@@ -1,3 +1,53 @@
-h1{
+/************************* TOOL BAR ***************************/
+md-toolbar {
   text-align: center;
+}
+
+/************************* GOAL AMOUNT / DONORS DISPLAY **********************/
+.goalInformation {
+  text-align: center;
+}
+
+.donorsContainer {
+  text-align: center;
+}
+/*********************** REWARD TIERS *******************/
+.rewards {
+  background-color: pink;
+}
+
+md-card {
+  text-align: center;
+}
+
+md-card-header {
+  background-color: lightblue;
+  text-align: center;
+}
+
+/************************** TEAM INFO SECTION **********************/
+
+.groupMedia {
+  width: 100%;
+  height: 400px;
+  background-color: lightblue;
+}
+
+.groupNarrative {
+  width: 100%;
+  height: 100px;
+  background-color: #E8A074;
+}
+
+.groupNeeds {
+  width: 100%;
+  height: 100px;
+  background-color: #DC8CFF;
+}
+
+
+/************************ FAQ ****************************/
+.faq {
+  width: 25%;
+  background-color: lightgreen;
 }
