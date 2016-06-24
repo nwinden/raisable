@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Raisable</title>
 
@@ -8,14 +9,63 @@
     <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/jk-carousel.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
 
     <link rel="stylesheet" href="/styles/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/jk-carousel.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
 
-  </head>
-  <body ng-app="clientApp">
-    <h1>Raisable</h1>
+</head>
 
-  </body>
+<body ng-app="clientApp">
+
+    <!-- Toolbar container -->
+    <md-toolbar layout="row">
+        <h1 class="nav-logo" flex>raisable</h1>
+        <a href="views/landing.html">Campaign Page</a>
+    </md-toolbar>
+    <!-- Campaign Search Bar -->
+    <md-subheader class="sub-nav">
+        <div class="search-dropdown">
+            <md-input-container>
+                <label>Items</label>
+                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+                    <md-optgroup label="items">
+                        <md-option ng-value="item" ng-repeat="item in items">Item {{item}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
+
+
+            <md-input-container class="search-input">
+                <input class="campaign-search-input" name="campaignSearch" placeholder="Search">
+            </md-input-container>
+
+        </div>
+    </md-subheader>
+
+    <div class="home-carousel" ng-controller="carouselController">
+        <div layout="column" layout-align="center center" style="padding-bottom: 10px">
+            <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="500" auto-slide="true" auto-slide-time="5000">
+            </jk-carousel>
+        </div>
+    </div>
+
+
+    <div ng-controller="gridListDemoCtrl as vm" flex ng-cloak>
+        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
+            <md-grid-tile ng-repeat="tile in vm.tiles" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background">
+                <md-grid-tile-footer>
+                    <h3>{{tile.title}}</h3></md-grid-tile-footer>
+            </md-grid-tile>
+        </md-grid-list>
+    </div>
+
+
+
+
+</body>
+
 </html>
