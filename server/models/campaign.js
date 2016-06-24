@@ -21,7 +21,7 @@ var CampaignSchema = new Schema({
   goal: { type: Number, required: true },
   raised: { type: Number, required: true },
   donorCount: { type: Number, required: true },
-  launchDate: { type: Date, required: true, default: Date.now}
+  launchDate: { type: Date, required: true, default: Date.now},
   deadlineDate: { type: Date, required: true },
   faqs: [{
     question: { type: String, required: true },
@@ -55,7 +55,7 @@ var CampaignSchema = new Schema({
     emailThankYou: { type: Boolean, required: true },
     acceptedReward: { type: Boolean, required: true },
     rewardAccepted: { type: String, required: true },
-    firstName { type: String, required: false },
+    firstName: { type: String, required: false },
     lastName: { type: String, required: false },
     zipCode: { type: Number, required: true },
     email: { type: String, required: true },
