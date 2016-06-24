@@ -11,6 +11,15 @@ md-toolbar {
 .donorsContainer {
   text-align: center;
 }
+
+.shareIcon {
+  width: 60px;
+  height: auto;
+}
+
+.sponsors {
+  text-align: center;
+}
 /*********************** REWARD TIERS *******************/
 .rewards {
   background-color: pink;
@@ -26,6 +35,9 @@ md-card-header {
 }
 
 /************************** TEAM INFO SECTION **********************/
+.teamInfoContainer {
+
+}
 
 .groupMedia {
   width: 100%;
@@ -33,13 +45,13 @@ md-card-header {
   background-color: lightblue;
 }
 
-.groupNarrative {
+.group Narrative {
   width: 100%;
   height: 100px;
   background-color: #E8A074;
 }
 
-.groupNeeds {
+.group Needs {
   width: 100%;
   height: 100px;
   background-color: #DC8CFF;
