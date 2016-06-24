@@ -3,6 +3,7 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
+var campaigns = require('./routes/campaigns');
 
 //middleware
 app.use(express.static(path.join(__dirname, './public')));
@@ -21,6 +22,9 @@ mongoose.connection.on('connected', function () {
 mongoose.connection.on('error', function (err) {
   console.log('Mongoose error connecting ', err);
 });
+
+//routes
+app.use('/campaigns', campaigns);
 
 // start server
 app.set('port', process.env.PORT || 5000);
