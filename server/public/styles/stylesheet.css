@@ -11,6 +11,15 @@ md-toolbar {
 .donorsContainer {
   text-align: center;
 }
+
+.shareIcon {
+  width: 60px;
+  height: auto;
+}
+
+.sponsors {
+  text-align: center;
+}
 /*********************** REWARD TIERS *******************/
 .rewards {
   background-color: pink;
@@ -26,6 +35,9 @@ md-card-header {
 }
 
 /************************** TEAM INFO SECTION **********************/
+.teamInfoContainer {
+
+}
 
 .groupMedia {
   width: 100%;
@@ -33,13 +45,13 @@ md-card-header {
   background-color: lightblue;
 }
 
-.groupNarrative {
+.group Narrative {
   width: 100%;
   height: 100px;
   background-color: #E8A074;
 }
 
-.groupNeeds {
+.group Needs {
   width: 100%;
   height: 100px;
   background-color: #DC8CFF;
@@ -51,86 +63,3 @@ md-card-header {
   width: 25%;
   background-color: lightgreen;
 }
-
-/*********************************************************/
-/********************* Home Page *************************/
-/*********************************************************/
-
-/********************* Nav Bar ************************/
-.nav-logo {
-  text-align: left;
-  margin-left: 10px;
-}
-
-/********************* Search Bar ************************/
-.sub-nav{
-  height: 100px;
-  border-bottom: 1px solid lightgray;
-}
-.search-dropdown {
-  text-align: center;
-}
-.search-input {
-  vertical-align: top;
-}
-.campaign-search-input {
-  text-align: center;
-}
-
-.home-carousel {
-  height: 700px;
-}
-
-/********************* Grid List ************************/
-.gridListdemoDynamicTiles md-icon {
-  width: 50%;
-  height: 30%; }
-.gridListdemoDynamicTiles md-icon svg {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%; }
-.gridListdemoDynamicTiles .s64 {
-  font-size: 64px; }
-.gridListdemoDynamicTiles .s32 {
-  font-size: 48px; }
-.gridListdemoDynamicTiles md-icon.fa {
-  display: block;
-  padding-left: 0; }
-.gridListdemoDynamicTiles md-icon.s32 span {
-  padding-left: 8px; }
-.gridListdemoDynamicTiles md-grid-list {
-  margin: 8px; }
-.gridListdemoDynamicTiles .gray {
-  background: #f5f5f5; }
-.gridListdemoDynamicTiles .green {
-  background: #b9f6ca; }
-.gridListdemoDynamicTiles .yellow {
-  background: #ffff8d; }
-.gridListdemoDynamicTiles .blue {
-  background: #84ffff; }
-.gridListdemoDynamicTiles .darkBlue {
-  background: #80d8ff; }
-.gridListdemoDynamicTiles .deepBlue {
-  background: #448aff; }
-.gridListdemoDynamicTiles .purple {
-  background: #b388ff; }
-.gridListdemoDynamicTiles .lightPurple {
-  background: #8c9eff; }
-.gridListdemoDynamicTiles .red {
-  background: #ff8a80; }
-.gridListdemoDynamicTiles .pink {
-  background: #ff80ab; }
-.gridListdemoDynamicTiles md-grid-tile {
-  transition: all 300ms ease-out 50ms; }
-.gridListdemoDynamicTiles md-grid-tile md-icon {
-  padding-bottom: 32px; }
-.gridListdemoDynamicTiles md-grid-tile md-grid-tile-footer {
-  background: rgba(0, 0, 0, 0.68);
-  height: 36px; }
-.gridListdemoDynamicTiles md-grid-tile-footer figcaption {
-  width: 100%; }
-.gridListdemoDynamicTiles md-grid-tile-footer figcaption h3 {
-  margin: 0;
-  font-weight: 700;
-  width: 100%;
-  text-align: center; }
