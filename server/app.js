@@ -33,6 +33,9 @@ app.listen(app.get('port'), function () {
 });
 
 // Handle index file separately
+
+
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, './public/views/index.html'));
 });

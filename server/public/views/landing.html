@@ -9,11 +9,14 @@
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
+    <script src="/scripts/LandingController.js"></script>
+    <script src="/assets/vendors/jk-carousel.js"></script>
 
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
+    <link rel="stylesheet" href="/styles/jk-carousel.css">
   </head>
-  <body ng-app="clientApp" layout="column">
+  <body ng-app="clientApp" ng-controller="LandingController" layout="column">
   <!-- Toolbar container -->
   <md-toolbar layout="row" >
     <h1 flex>rAIsable</h1>
@@ -24,7 +27,7 @@
 
       <!-- Goal and Donors container -->
       <md-content flex="25" id="goal" class="md-whiteframe-9dp">
-        <section layout="column" class="goalInformation">
+        <section flex-offset="5" flex="90" layout="column" layout-align="center">
           <h1>(ITEMS NEEDED) for (ORGANIZATION)</h1>
           <h5>by SCHOOL NAME</h5>
           <div flex class="goalCard">
@@ -42,21 +45,27 @@
             </md-card>
           </div>
           <md-button class="md-raised md-primary">Contribute Now</md-button>
-          <div flex layout="row">
+          <div flex layout="row" layout-align="center">
             <p>Share: </p>
-
+            <a href=""><img src="/assets/images/facebook.png" alt="share through facebook" class="shareIcon" /></a>
+            <a href=""><img src="/assets/images/instagram.png" alt="share through instagram" class="shareIcon" /></a>
+            <a href=""><img src="/assets/images/pinterest.png" alt="share through pinterest" class="shareIcon" /></a>
+            <a href=""><img src="/assets/images/twitter.png" alt="share through twitter" class="shareIcon" /></a>
           </div>
         </section>
 
-        <section class="sponsors and backers">
-          <div class="donorsContainer">
+        <section flex-offset="5" flex="90" layout="column" layout-align="center">
+          <md-content flex class="md-whiteframe-9dp">
             <div class="sponsors">
               <h3>Sponsors</h3>
+              <md-card>
+                <h4>sponsor 1</h4>
+              </md-card>
             </div>
             <div class="backers">
               <h3>All Star Backers</h3>
             </div>
-          </div>
+          </md-content>
         </section>
 
       </md-content>
@@ -81,10 +90,14 @@
           </section>
 
           <section flex layout="row">
-              <div flex="75" layout="column" class="md-whiteframe-9dp">
+              <div flex="5">
+              </div>
+              <div flex="65" layout="column" class="teamInfoContainer">
                   <div flex class="groupMedia">Team Photo/Video</div>
-                  <div flex class="groupNarrative">About Team</div>
-                  <div flex class="groupNeeds">Team Needs</div>
+                  <div flex class="group Narrative">About Team</div>
+                  <div flex class="group Needs">Team Needs</div>
+              </div>
+              <div flex="5">
               </div>
 
               <div flex="25" class="md-whiteframe-9dp">
