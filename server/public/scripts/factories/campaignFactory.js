@@ -1,12 +1,13 @@
 clientApp.factory('campaignFactory', ['$http', function($http) {
 
   // PRIVATE
-  var campaign = undefined;
+  var campaigns = undefined;
+  var landingPageCampaign = undefined;
 
   function getCampaignData() {
     var promise = $http.get('/PLACEHOLDER').then(function(response) {
       console.log('Async data returned: ', response.data);
-      campaign = response.data;
+      campaigns = response.data;
     });
 
     return promise;
@@ -19,7 +20,12 @@ clientApp.factory('campaignFactory', ['$http', function($http) {
     },
     factoryGetCampaign: function() {
       // return our array
-      return campaign;
+      return campaigns;
+    },
+    factorySetLandingPage: function (campaign) {
+      landingPageCampaign = campaign;
+      return landingPageCampaign;
+
     }
   };
 
