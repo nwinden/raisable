@@ -9,11 +9,12 @@
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
+    <script src="/scripts/LandingController.js"></script>
 
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
   </head>
-  <body ng-app="clientApp" layout="column">
+  <body ng-app="clientApp" ng-controller="LandingController" layout="column">
   <!-- Toolbar container -->
   <md-toolbar layout="row" >
     <h1 flex>rAIsable</h1>
@@ -94,7 +95,7 @@
                   <div flex class="group Narrative">About Team</div>
                   <div flex class="group Needs">Team Needs</div>
               </div>
-              <div flex="5">  
+              <div flex="5">
               </div>
 
               <div flex="25" class="md-whiteframe-9dp">
