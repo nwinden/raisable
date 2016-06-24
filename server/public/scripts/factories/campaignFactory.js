@@ -24,8 +24,9 @@ clientApp.factory('campaignFactory', ['$http', function($http) {
     },
     factorySetLandingPage: function (campaign) {
       landingPageCampaign = campaign;
+    },
+    factoryGetLandingPage: function () {
       return landingPageCampaign;
-
     }
   };
 
