@@ -26,6 +26,10 @@ md-toolbar {
 .sponsors {
   text-align: center;
 }
+
+.backers {
+  text-align: center;
+}
 /*********************** REWARD TIERS *******************/
 .rewards {
   background-color: pink;
@@ -51,21 +55,21 @@ md-card-header {
   background-color: lightblue;
 }
 
-.group Narrative {
+.groupNarrative {
   width: 100%;
-  height: 100px;
+  height: auto;
   background-color: #E8A074;
 }
 
-.group Needs {
+.groupNeeds {
   width: 100%;
-  height: 100px;
+  height: auto;
   background-color: #DC8CFF;
 }
 
 
 /************************ FAQ ****************************/
 .faq {
-  width: 25%;
+  text-align: center;
   background-color: lightgreen;
 }
