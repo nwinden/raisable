@@ -184,7 +184,22 @@ clientApp.controller('LandingController', ['$scope','$location', function($scope
 
 
 
+$scope.campaign = campaign;
+$scope.needs = [];
+$scope.faqs = [];
+$scope.donorTiers = [];
 
+angular.forEach($scope.campaign.items, function (need) {
+  $scope.needs.push(need);
+});
+
+angular.forEach($scope.campaign.faqs, function (faq) {
+  $scope.faqs.push(faq);
+});
+
+angular.forEach($scope.campaign.donorLevels, function (tiers) {
+  $scope.donorTiers.push(tiers);
+});
 
 
 
