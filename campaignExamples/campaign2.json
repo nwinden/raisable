@@ -1,0 +1,181 @@
+{
+  "url": "raisable.com/riverside-band",
+  "shortUrl": "raisable.com/0f8k2sa",
+  "featured": false,
+  "title": "Instruments for the Riverside Band",
+  "creatorName": "Riverside High School Band",
+  "creatorId": "097f191e810c19729de756xa",
+  "zipCode": 55811,
+  "categories": [
+    "music",
+    "band",
+    "instruments"
+  ],
+  "imageLink": "",
+  "videoLink": "",
+  "about": "The RiverSide High Band has an oppportunity to compete in the state band competition and needs your help to get there!",
+
+  "items": [{
+    "name": "Transportation",
+    "price": 50000,
+    "quantity": 1
+  },
+  {
+    "name": "Food",
+    "price": 40000,
+    "quantity": 1
+  },
+  {
+    "name": "Entry Fee",
+    "price": 50000,
+    "quantity": 1
+  },
+  {
+    "name": "Hotel Rooms",
+    "price": 30000,
+    "quantity": 10
+  }],
+
+  "goal": 170000,
+  "raised": 6300,
+  "donorCount": 4,
+  "launchDate": "2016-08-01T16:00:00Z",
+  "deadlineDate": "2016-10-01T16:00:00Z",
+
+  "faqs": [{
+    "question": "Where does the competition take place?",
+    "email": "curiousbacker1@gmail.com",
+    "approved": true,
+    "response": "The competition is hosted at the Mineapolis Convention Center."
+  },
+  {
+    "question": "How much is covered for students?",
+    "email": "curiousbacker2@gmail.com",
+    "approved": true,
+    "response": "Entry fee, hotel, transportation and one meal are covered by this fundraiser. Students will need to bring a bagged lunch or money for fast food during the first travel day."
+  }],
+
+  "promoters": [{
+    "name": "Ben",
+    "refferalUrl": "ben",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 1,
+    "donationAmmount": 50000
+    },
+    {
+    "name": "Eve",
+    "refferalUrl": "eve",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 1,
+    "donationAmmount": 3000
+    },
+    {
+    "name": "Jeb",
+    "refferalUrl": "jeb",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 1,
+    "donationAmmount": 10000
+  }],
+
+  "donorLevels": [{
+    "name": "Sponsor Reward",
+    "low": 50000,
+    "high": 1000000,
+    "hasReward": true,
+    "rewardTitle": "Sponsor Package",
+    "rewardDescription": "Public thank-you at each band performance.",
+    "rewardImageLink": "",
+  },
+  {
+    "name": "Gold Reward",
+    "low": 10000,
+    "high": 19999,
+    "hasReward": true,
+    "rewardTitle": "RiverSide Band Sweater",
+    "rewardDescription": "Get the previous two reward tiers AND a Riverside Band sweater.",
+    "rewardImageLink": ""
+  },
+  {
+    "name": "Silver Reward",
+    "low": 5000,
+    "high": 9999,
+    "hasReward": true,
+    "rewardTitle": "Tickets to the homecoming game",
+    "rewardDescription": "Attend the private concert AND get free popcorn at the concert.",
+    "rewardImageLink": ""
+  },
+  {
+    "name": "Band Reward",
+    "low": 1000,
+    "high": 4999,
+    "hasReward": true,
+    "rewardTitle": "Private Concert",
+    "rewardDescription": "Attend a private concert only for band backers!",
+    "rewardImageLink": ""
+  }],
+
+  "sponsors": [{
+    "donation": 50000,
+    "publicThankYou": true,
+    "emailThankYou": true,
+    "acceptedReward": true,
+    "rewardAccepted": "Sponser Reward",
+    "firstName": "Music-Go-Round",
+    "lastName": "",
+    "zipCode": 55432,
+    "email": "frank@musicgoroundduluth.com",
+    "imageLink": "",
+    "websiteLink": "http://www.musicgoroundduluthmn.com/",
+    "promotorLinkUsed":"ben"
+  },
+  {
+    "donation": 10000,
+    "publicThankYou": false,
+    "emailThankYou": false,
+    "acceptedReward": false,
+    "rewardAccepted": "No Reward",
+    "firstName": "",
+    "lastName": "",
+    "zipCode": 55005,
+    "email": "jebediah@gmail.com",
+    "imageLink": "",
+    "websiteLink": "",
+    "promotorLinkUsed":"jeb"
+  },
+  {
+    "donation": 3000,
+    "publicThankYou": true,
+    "emailThankYou": true,
+    "acceptedReward": true,
+    "rewardAccepted": "Band Reward",
+    "firstName": "Eve",
+    "lastName": "Levnte",
+    "zipCode": 55112,
+    "email": "princesss@gmail.com",
+    "imageLink": "",
+    "websiteLink": "",
+    "promotorLinkUsed":"eve"
+  }],
+
+  "twitterImageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/team.jpg",
+  "twitterShareText": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
+  "facebookPostTitle": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
+  "facebookImageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/team.jpg",
+  "facebookPostContent": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
+  "instagramImageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/team.jpg",
+  "instagramShareText": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
+  "pinterestImageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/team.jpg",
+  "pinterestShareText": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
+}
