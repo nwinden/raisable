@@ -11,6 +11,8 @@
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/jk-carousel.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
+    <script src="/scripts/homeController.js" charset="utf-8"></script>
+
 
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -53,14 +55,17 @@
             <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="500" auto-slide="true" auto-slide-time="5000">
             </jk-carousel>
         </div>
+        <h2 class="active-campaigns">Active Campaigns</h2>
     </div>
 
 
-    <div ng-controller="gridListDemoCtrl as vm" flex ng-cloak>
-        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
+    <div class="gridListTiles" ng-controller="gridListDemoCtrl as vm" flex ng-cloak>
+        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="10px" md-gutter-gt-sm="10px" md-gutter-gt-md="10px" >
             <md-grid-tile ng-repeat="tile in vm.tiles" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background">
                 <md-grid-tile-footer>
-                    <h3>{{tile.title}}</h3></md-grid-tile-footer>
+                    <h2>Uniforms for the Spartans</h2>
+                    <h4>By: North High School</h4>
+                  </md-grid-tile-footer>
             </md-grid-tile>
         </md-grid-list>
     </div>
