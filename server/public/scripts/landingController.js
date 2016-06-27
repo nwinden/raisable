@@ -186,17 +186,25 @@ clientApp.controller('LandingController', ['$scope','$location', function($scope
     strokeWidth: 4,
     easing: 'easeInOut',
     duration: 1400,
-    color: 'blue',
+    color: '#3F51B5',
     trailColor: '#eee',
     trailWidth: 1,
     svgStyle: {width: '100%', height: '100%'}
   });
-  bar.animate(1.0);  // Number from 0.0 to 1.0
 
 $scope.campaign = campaign;
 $scope.needs = [];
 $scope.faqs = [];
 $scope.donorTiers = [];
+
+changeProgressBar(); //runs once on page load
+
+function changeProgressBar() {
+  var progress = (campaign.raised / campaign.goal);
+  bar.animate(progress); //posibly 'return' this
+  $scope.goal = campaign.goal / 100;
+  $scope.raised = campaign.raised / 100;
+}
 
 angular.forEach($scope.campaign.items, function (need) {
   $scope.needs.push(need);

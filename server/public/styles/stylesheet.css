@@ -10,8 +10,7 @@ md-toolbar {
 
 #progressLine {
   margin: 20px;
-  width: 400px;
-  height: 8px;
+  height: 30px;
 }
 
 .donorsContainer {
