@@ -18,19 +18,23 @@
 }
 .search-input {
   vertical-align: top;
+  width: 30%;
 }
 .campaign-search-input {
   text-align: center;
 }
 
 .home-carousel {
-  height: 430px;
 }
 
 
 .active-campaigns{
   text-align: center;
   color: gray;
+}
+
+.searchIcon {
+  vertical-align: middle;
 }
 
 /********************* Grid List ************************/
@@ -51,7 +55,7 @@
 .gridListTiles md-grid-tile {
   transition: all 300ms ease-out 50ms;
   /*background: #2196f3;*/
-  background-image: url('http://winwolves.net/wp-content/uploads/2013/08/FtblVarsity-web-modified.jpg');
+  /*background-image: url('http://winwolves.net/wp-content/uploads/2013/08/FtblVarsity-web-modified.jpg');*/
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -94,4 +98,29 @@
   font-weight: 700;
   width: 100%;
   text-align: center;
+}
+
+.featured-campaign-widget {
+  height: 300px;
+  width: 370px;
+  top: 234px;
+  left: 65px;
+  right: 433px;
+  bottom: 534px;
+  position: absolute;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, .8);
+
+}
+
+md-card {
+  background: rgba(250, 250, 250);
+
+}
+
+.widget-guts {
+
 }
