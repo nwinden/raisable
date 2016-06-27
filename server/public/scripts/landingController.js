@@ -196,6 +196,15 @@ $scope.campaign = campaign;
 $scope.needs = [];
 $scope.faqs = [];
 $scope.donorTiers = [];
+$scope.title = campaign.title;
+$scope.name = campaign.creatorName;
+
+//gramaticly correct backer message
+if (campaign.donorCount == 1) {
+  $scope.backers = campaign.donorCount + ' backer';
+} else {
+  $scope.backers = campaign.donorCount + ' backers';
+}
 
 changeProgressBar(); //runs once on page load
 

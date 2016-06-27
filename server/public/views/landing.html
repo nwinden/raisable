@@ -13,10 +13,12 @@
     <script src="/scripts/LandingController.js"></script>
     <script src="/assets/vendors/jk-carousel.js"></script>
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/jk-carousel.css">
   </head>
+
   <body ng-app="clientApp" ng-controller="LandingController" layout="column">
   <!-- Toolbar container -->
   <md-toolbar layout="row" >
@@ -29,8 +31,8 @@
       <!-- Goal and Donors container -->
       <md-content flex="25" id="goal" class="md-whiteframe-9dp">
         <section flex-offset="5" flex="90" layout="column" layout-align="center">
-          <h1>(ITEMS NEEDED) for (ORGANIZATION)</h1>
-          <h5>by SCHOOL NAME</h5>
+          <h1>{{title}}</h1>
+          <h5>by {{name}}</h5>
           <div flex class="goalCard">
             <md-card>
               <h3>Goal: {{goal | currency}}</h3>
@@ -39,7 +41,7 @@
                 <h5>Raised: {{raised | currency}}</h5>
                   <div flex layout="row" class="remainingTime">
                     <h5 flex>Remaining Time</h5>
-                    <h5 flex>Number of Backers</h5>
+                    <h5 flex>{{backers}}</h5>
                   </div>
 
               </div>
@@ -97,7 +99,7 @@
             <md-card flex="25" layout="column" class="md-whiteframe-9dp" ng-repeat="tier in donorTiers"> <!--ng-repeat-->
               <md-card-header>{{tier.name}}</md-card-header>
               <md-card-content>
-                <p>${{tier.low}} - ${{tier.high}}</p>
+                <p>{{tier.low / 100 | currency}}</p>
               </md-card-content>
               <md-card-footer>
                 <md-button class="md-raised md-primary">Claim</md-button>
