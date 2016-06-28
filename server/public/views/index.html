@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/homestylesheet.css">
 </head>
-<body ng-app="clientApp" ng-controller="HomeController as vm">
+<body ng-app="clientApp" ng-controller="HomeController" ng-init="getCampaigns()">
 
     <!-- Toolbar container -->
     <md-toolbar layout="row">
@@ -65,7 +65,7 @@
     <div class="gridListTiles" flex ng-cloak>
       <h2 class="active-campaigns">Active Campaigns</h2>
         <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="10px" md-gutter-gt-sm="10px" md-gutter-gt-md="10px">
-            <md-grid-tile ng-repeat="tile in vm.tiles" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
+            <md-grid-tile ng-repeat="campaign in campaigns" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
                 <md-grid-tile-footer>
                     <h2>{{campaign.title}}</h2>
                     <h4>By: {{campaign.creatorName}}</h4>
@@ -79,9 +79,6 @@
 
       <h2>{{campaign.title}}</h2>
       <h5>By: {{campaign.creatorName}}</h5>
-
-
-
       <div flex class="goalCard">
         <md-card>
           <h3>Goal: {{goal | currency}}</h3>

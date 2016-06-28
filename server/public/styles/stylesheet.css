@@ -8,11 +8,6 @@ md-toolbar {
   text-align: center;
 }
 
-#progressLine {
-  margin: 20px;
-  height: 30px;
-}
-
 .donorsContainer {
   text-align: center;
 }
@@ -44,31 +39,47 @@ md-card-header {
 }
 
 /************************** TEAM INFO SECTION **********************/
-.teamInfoContainer {
 
+img {
+  height: 400px;
+  width: auto;
 }
 
 .groupMedia {
   width: 100%;
   height: 400px;
-  background-color: lightblue;
+  background-color: black;
+  text-align: center;
 }
 
 .groupNarrative {
   width: 100%;
   height: auto;
-  background-color: #E8A074;
+  /*background-color: #E8A074;*/
 }
 
 .groupNeeds {
   width: 100%;
   height: auto;
-  background-color: #DC8CFF;
+/*  background-color: #DC8CFF;*/
 }
 
 
 /************************ FAQ ****************************/
 .faq {
   text-align: center;
-  background-color: lightgreen;
+  /*background-color: lightgreen;*/
+}
+
+/*********************** REWARD DIALOG ********************/
+/*.experiment th, td {
+  border: 1px solid black;
+}*/
+
+md-dialog-content h4 {
+  text-align: center;
+}
+
+.results {
+  text-align: right;
 }

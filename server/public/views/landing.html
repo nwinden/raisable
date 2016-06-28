@@ -9,14 +9,18 @@
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/progressbar.min.js"></script>
+    <script src="/assets/vendors/moment.min.js"></script>
+    <script src="/assets/vendors/jk-carousel.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
     <script src="/scripts/LandingController.js"></script>
-    <script src="/assets/vendors/jk-carousel.js"></script>
+    <script src="/scripts/factories/campaignFactory.js"></script>
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/jk-carousel.css">
   </head>
+
   <body ng-app="clientApp" ng-controller="LandingController" layout="column">
   <!-- Toolbar container -->
   <md-toolbar layout="row" >
@@ -29,17 +33,17 @@
       <!-- Goal and Donors container -->
       <md-content flex="25" id="goal" class="md-whiteframe-9dp">
         <section flex-offset="5" flex="90" layout="column" layout-align="center">
-          <h1>(ITEMS NEEDED) for (ORGANIZATION)</h1>
-          <h5>by SCHOOL NAME</h5>
+          <h1>{{title}}</h1>
+          <h5>by {{name}}</h5>
           <div flex class="goalCard">
             <md-card>
-              <h3>Goal: {{goal | currency}}</h3>
+              <h3>Goal: {{goal / 100 | currency}}</h3>
               <div flex layout="column">
                 <div id="progressLine"></div>
-                <h5>Raised: {{raised | currency}}</h5>
+                <h5>Raised: {{raised / 100 | currency}}</h5>
                   <div flex layout="row" class="remainingTime">
-                    <h5 flex>Remaining Time</h5>
-                    <h5 flex>Number of Backers</h5>
+                    <h5 flex>{{timeRemaining}}</h5>
+                    <h5 flex>{{backers}}</h5>
                   </div>
 
               </div>
@@ -61,10 +65,9 @@
               <h3>Sponsors</h3>
               <md-card>
 
-                <!-- <div class="sponsors-carousel"  ng-controller="carouselController" > -->
                 <div class="sponsors-carousel">
                     <div layout="column" layout-align="center center" style="padding-bottom: 10px">
-                        <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="500" auto-slide="true" auto-slide-time="5000">
+                        <jk-carousel data="sponsorsArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="2000" auto-slide="true" auto-slide-time="5000">
                         </jk-carousel>
                     </div>
                 </div>
@@ -75,7 +78,7 @@
               <h3>All Star Backers</h3>
               <md-card>
 
-                <!-- <div class="allstar-carousel" ng-controller="carouselController"> -->
+                
                 <div class="allstar-carousel">
                     <div layout="column" layout-align="center center" style="padding-bottom: 10px">
                         <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="500" auto-slide="true" auto-slide-time="5000">
@@ -96,13 +99,13 @@
 
           <!-- Reward tiers container -->
           <section flex layout="row" class="rewards">
-            <md-card flex="25" layout="column" class="md-whiteframe-9dp" ng-repeat="tier in donorTiers"> <!--ng-repeat-->
+            <md-card flex="25" layout="column" class="md-whiteframe-9dp" ng-repeat="tier in donorTiers" layout-align="center">
               <md-card-header>{{tier.name}}</md-card-header>
               <md-card-content>
-                <p>${{tier.low}} - ${{tier.high}}</p>
+                <p>{{tier.low / 100 | currency}}</p>
               </md-card-content>
               <md-card-footer>
-                <md-button class="md-raised md-primary">Claim</md-button>
+                <md-button class="md-raised md-primary" ng-click="claimReward($event)">Claim</md-button>
               </md-card-footer>
             </md-card>
           </section>
@@ -111,7 +114,9 @@
               <div flex="5">
               </div>
               <div flex="65" layout="column" class="teamInfoContainer">
-                  <div flex class="groupMedia"></div>
+                  <div flex class="groupMedia">
+                    <img src="{{campaign.imageLink}}" alt="" />
+                  </div>
                   <div flex class="groupNarrative">
                     <md-card>
                       <md-card-header>About</md-card-header>
@@ -124,7 +129,7 @@
                       <md-card-content ng-repeat="need in needs">
                         Item: {{need.name}}<br>
                         Quantity: {{need.quantity}}<br>
-                        Total Price: ${{need.price}}
+                        Total Price: {{need.price / 100 | currency}}
                       </md-card-content>
                     </md-card>
                   </div>
@@ -136,7 +141,7 @@
                 <md-content class="faq">
                   <h2>FAQ</h2>
                   <p ng-repeat="faq in faqs">
-                    Q: {{faq.question}}<br>
+                    Q: {{faq.question}}
                     A: {{faq.response}}
                   </p>
                 </md-content>
