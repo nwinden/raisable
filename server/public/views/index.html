@@ -9,6 +9,7 @@
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/jk-carousel.js"></script>
+    <script src="/assets/vendors/progressbar.min.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
     <script src="/scripts/homeController.js" charset="utf-8"></script>
 
@@ -19,7 +20,7 @@
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/homestylesheet.css">
 </head>
-<body ng-app="clientApp" ng-controller="HomeController">
+<body ng-app="clientApp" ng-controller="HomeController as vm">
 
     <!-- Toolbar container -->
     <md-toolbar layout="row">
@@ -31,7 +32,7 @@
       <form ng-submit="campaignSearch()">
         <div class="search-dropdown">
             <md-input-container>
-                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()" required>
                     <md-optgroup label="Search By:">
                         <md-option ng-value="item" ng-repeat="item in items" aria-label="Search Options">{{item}}</md-option>
                     </md-optgroup>
@@ -39,7 +40,7 @@
             </md-input-container>
             <!-- Search Field -->
             <md-input-container class="search-input">
-                <input type="text" class="campaign-search-input" name="campaignSearch" aria-label="Search Input" ng-model="searchInput"/>
+                <input type="text" class="campaign-search-input" name="campaignSearch" aria-label="Search Input" ng-model="searchInput" required />
             </md-input-container>
             <!-- Submit Button -->
             <md-button type="submit" class="searchIcon md-icon-button md-accent" aria-label="Submit">
@@ -61,7 +62,7 @@
         </div>
     </div>
     <!-- Campaign Tiles -->
-    <div class="gridListTiles" ng-controller="HomeController as vm" flex ng-cloak>
+    <div class="gridListTiles" flex ng-cloak>
       <h2 class="active-campaigns">Active Campaigns</h2>
         <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="10px" md-gutter-gt-sm="10px" md-gutter-gt-md="10px">
             <md-grid-tile ng-repeat="tile in vm.tiles" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
@@ -79,19 +80,23 @@
       <h2>{{campaign.title}}</h2>
       <h5>By: {{campaign.creatorName}}</h5>
 
-      <md-card>
-        <h3>Goal</h3>
-        <div flex layout="column">
-          <h5>Progress Bar</h5>
 
-            <div flex layout="row" class="remainingTime">
-              <h5 flex>Remaining Time</h5>
-              <h5 flex>Number of Backers</h5>
-            </div>
+
+      <div flex class="goalCard">
+        <md-card>
+          <h3>Goal: {{goal | currency}}</h3>
+          <div flex layout="column">
+            <div id="progressLine"></div>
+            <h5>Raised: {{raised | currency}}</h5>
+              <div flex layout="row" class="remainingTime">
+                <h5 flex>Remaining Time</h5>
+                <h5 flex>Number of Backers</h5>
+              </div>
+
           </div>
-        </div>
-      </md-card>
+        </md-card>
+      </div>
     </div>
-
+</div>
 </body>
 </html>

@@ -9,12 +9,23 @@
 }
 
 /********************* Search Bar ************************/
+md-input-container{
+  margin: 0;
+}
+
+.md-subheader ._md-subheader-inner {
+  padding: 0;
+}
+
 .sub-nav{
-  height: 100px;
+  height: 50px;
   border-bottom: 1px solid lightgray;
 }
 .search-dropdown {
   text-align: center;
+  height: 50px;
+  margin: 0;
+  padding-top: 2px;
 }
 .search-input {
   vertical-align: top;
@@ -25,8 +36,8 @@
 }
 
 .home-carousel {
-}
 
+}
 
 .active-campaigns{
   text-align: center;
@@ -36,6 +47,11 @@
 .searchIcon {
   vertical-align: middle;
 }
+
+md-input-container:not(.md-input-has-value) input:not(:focus), md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-ampm-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-day-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-hour-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-millisecond-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-minute-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-month-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-second-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-text, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-week-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-year-field {
+  height: 33px;
+}
+
 
 /********************* Grid List ************************/
 
@@ -101,23 +117,37 @@
 }
 
 .featured-campaign-widget {
-  height: 300px;
+  height: 372px;
   width: 370px;
-  top: 234px;
+  top: 154px;
   left: 65px;
-  right: 433px;
-  bottom: 534px;
+  /*right: 433px;*/
+  /*bottom: 534px;*/
   position: absolute;
   z-index: 1;
   color: white;
   text-align: center;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, .8);
+  background: rgba(0, 0, 0, .2);
+  padding: 10px;
 
 }
 
+/********************* Featured Widget ************************/
+@media screen and (max-width: 1275px) {
+    .featured-campaign-widget {
+        color: gray;
+        text-shadow: 1px 1px black;
+        background: none;
+    }
+    md-card {
+      display: none;
+    }
+
+}
 md-card {
-  background: rgba(250, 250, 250);
+  background: rgba(250, 250, 250, .2);
+  color: white;
+
 
 }
 
