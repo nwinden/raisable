@@ -91,7 +91,7 @@
   }],
 
   "donorLevels": [{
-    "name": "Sponsor Reward",
+    "name": "Sponsor",
     "low": 50000,
     "high": 1000000,
     "hasReward": true,
@@ -116,7 +116,7 @@
     ]
   },
   {
-    "name": "Gold Reward",
+    "name": "Gold",
     "low": 10000,
     "high": 19999,
     "hasReward": true,
@@ -128,7 +128,7 @@
     ]
   },
   {
-    "name": "Silver Reward",
+    "name": "Silver",
     "low": 5000,
     "high": 9999,
     "hasReward": true,
@@ -140,7 +140,7 @@
     ]
   },
   {
-    "name": "Band Reward",
+    "name": "Band",
     "low": 1000,
     "high": 4999,
     "hasReward": true,
@@ -165,7 +165,7 @@
     ]
   },
   {
-    "name": "No Reward",
+    "name": "Donor",
     "low": 500,
     "high": 100000,
     "hasReward": false,

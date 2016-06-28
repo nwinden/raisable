@@ -94,7 +94,7 @@
         "publicThankYou": true,
         "emailThankYou": true,
         "acceptedReward": true,
-        "rewardAccepted": "Sponser Reward",
+        "rewardAccepted": "Sponser",
         "firstName": "Dunn Bros Coffee",
         "lastName": "",
         "zipCode": 55432,
@@ -106,7 +106,7 @@
     ]
   },
   {
-    "name": "All Star Reward",
+    "name": "All-Star",
     "low": 20000,
     "high": 49999,
     "hasReward": true,
@@ -118,7 +118,7 @@
     ]
   },
   {
-    "name": "Gold Reward",
+    "name": "Gold",
     "low": 10000,
     "high": 19999,
     "hasReward": true,
@@ -130,7 +130,7 @@
     ]
   },
   {
-    "name": "Silver Reward",
+    "name": "Silver",
     "low": 5000,
     "high": 9999,
     "hasReward": true,
@@ -167,7 +167,7 @@
     ]
   },
   {
-    "name": "No Reward",
+    "name": "Donor",
     "low": 500,
     "high": 100000,
     "hasReward": false,

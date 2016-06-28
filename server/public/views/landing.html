@@ -62,29 +62,14 @@
         <section flex-offset="5" flex="90" layout="column" layout-align="center">
           <md-content flex class="md-whiteframe-9dp">
             <div class="sponsors">
-              <h3>Sponsors</h3>
               <md-card>
-
-                <div class="sponsors-carousel">
-                    <div layout="column" layout-align="center center" style="padding-bottom: 10px">
-                        <jk-carousel data="sponsorsArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="2000" auto-slide="true" auto-slide-time="5000">
-                        </jk-carousel>
-                    </div>
+                <div ng-repeat="level in levels">
+                  <h3>{{level.name}}</h3>
+                  <div ng-repeat="backer in level.sponsors">
+                    <img ng-if="backer.imageLink" ng-src="backer.imageLink" />
+                    <h4>{{backer.firstName}} {{backer.lastName}}</h4>
+                  </div>
                 </div>
-
-              </md-card>
-            </div>
-            <div class="backers">
-              <h3>All Star Backers</h3>
-              <md-card>
-
-                <div class="allstar-carousel" ng-controller="carouselController">
-                    <div layout="column" layout-align="center center" style="padding-bottom: 10px">
-                        <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="500" auto-slide="true" auto-slide-time="5000">
-                        </jk-carousel>
-                    </div>
-                </div>
-
               </md-card>
             </div>
           </md-content>
@@ -98,8 +83,8 @@
 
           <!-- Reward tiers container -->
           <section flex layout="row" class="rewards">
-            <md-card flex="25" layout="column" class="md-whiteframe-9dp" ng-repeat="tier in donorTiers" layout-align="center">
-              <md-card-header>{{tier.name}}</md-card-header>
+            <md-card flex="25" layout="column" class="md-whiteframe-9dp" ng-repeat="tier in donorTiers" layout-align="center" ng-if="tier.name != 'Donor'">
+              <md-card-header>{{tier.name}} Reward</md-card-header>
               <md-card-content>
                 <p>{{tier.low / 100 | currency}}</p>
               </md-card-content>
