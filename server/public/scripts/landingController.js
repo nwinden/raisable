@@ -1,5 +1,4 @@
-clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', function($scope, $location, $mdDialog) {
-  console.log('landing controller!');
+clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'campaignFactory', function($scope, $location, $mdDialog, campaignFactory) {
 
   var campaign = {
     "url": "raisable.com/slp-booster-club/ad98398dad",
@@ -182,16 +181,60 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', fu
     "pinterestShareText": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
   }; //end of object
 
+  var bar = new ProgressBar.Line(progressLine, {
+    strokeWidth: 4,
+    easing: 'easeInOut',
+    duration: 1400,
+    color: '#3F51B5',
+    trailColor: '#eee',
+    trailWidth: 1,
+    svgStyle: {width: '100%', height: '100%'}
+  });
 
 
-  $scope.campaign = campaign;
-  $scope.needs = [];
-  $scope.faqs = [];
-  $scope.donorTiers = [];
+
   $scope.selectedReward = {};
   $scope.donationAmount = 0;
   $scope.accountFees = 0;
   $scope.totalContribution = 0;
+
+$scope.campaign = campaign;
+$scope.needs = [];
+$scope.faqs = [];
+$scope.donorTiers = [];
+$scope.title = campaign.title;
+$scope.name = campaign.creatorName;
+
+//gramaticly correct backer message
+if (campaign.donorCount == 1) {
+  $scope.backers = campaign.donorCount + ' backer';
+} else {
+  $scope.backers = campaign.donorCount + ' backers';
+}
+
+//runs once on page load
+changeProgressBar();
+timeRemaining();
+
+function timeRemaining() {
+  var deadline = moment(campaign.deadlineDate);
+  var now = moment();
+  $scope.timeRemaining = moment(deadline - now).format('D');
+  if ($scope.timeRemaining <= 0) {
+    $scope.timeRemaining = 0 + ' days left';
+  } else if ($scope.timeRemaining == 1) {
+    $scope.timeRemaining = 1 + ' day left!';
+  } else {
+    $scope.timeRemaining += ' days left';
+  }
+}
+
+function changeProgressBar() {
+  var progress = (campaign.raised / campaign.goal);
+  bar.animate(progress);
+  $scope.goal = campaign.goal;
+  $scope.raised = campaign.raised;
+}
 
   $scope.calcFees = function (blah) {
 
@@ -200,7 +243,13 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', fu
 
   }
 
-
+var params = $location.search('link');
+console.log('params:', params);
+if (params.$$search.link == true) {
+  console.log('location search found true!');
+} else {
+  console.log('location search found false, but at least it checked');
+}
 
 
 
