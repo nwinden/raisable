@@ -271,7 +271,7 @@ if (params.$$search.link == true) {
       clickOutsideToClose: true,
       scope: $scope,
       preserveScope: true,
-      templateUrl: 'reward-dialog.html',
+      templateUrl: 'reward-dialog2.html',
       controller: function LandingController($scope, $mdDialog) {
         $scope.closeDialog = function () {
           $mdDialog.hide();
