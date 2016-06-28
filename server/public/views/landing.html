@@ -9,6 +9,7 @@
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/progressbar.min.js"></script>
+    <script src="/assets/vendors/moment.min.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
     <script src="/scripts/LandingController.js"></script>
     <script src="/assets/vendors/jk-carousel.js"></script>
@@ -35,12 +36,12 @@
           <h5>by {{name}}</h5>
           <div flex class="goalCard">
             <md-card>
-              <h3>Goal: {{goal | currency}}</h3>
+              <h3>Goal: {{goal / 100 | currency}}</h3>
               <div flex layout="column">
                 <div id="progressLine"></div>
-                <h5>Raised: {{raised | currency}}</h5>
+                <h5>Raised: {{raised / 100 | currency}}</h5>
                   <div flex layout="row" class="remainingTime">
-                    <h5 flex>Remaining Time</h5>
+                    <h5 flex>{{timeRemaining}}</h5>
                     <h5 flex>{{backers}}</h5>
                   </div>
 
@@ -124,7 +125,7 @@
                       <md-card-content ng-repeat="need in needs">
                         Item: {{need.name}}<br>
                         Quantity: {{need.quantity}}<br>
-                        Total Price: ${{need.price}}
+                        Total Price: {{need.price / 100 | currency}}
                       </md-card-content>
                     </md-card>
                   </div>

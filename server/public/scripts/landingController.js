@@ -1,5 +1,4 @@
 clientApp.controller('LandingController', ['$scope','$location', function($scope, $location) {
-  console.log('landing controller!');
 
   var campaign = {
     "url": "raisable.com/slp-booster-club/ad98398dad",
@@ -206,13 +205,28 @@ if (campaign.donorCount == 1) {
   $scope.backers = campaign.donorCount + ' backers';
 }
 
-changeProgressBar(); //runs once on page load
+//runs once on page load
+changeProgressBar();
+timeRemaining();
+
+function timeRemaining() {
+  var deadline = moment(campaign.deadlineDate);
+  var now = moment();
+  $scope.timeRemaining = moment(deadline - now).format('D');
+  if ($scope.timeRemaining <= 0) {
+    $scope.timeRemaining = 0 + ' days left';
+  } else if ($scope.timeRemaining == 1) {
+    $scope.timeRemaining = 1 + ' day left!';
+  } else {
+    $scope.timeRemaining += ' days left';
+  }
+}
 
 function changeProgressBar() {
   var progress = (campaign.raised / campaign.goal);
-  bar.animate(progress); //posibly 'return' this
-  $scope.goal = campaign.goal / 100;
-  $scope.raised = campaign.raised / 100;
+  bar.animate(progress);
+  $scope.goal = campaign.goal;
+  $scope.raised = campaign.raised;
 }
 
 angular.forEach($scope.campaign.items, function (need) {
