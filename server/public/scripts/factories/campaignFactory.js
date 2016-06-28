@@ -1,4 +1,4 @@
-clientApp.factory('campaignFactory', ['$http', function($http) {
+clientApp.factory('campaignFactory', ['$http', '$location', function($http, $location) {
 
   // PRIVATE
   var campaigns = undefined;
@@ -12,6 +12,7 @@ clientApp.factory('campaignFactory', ['$http', function($http) {
 
     return promise;
   }
+
 
   // PUBLIC
   var publicApi = {

@@ -1,4 +1,4 @@
-clientApp.controller('LandingController', ['$scope','$location', function($scope, $location) {
+clientApp.controller('LandingController', ['$scope','$location', 'campaignFactory', function($scope, $location, campaignFactory) {
 
   var campaign = {
     "url": "raisable.com/slp-booster-club/ad98398dad",
@@ -241,7 +241,13 @@ angular.forEach($scope.campaign.donorLevels, function (tiers) {
   $scope.donorTiers.push(tiers);
 });
 
-
+var params = $location.search('link');
+console.log('params:', params);
+if (params.$$search.link == true) {
+  console.log('location search found true!');
+} else {
+  console.log('location search found false, but at least it checked');
+}
 
 
 
