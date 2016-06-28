@@ -184,6 +184,7 @@ clientApp.controller('HomeController', ['$scope', function($scope) {
 
 
   //--- Home Page Campaign Search --- //
+    $scope.searchInput;
       $scope.items = ["Category","Keyword", "Zipcode"];
       $scope.selectedItem;
       $scope.getSelectedText = function() {
@@ -193,6 +194,12 @@ clientApp.controller('HomeController', ['$scope', function($scope) {
           return " Select ";
         }
       };
+
+      $scope.campaignSearch = function () {
+        alert("Sumbitted: " + $scope.searchInput + " and " + $scope.selectedItem);
+
+      };
+
 
   //--- Home Page Carousel --- //
       $scope.dataArray = [
@@ -208,9 +215,6 @@ clientApp.controller('HomeController', ['$scope', function($scope) {
       ];
 
   //--- Campaign Grid Tiles --- //
-
-
-
       this.tiles = buildGridModel({
         icon : "avatar:svg-",
         title: "Svg-",
