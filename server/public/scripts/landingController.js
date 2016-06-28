@@ -181,23 +181,20 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
     "pinterestShareText": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
   }; //end of object
 
-  var bar = new ProgressBar.Line(progressLine, {
-    strokeWidth: 4,
-    easing: 'easeInOut',
-    duration: 1400,
-    color: '#3F51B5',
-    trailColor: '#eee',
-    trailWidth: 1,
-    svgStyle: {width: '100%', height: '100%'}
-  });
+var bar = new ProgressBar.Line(progressLine, {
+  strokeWidth: 4,
+  easing: 'easeInOut',
+  duration: 1400,
+  color: '#3F51B5',
+  trailColor: '#eee',
+  trailWidth: 1,
+  svgStyle: {width: '100%', height: '100%'}
+});
 
-
-
-  $scope.selectedReward = {};
-  $scope.donationAmount = 0;
-  $scope.accountFees = 0;
-  $scope.totalContribution = 0;
-
+$scope.selectedReward = {};
+$scope.donationAmount = 0;
+$scope.accountFees = 0;
+$scope.totalContribution = 0;
 $scope.campaign = campaign;
 $scope.needs = [];
 $scope.faqs = [];
@@ -236,12 +233,10 @@ function changeProgressBar() {
   $scope.raised = campaign.raised;
 }
 
-  $scope.calcFees = function (blah) {
-
-    $scope.accountFees = 0.3 + (0.029 * blah);
-    $scope.totalContribution = blah - $scope.accountFees;
-
-  }
+$scope.calcFees = function (blah) {
+  $scope.accountFees = 0.3 + (0.029 * blah);
+  $scope.totalContribution = blah - $scope.accountFees;
+}
 
 var params = $location.search('link');
 console.log('params:', params);
@@ -252,32 +247,31 @@ if (params.$$search.link == true) {
 }
 
 
+angular.forEach($scope.campaign.items, function (need) {
+  $scope.needs.push(need);
+});
 
-  angular.forEach($scope.campaign.items, function (need) {
-    $scope.needs.push(need);
-  });
+angular.forEach($scope.campaign.faqs, function (faq) {
+  $scope.faqs.push(faq);
+});
 
-  angular.forEach($scope.campaign.faqs, function (faq) {
-    $scope.faqs.push(faq);
-  });
-
-  angular.forEach($scope.campaign.donorLevels, function (tiers) {
-    $scope.donorTiers.push(tiers);
-  });
+angular.forEach($scope.campaign.donorLevels, function (tiers) {
+  $scope.donorTiers.push(tiers);
+});
 
 
-  $scope.claimReward = function (event) {
-    $mdDialog.show({
-      clickOutsideToClose: true,
-      scope: $scope,
-      preserveScope: true,
-      templateUrl: 'reward-dialog.html',
-      controller: function LandingController($scope, $mdDialog) {
-        $scope.closeDialog = function () {
-          $mdDialog.hide();
-        }
+$scope.claimReward = function (event) {
+  $mdDialog.show({
+    clickOutsideToClose: true,
+    scope: $scope,
+    preserveScope: true,
+    templateUrl: 'reward-dialog.html',
+    controller: function LandingController($scope, $mdDialog) {
+      $scope.closeDialog = function () {
+        $mdDialog.hide();
       }
-    });
-  };
+    }
+  });
+};
 
 }]);
