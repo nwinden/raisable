@@ -294,6 +294,7 @@ $scope.claimReward = function (event) {
     controller: function LandingController($scope, $mdDialog) {
       $scope.closeDialog = function () {
         $mdDialog.hide();
+
       }
     }
   });
