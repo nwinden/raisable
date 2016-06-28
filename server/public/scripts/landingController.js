@@ -182,12 +182,29 @@ clientApp.controller('LandingController', ['$scope','$location', function($scope
     "pinterestShareText": "help the slp spartans get new uniforms raisable.com/lksdfj3c",
   }; //end of object
 
-
+  var bar = new ProgressBar.Line(progressLine, {
+    strokeWidth: 4,
+    easing: 'easeInOut',
+    duration: 1400,
+    color: '#3F51B5',
+    trailColor: '#eee',
+    trailWidth: 1,
+    svgStyle: {width: '100%', height: '100%'}
+  });
 
 $scope.campaign = campaign;
 $scope.needs = [];
 $scope.faqs = [];
 $scope.donorTiers = [];
+
+changeProgressBar(); //runs once on page load
+
+function changeProgressBar() {
+  var progress = (campaign.raised / campaign.goal);
+  bar.animate(progress); //posibly 'return' this
+  $scope.goal = campaign.goal / 100;
+  $scope.raised = campaign.raised / 100;
+}
 
 angular.forEach($scope.campaign.items, function (need) {
   $scope.needs.push(need);

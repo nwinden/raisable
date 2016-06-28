@@ -8,6 +8,11 @@ md-toolbar {
   text-align: center;
 }
 
+#progressLine {
+  margin: 20px;
+  height: 30px;
+}
+
 .donorsContainer {
   text-align: center;
 }
