@@ -1,4 +1,4 @@
-clientApp.controller('LandingController', ['$scope','$location', function($scope, $location) {
+clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', function($scope, $location, $mdDialog) {
   console.log('landing controller!');
 
   var campaign = {
@@ -85,7 +85,7 @@ clientApp.controller('LandingController', ['$scope','$location', function($scope
     "donorLevels": [{
       "name": "Sponsor Reward",
       "low": 50000,
-      "high": 1000000,
+      "high": 100000,
       "hasReward": true,
       "rewardTitle": "Sponsor Package",
       "rewardDescription": "Image and link on campaign landing page. Loudspeaker thank you at each home football game.",
@@ -184,25 +184,51 @@ clientApp.controller('LandingController', ['$scope','$location', function($scope
 
 
 
-$scope.campaign = campaign;
-$scope.needs = [];
-$scope.faqs = [];
-$scope.donorTiers = [];
+  $scope.campaign = campaign;
+  $scope.needs = [];
+  $scope.faqs = [];
+  $scope.donorTiers = [];
+  $scope.selectedReward = {};
+  $scope.donationAmount = 0;
+  $scope.accountFees = 0;
+  $scope.totalContribution = 0;
 
-angular.forEach($scope.campaign.items, function (need) {
-  $scope.needs.push(need);
-});
+  $scope.calcFees = function (blah) {
 
-angular.forEach($scope.campaign.faqs, function (faq) {
-  $scope.faqs.push(faq);
-});
+    $scope.accountFees = 0.3 + (0.029 * blah);
+    $scope.totalContribution = blah - $scope.accountFees;
 
-angular.forEach($scope.campaign.donorLevels, function (tiers) {
-  $scope.donorTiers.push(tiers);
-});
-
+  }
 
 
 
+
+
+  angular.forEach($scope.campaign.items, function (need) {
+    $scope.needs.push(need);
+  });
+
+  angular.forEach($scope.campaign.faqs, function (faq) {
+    $scope.faqs.push(faq);
+  });
+
+  angular.forEach($scope.campaign.donorLevels, function (tiers) {
+    $scope.donorTiers.push(tiers);
+  });
+
+
+  $scope.claimReward = function (event) {
+    $mdDialog.show({
+      clickOutsideToClose: true,
+      scope: $scope,
+      preserveScope: true,
+      templateUrl: 'reward-dialog.html',
+      controller: function LandingController($scope, $mdDialog) {
+        $scope.closeDialog = function () {
+          $mdDialog.hide();
+        }
+      }
+    });
+  };
 
 }]);
