@@ -41,8 +41,9 @@ md-card-header {
 /************************** TEAM INFO SECTION **********************/
 
 img {
-  height: 400px;
-  width: auto;
+  height: auto;
+  width: 100%;
+  display: inline;
 }
 
 .groupMedia {
@@ -50,6 +51,7 @@ img {
   height: 400px;
   background-color: black;
   text-align: center;
+  vertical-align: middle;
 }
 
 .groupNarrative {
@@ -64,6 +66,13 @@ img {
 /*  background-color: #DC8CFF;*/
 }
 
+.needsContainer {
+  width: 30%;
+  height: auto;
+  float: left;
+  margin: 5px;
+}
+
 
 /************************ FAQ ****************************/
 .faq {
@@ -72,9 +81,14 @@ img {
 }
 
 /*********************** REWARD DIALOG ********************/
+
 /*.experiment th, td {
   border: 1px solid black;
 }*/
+
+.action {
+  width: 60%;
+}
 
 md-dialog-content h4 {
   text-align: center;
@@ -82,4 +96,15 @@ md-dialog-content h4 {
 
 .results {
   text-align: right;
+  width: 40%;
+}
+
+.donationInput {
+  text-align: right;
+  border: 0px;
+  width: 75%;
+}
+
+#submitReward {
+  float: right;
 }

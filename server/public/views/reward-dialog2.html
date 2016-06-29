@@ -1,67 +1,75 @@
-<md-dialog flex="75">
+<md-dialog flex="75" class="rewardDialog">
  <md-toolbar>
    <div class="md-toolbar-tools">
      <h2>Choose Reward and Submit Donation</h2>
    </div>
  </md-toolbar>
+ <form name="donorRewardsForm">
  <md-dialog-content flex-shrink="0" flex-basis="auto" layout="row">
-   <div flex="5"></div>
-   <div flex="45" layout="column">
-     <h4>Claim your reward</h4>
-     <md-input-container>
-       <md-radio-group>
-         <md-radio-button name="rewardTier" value="{{value}}" ng-model="selectedReward.reward" ng-repeat="tier in donorTiers">{{tier.name}}</md-radio-button>
-         <md-radio-button name="rewardTier" value="2" ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
-         <md-radio-button name="publicThankYou" value="3" ng-model="selectedReward.goPublic">Can we publickly thank you?</md-radio-button>
-       </md-radio-group>
-     </md-input-container>
-     <md-input-container>
-       <input type="text" name="firstName" ng-model="selectedReward.firstName" placeholder="First Name" />
-     </md-input-container>
-     <md-input-container>
-       <input type="text" name="lastName" ng-model="selectedReward.lastName" placeholder="Last Name" />
-     </md-input-container>
-   </div>
-   <div flex="5"></div>
-   <div flex="40" layout="column">
-     <h4>Checkout</h4>
-     <md-input-container>
-       <input type="text" name="email" ng-model="selectedReward.email" placeholder="Email" />
-     </md-input-container>
-     <md-input-container>
-       <input type="number" name="number" placeholder="Card Number" />
-     </md-input-container>
-     <md-input-container>
-       <input type="date" name="expdate" placeholder="Exp. Date" />
-     </md-input-container>
-     <md-input-container>
-       <input type="number" name="cvc" placeholder="CVC/CVV" />
-     </md-input-container>
 
-     <h4>Breakout</h4>
-     <div flex layout="row">
-       <div flex="60">
-         <table class="experiment">
-           <tr>
-             <td>Donation:</td>
-             <td class="results">
-               <input type="number" name="donationAmount" placeholder="{{tier.low}}" ng-model="donationAmount" ng-change="calcFees(donationAmount)" />
-             </td>
-           </tr>
-           <tr>
-             <td>Account Fees:</td>
-             <td class="results" >{{accountFees}}</td>
-           </tr>
-           <tr>
-             <td>Total Contribution:</td>
-             <td class="results">{{totalContribution}}</td>
-           </tr>
-         </table>
-       <div flex="40">
-         <md-button class="md-raised md-primary" ng-click="">Pay {{donationAmount}}</md-button>
-       </div>
+     <div flex="5"></div>
+
+     <div flex="45" layout="column">
+       <h4>Claim your reward</h4>
+       <md-input-container>
+         <md-radio-group>
+           <md-radio-button name="rewardTier" value="{{tier.name}}" ng-model="selectedReward.reward"
+            ng-repeat="tier in donorTiers"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+           <md-radio-button name="rewardTier" value="forgoReward" ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
+           <br>
+           <md-radio-button name="publicThankYou" value="goPublic" ng-model="selectedReward.goPublic">Can we publicly thank you?</md-radio-button>
+         </md-radio-group>
+       </md-input-container>
+       <md-input-container>
+         <input type="text" name="firstName" ng-model="selectedReward.firstName" placeholder="First Name" />
+       </md-input-container>
+       <md-input-container>
+         <input type="text" name="lastName" ng-model="selectedReward.lastName" placeholder="Last Name" />
+       </md-input-container>
      </div>
-   </div>
-   <div flex="5"></div>
- </md-dialog-content>
+
+     <div flex="5"></div>
+
+     <div flex="40" layout="column">
+       <h4>Checkout</h4>
+       <md-input-container>
+         <input type="text" name="email" ng-model="selectedReward.email" placeholder="Email" />
+       </md-input-container>
+       <md-input-container>
+         <input type="number" name="number" placeholder="Card Number" />
+       </md-input-container>
+       <md-input-container>
+         <input type="date" name="expdate" placeholder="Exp. Date" />
+       </md-input-container>
+       <md-input-container>
+         <input type="number" name="cvc" placeholder="CVC/CVV" />
+       </md-input-container>
+
+       <h4>Breakout</h4>
+         <div flex class="breakout">
+           <table class="experiment">
+             <tr>
+               <td class="action">Donation:</td>
+               <td class="results">
+                 <input class="donationInput" type="text" name="donationAmount" ng-model="donationAmount"
+                   ng-change="calcFees(donationAmount)" ng-currency min="1" max="1000000" />
+               </td>
+             </tr>
+             <tr>
+               <td class="action">Account Fees:</td>
+               <td class="results">{{accountFees | currency}}</td>
+             </tr>
+             <tr>
+               <td class="action">Total Contribution:</td>
+               <td class="results">{{totalContribution | currency}}</td>
+             </tr>
+           </table><br>
+           <md-button id="submitReward" class="md-raised md-primary" ng-click="">Pay {{donationAmount | currency}}</md-button>
+         </div>
+     </div>
+
+     <div flex="5"></div>
+
+</md-dialog-content>
+</form>
 </md-dialog>

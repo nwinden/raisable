@@ -5,6 +5,7 @@
     <title>raisable</title>
 
     <script src="/assets/vendors/angular.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/ng-currency.js"></script>
     <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
@@ -102,6 +103,7 @@
               <md-card-header>{{tier.name}}</md-card-header>
               <md-card-content>
                 <p>{{tier.low / 100 | currency}}</p>
+                <p>{{tier.rewardTitle}}</p>
               </md-card-content>
               <md-card-footer>
                 <md-button class="md-raised md-primary" ng-click="claimReward($event)">Claim</md-button>
@@ -123,12 +125,14 @@
                     </md-card>
                   </div>
                   <div flex class="groupNeeds">
-                    <md-card>
+                    <md-card layout-align="center">
                       <md-card-header>Needs</md-card-header>
-                      <md-card-content ng-repeat="need in needs">
-                        Item: {{need.name}}<br>
-                        Quantity: {{need.quantity}}<br>
-                        Total Price: {{need.price / 100 | currency}}
+                      <md-card-content>
+                        <div ng-repeat="need in needs" class="needsContainer">
+                          Item: {{need.name}}<br>
+                          Quantity: {{need.quantity}}<br>
+                          Total Price: {{need.price / 100 | currency}}
+                        </div>
                       </md-card-content>
                     </md-card>
                   </div>
@@ -140,7 +144,7 @@
                 <md-content class="faq">
                   <h2>FAQ</h2>
                   <p ng-repeat="faq in faqs">
-                    Q: {{faq.question}}
+                    Q: {{faq.question}}<br>
                     A: {{faq.response}}
                   </p>
                 </md-content>

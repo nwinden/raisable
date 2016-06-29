@@ -194,9 +194,11 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
 
 
   $scope.selectedReward = {};
-  $scope.donationAmount = 0;
+  $scope.donationAmount = '';
   $scope.accountFees = 0;
   $scope.totalContribution = 0;
+
+
 
 $scope.campaign = campaign;
 $scope.needs = [];
@@ -204,6 +206,8 @@ $scope.faqs = [];
 $scope.donorTiers = [];
 $scope.title = campaign.title;
 $scope.name = campaign.creatorName;
+
+
 
 //gramaticly correct backer message
 if (campaign.donorCount == 1) {
@@ -265,7 +269,7 @@ if (params.$$search.link == true) {
     $scope.donorTiers.push(tiers);
   });
 
-
+//function for generating reward dialog box
   $scope.claimReward = function (event) {
     $mdDialog.show({
       clickOutsideToClose: true,
