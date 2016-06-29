@@ -306,13 +306,12 @@ $scope.claimReward = function (event) {
   $mdDialog.show({
     clickOutsideToClose: true,
     scope: $scope,
-    targetEvent: event,
     preserveScope: true,
     templateUrl: 'reward-dialog2.html',
     controller: function LandingController($scope, $mdDialog) {
-    //   $scope.closeDialog = function () {
-    //     $mdDialog.close();
-    //   }
+      $scope.closeDialog = function () {
+        $mdDialog.hide();
+      }
      }
   });
 };
