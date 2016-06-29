@@ -33,7 +33,7 @@
 
       <!-- Goal and Donors container -->
       <md-content flex="25" id="goal" class="md-whiteframe-9dp">
-        <section flex-offset="5" flex="90" layout="column" layout-align="center">
+        <div flex-offset="5" flex="90" layout="column" layout-align="center">
           <h1>{{title}}</h1>
           <h5>by {{name}}</h5>
           <div flex class="goalCard">
@@ -46,11 +46,10 @@
                     <h5 flex>{{timeRemaining}}</h5>
                     <h5 flex>{{backers}}</h5>
                   </div>
-
               </div>
             </md-card>
           </div>
-          <md-button class="md-raised md-primary">Contribute Now</md-button>
+          <md-button class="md-raised md-primary" ng-click="claimReward()">Contribute Now</md-button>
           <div flex layout="row" layout-align="center">
             <p>Share: </p>
             <a href=""><img src="/assets/images/facebook.png" alt="share through facebook" class="shareIcon" /></a>
@@ -58,31 +57,31 @@
             <a href=""><img src="/assets/images/pinterest.png" alt="share through pinterest" class="shareIcon" /></a>
             <a href=""><img src="/assets/images/twitter.png" alt="share through twitter" class="shareIcon" /></a>
           </div>
-        </section>
+        </div>
 
-        <section flex-offset="5" flex="90" layout="column" layout-align="center">
-          <md-content flex class="md-whiteframe-9dp">
-            <div class="sponsors">
-              <md-card>
+        <div flex-offset="5" flex="90" layout="column" layout-align="center">
 
-                <div class="sponsors-carousel">
-                    <h3>Sponsors</h3>
-                    <div layout="column" layout-align="center center" >
-                        <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="1000" max-height="400" auto-slide="true" auto-slide-time="5000">
-                        </jk-carousel>
-                    </div>
-                </div>
-                <!--<div ng-repeat="level in levels">
-                  <h3>{{level.name}}</h3>
-                  <div ng-repeat="backer in level.sponsors">
-                    <img ng-if="backer.imageLink" ng-src="backer.imageLink" />
-                    <h4>{{backer.firstName}} {{backer.lastName}}</h4>
-                  </div>
-                </div>-->
+          <!--tiles/cards for sponsor level recognition-->
+          <div class="sponsors">
+            <h3>Sponsors</h3>
+            <div class="sponsorsContainer" ng-repeat="level in levels" ng-if="level.name == 'Sponsor'">
+              <md-card ng-repeat="backer in level.sponsors" >
+                <md-card-header>{{backer.firstName}} {{backer.lastName}}</md-card-header>
+                <md-content>{{backer.imageLink}}<br><a href="{{backer.websiteLink}}">{{backer.websiteLink}}</a></md-content>
               </md-card>
             </div>
-          </md-content>
-        </section>
+          </div>
+
+          <!--carousels for each level of donation-->
+          <div class="backers" ng-repeat="level in levels" ng-if="level.name != 'Sponsor'">
+            <h3>{{level.name}}</h3>
+              <div layout="column" layout-align="center center">
+                  <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="600" auto-slide="true" auto-slide-time="5000">
+                  </jk-carousel>
+              </div>
+          </div>
+
+        </div>
 
       </md-content>
 
@@ -91,7 +90,7 @@
         <div layout="column">
 
           <!-- Reward tiers container -->
-          <section flex layout="row" class="rewards">
+          <div flex layout="row" class="rewards">
             <md-card flex="25" layout="column" class="md-whiteframe-9dp" ng-repeat="tier in donorTiers" layout-align="center" ng-if="tier.name != 'Donor'">
               <md-card-header>{{tier.name}} Reward</md-card-header>
               <md-card-content>
@@ -102,9 +101,9 @@
                 <md-button class="md-raised md-primary" ng-click="claimReward(tier)">Claim</md-button>
               </md-card-footer>
             </md-card>
-          </section>
+          </div>
 
-          <section flex layout="row">
+          <div flex layout="row">
               <div flex="5">
               </div>
               <div flex="65" layout="column" class="teamInfoContainer">
@@ -142,7 +141,7 @@
                   </p>
                 </md-content>
               </div>
-          </section>
+          </div>
         </div>
       </md-content>
 

@@ -43,7 +43,7 @@ md-card-header {
 img {
   height: auto;
   width: 100%;
-  display: inline;
+/*  display: inline;*/
 }
 
 .groupMedia {
@@ -69,7 +69,7 @@ img {
 .needsContainer {
   width: 30%;
   height: auto;
-  float: left;
+/*  float: left;*/
   margin: 5px;
 }
 
