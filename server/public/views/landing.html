@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
-    <link rel="stylesheet" href="/styles/jk-carousel.css">
+    <link rel="stylesheet" href="/styles/landing-jk-carousel.css">
   </head>
 
   <body ng-app="clientApp" ng-controller="LandingController" layout="column">
@@ -64,13 +64,21 @@
           <md-content flex class="md-whiteframe-9dp">
             <div class="sponsors">
               <md-card>
-                <div ng-repeat="level in levels">
+
+                <div class="sponsors-carousel">
+                    <h3>Sponsors</h3>
+                    <div layout="column" layout-align="center center" >
+                        <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="1000" max-height="400" auto-slide="true" auto-slide-time="5000">
+                        </jk-carousel>
+                    </div>
+                </div>
+                <!--<div ng-repeat="level in levels">
                   <h3>{{level.name}}</h3>
                   <div ng-repeat="backer in level.sponsors">
                     <img ng-if="backer.imageLink" ng-src="backer.imageLink" />
                     <h4>{{backer.firstName}} {{backer.lastName}}</h4>
                   </div>
-                </div>
+                </div>-->
               </md-card>
             </div>
           </md-content>

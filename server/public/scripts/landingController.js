@@ -287,6 +287,17 @@ angular.forEach($scope.campaign.donorLevels, function (tiers) {
   $scope.donorTiers.push(tiers);
 });
 
+//--- Landing Page Carousel --- //
+
+$scope.dataArray = [{
+    src: 'http://www.calgarywindowsales.ca/img/Calgary-1440x400--3.jpg'
+}, {
+    src: 'https://wordpress.nessyamato.com/wp-content/uploads/2015/10/hp1440x400-menar-bluegreen.jpg'
+}, {
+
+    src: 'http://www.anglinpr.com/files/7814/4356/6575/web-header-OCAST-1440-x-400.png'
+}];
+
 
 //function for generating reward dialog box
 $scope.claimReward = function (event) {
@@ -294,7 +305,7 @@ $scope.claimReward = function (event) {
     clickOutsideToClose: true,
     scope: $scope,
     preserveScope: true,
-    templateUrl: 'reward-dialog.html',
+    templateUrl: 'reward-dialog2.html',
     controller: function LandingController($scope, $mdDialog) {
       $scope.closeDialog = function () {
         $mdDialog.hide();
