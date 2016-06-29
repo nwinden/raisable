@@ -15,4 +15,16 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/all', function (req, res) {
+  Campaign.find({}, function (err, campaigns) {
+
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+
+    res.send(campaigns);
+  });
+});
+
 module.exports = router;

@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Raisable</title>
-
+    <!-- Application Logic -->
     <script src="/assets/vendors/angular.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/jk-carousel.js"></script>
+    <script src="/assets/vendors/progressbar.min.js"></script>
+    <script src="/assets/vendors/moment.min.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
     <script src="/scripts/homeController.js" charset="utf-8"></script>
+    <script src="/scripts/factories/campaignFactory.js"></script>
 
-
+    <!-- Application Styles -->
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles/jk-carousel.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/homestylesheet.css">
-
-
 </head>
-
-<body ng-app="clientApp">
+<body ng-app="clientApp" ng-controller="HomeController" ng-init="getCampaigns()">
 
     <!-- Toolbar container -->
     <md-toolbar layout="row">
@@ -32,47 +31,71 @@
     </md-toolbar>
     <!-- Campaign Search Bar -->
     <md-subheader class="sub-nav">
+      <form ng-submit="campaignSearch()">
         <div class="search-dropdown">
             <md-input-container>
-                <label>Items</label>
-                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-                    <md-optgroup label="items">
-                        <md-option ng-value="item" ng-repeat="item in items">Item {{item}}</md-option>
+                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()" required>
+                    <md-optgroup label="Search By:">
+                        <md-option ng-value="item" ng-repeat="item in items" aria-label="Search Options">{{item}}</md-option>
                     </md-optgroup>
                 </md-select>
             </md-input-container>
-
-
+            <!-- Search Field -->
             <md-input-container class="search-input">
-                <input class="campaign-search-input" name="campaignSearch" placeholder="Search">
+                <input type="text" class="campaign-search-input" name="campaignSearch" aria-label="Search Input" ng-model="searchInput" required />
             </md-input-container>
-
+            <!-- Submit Button -->
+            <md-button type="submit" class="searchIcon md-icon-button md-accent" aria-label="Submit">
+                <md-icon>
+                    <svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        <path d="M0 0h24v24H0z" fill="none" />
+                    </svg>
+                </md-icon>
+            </md-button>
         </div>
+        </form>
     </md-subheader>
-
-    <div class="home-carousel" ng-controller="carouselController">
-        <div layout="column" layout-align="center center" style="padding-bottom: 10px">
-            <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="500" auto-slide="true" auto-slide-time="5000">
+    <!-- Featured Carousel -->
+    <div class="home-carousel">
+        <div layout="column" layout-align="center center" >
+            <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="1440" max-height="400" auto-slide="true" auto-slide-time="5000">
             </jk-carousel>
         </div>
-        <h2 class="active-campaigns">Active Campaigns</h2>
     </div>
-
-
-    <div class="gridListTiles" ng-controller="gridListDemoCtrl as vm" flex ng-cloak>
-        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="10px" md-gutter-gt-sm="10px" md-gutter-gt-md="10px" >
-            <md-grid-tile ng-repeat="tile in vm.tiles" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background">
-                <md-grid-tile-footer>
-                    <h2>Uniforms for the Spartans</h2>
-                    <h4>By: North High School</h4>
-                  </md-grid-tile-footer>
-            </md-grid-tile>
+    <!-- Campaign Tiles -->
+    <div class="gridListTiles" flex ng-cloak>
+      <h2 class="active-campaigns">Active Campaigns</h2>
+        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="3:3" md-gutter="30px" md-gutter-gt-sm="30px" md-gutter-gt-md="30px">
+             <md-grid-tile ng-repeat="campaign in campaigns" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
+                <a ng-href="campaigns/{{campaign.campaignId}}"><md-grid-tile-footer>
+                    <h3>{{campaign.title}}</h2>
+                    <h6>By: {{campaign.creatorName}}</h4>
+                </md-grid-tile-footer>
+            </a></md-grid-tile>
         </md-grid-list>
     </div>
+    <!-- Campaign Widget -->
+    <div class="featured-campaign-widget">
+      <div class="widget-guts">
 
+      <h3>{{campaigns[0].title}}</h2>
+      <h6>By: {{campaigns[0].creatorName}}</h5>
+      <div flex class="goalCard">
+        <md-card>
+          <h3>Goal: {{campaigns[0].goal | currency}}</h3>
+          <div flex layout="column">
+            <div id="progressLine"></div>
+            <h5>Raised: {{campaigns[0].raised | currency}}</h5>
+              <div flex layout="row" class="remainingTime">
+                <h5 flex>Remaining Time</h5>
+                <h5 flex>Number of Backers</h5>
+              </div>
 
-
-
+          </div>
+        </md-card>
+      </div>
+    </div>
+</div>
 </body>
-
 </html>

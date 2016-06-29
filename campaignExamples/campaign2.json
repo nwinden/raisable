@@ -5,6 +5,7 @@
   "title": "Instruments for the Riverside Band",
   "creatorName": "Riverside High School Band",
   "creatorId": "097f191e810c19729de756xa",
+  "campaignId": 4231,
   "zipCode": 55811,
   "categories": [
     "music",
@@ -90,83 +91,103 @@
   }],
 
   "donorLevels": [{
-    "name": "Sponsor Reward",
+    "name": "Sponsor",
     "low": 50000,
     "high": 1000000,
     "hasReward": true,
     "rewardTitle": "Sponsor Package",
     "rewardDescription": "Public thank-you at each band performance.",
     "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 50000,
+        "publicThankYou": true,
+        "emailThankYou": true,
+        "acceptedReward": true,
+        "rewardAccepted": "Sponser Reward",
+        "firstName": "Music-Go-Round",
+        "lastName": "",
+        "zipCode": 55432,
+        "email": "frank@musicgoroundduluth.com",
+        "imageLink": "",
+        "websiteLink": "http://www.musicgoroundduluthmn.com/",
+        "promotorLinkUsed":"ben"
+      }
+    ]
   },
   {
-    "name": "Gold Reward",
+    "name": "Gold",
     "low": 10000,
     "high": 19999,
     "hasReward": true,
     "rewardTitle": "RiverSide Band Sweater",
     "rewardDescription": "Get the previous two reward tiers AND a Riverside Band sweater.",
-    "rewardImageLink": ""
+    "rewardImageLink": "",
+    "sponsors": [
+
+    ]
   },
   {
-    "name": "Silver Reward",
+    "name": "Silver",
     "low": 5000,
     "high": 9999,
     "hasReward": true,
     "rewardTitle": "Tickets to the homecoming game",
     "rewardDescription": "Attend the private concert AND get free popcorn at the concert.",
-    "rewardImageLink": ""
+    "rewardImageLink": "",
+    "sponsors": [
+
+    ]
   },
   {
-    "name": "Band Reward",
+    "name": "Band",
     "low": 1000,
     "high": 4999,
     "hasReward": true,
     "rewardTitle": "Private Concert",
     "rewardDescription": "Attend a private concert only for band backers!",
-    "rewardImageLink": ""
-  }],
-
-  "sponsors": [{
-    "donation": 50000,
-    "publicThankYou": true,
-    "emailThankYou": true,
-    "acceptedReward": true,
-    "rewardAccepted": "Sponser Reward",
-    "firstName": "Music-Go-Round",
-    "lastName": "",
-    "zipCode": 55432,
-    "email": "frank@musicgoroundduluth.com",
-    "imageLink": "",
-    "websiteLink": "http://www.musicgoroundduluthmn.com/",
-    "promotorLinkUsed":"ben"
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 3000,
+        "publicThankYou": true,
+        "emailThankYou": true,
+        "acceptedReward": true,
+        "rewardAccepted": "Band Reward",
+        "firstName": "Eve",
+        "lastName": "Levnte",
+        "zipCode": 55112,
+        "email": "princesss@gmail.com",
+        "imageLink": "",
+        "websiteLink": "",
+        "promotorLinkUsed":"eve"
+      }
+    ]
   },
   {
-    "donation": 10000,
-    "publicThankYou": false,
-    "emailThankYou": false,
-    "acceptedReward": false,
-    "rewardAccepted": "No Reward",
-    "firstName": "",
-    "lastName": "",
-    "zipCode": 55005,
-    "email": "jebediah@gmail.com",
-    "imageLink": "",
-    "websiteLink": "",
-    "promotorLinkUsed":"jeb"
-  },
-  {
-    "donation": 3000,
-    "publicThankYou": true,
-    "emailThankYou": true,
-    "acceptedReward": true,
-    "rewardAccepted": "Band Reward",
-    "firstName": "Eve",
-    "lastName": "Levnte",
-    "zipCode": 55112,
-    "email": "princesss@gmail.com",
-    "imageLink": "",
-    "websiteLink": "",
-    "promotorLinkUsed":"eve"
+    "name": "Donor",
+    "low": 500,
+    "high": 100000,
+    "hasReward": false,
+    "rewardTitle": "",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 10000,
+        "publicThankYou": false,
+        "emailThankYou": false,
+        "acceptedReward": false,
+        "rewardAccepted": "No Reward",
+        "firstName": "",
+        "lastName": "",
+        "zipCode": 55005,
+        "email": "jebediah@gmail.com",
+        "imageLink": "",
+        "websiteLink": "",
+        "promotorLinkUsed":"jeb"
+      }
+    ]
   }],
 
   "twitterImageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/team.jpg",
