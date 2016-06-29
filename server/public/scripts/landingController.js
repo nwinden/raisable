@@ -301,16 +301,19 @@ $scope.dataArray = [{
 
 //function for generating reward dialog box
 $scope.claimReward = function (event) {
+  $scope.claimReward = event.low;
+  console.log($scope.claimReward);
   $mdDialog.show({
     clickOutsideToClose: true,
     scope: $scope,
+    targetEvent: event,
     preserveScope: true,
     templateUrl: 'reward-dialog2.html',
     controller: function LandingController($scope, $mdDialog) {
-      $scope.closeDialog = function () {
-        $mdDialog.hide();
-      }
-    }
+    //   $scope.closeDialog = function () {
+    //     $mdDialog.close();
+    //   }
+     }
   });
 };
 

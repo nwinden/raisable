@@ -14,7 +14,7 @@
        <md-input-container>
          <md-radio-group>
            <md-radio-button name="rewardTier" value="{{tier.name}}" ng-model="selectedReward.reward"
-            ng-repeat="tier in donorTiers"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+            ng-repeat="tier in donorTiers" ng-if="tier.name != 'Donor'"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
            <md-radio-button name="rewardTier" value="forgoReward" ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
            <br>
            <md-radio-button name="publicThankYou" value="goPublic" ng-model="selectedReward.goPublic">Can we publicly thank you?</md-radio-button>
