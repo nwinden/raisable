@@ -299,9 +299,9 @@ $scope.dataArray = [{
 }];
 
 
+
 //function for generating reward dialog box
 $scope.claimReward = function (event) {
-  $scope.claimReward = event.low;
   console.log($scope.claimReward);
   $mdDialog.show({
     clickOutsideToClose: true,
