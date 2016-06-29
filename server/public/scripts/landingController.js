@@ -83,7 +83,7 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
     }],
 
     "donorLevels": [{
-      "name": "Sponsor Reward",
+      "name": "Sponsor",
       "low": 50000,
       "high": 1000000,
       "hasReward": true,
@@ -101,14 +101,14 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
           "lastName": "",
           "zipCode": 55432,
           "email": "bob@dunnbrothers.com",
-          "imageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/logo.jpg",
+          "imageLink": "https://genesistransformation.files.wordpress.com/2014/11/coffee.jpg",
           "websiteLink": "dunnbrothers.com/promotion/3029fjd3",
           "promotorLinkUsed":"none"
         }
       ]
     },
     {
-      "name": "All Star Reward",
+      "name": "All-Star",
       "low": 20000,
       "high": 49999,
       "hasReward": true,
@@ -120,7 +120,7 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
       ]
     },
     {
-      "name": "Gold Reward",
+      "name": "Gold",
       "low": 10000,
       "high": 19999,
       "hasReward": true,
@@ -132,7 +132,7 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
       ]
     },
     {
-      "name": "Silver Reward",
+      "name": "Silver",
       "low": 5000,
       "high": 9999,
       "hasReward": true,
@@ -144,7 +144,7 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
       ]
     },
     {
-      "name": "Team Reward",
+      "name": "Team",
       "low": 1000,
       "high": 4999,
       "hasReward": true,
@@ -169,7 +169,7 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
       ]
     },
     {
-      "name": "No Reward",
+      "name": "Donor",
       "low": 500,
       "high": 100000,
       "hasReward": false,
@@ -226,6 +226,7 @@ $scope.faqs = [];
 $scope.donorTiers = [];
 $scope.title = campaign.title;
 $scope.name = campaign.creatorName;
+$scope.levels = campaign.donorLevels;
 
 //gramaticly correct backer message
 if (campaign.donorCount == 1) {
