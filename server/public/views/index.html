@@ -31,34 +31,25 @@
         <a href="/views/landing.html">Campaign Page</a>
     </md-toolbar>
     <!-- Campaign Search Bar -->
+
     <md-subheader class="sub-nav">
       <form ng-submit="campaignSearch()">
         <div class="search-dropdown">
-            <md-input-container>
-                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()" required>
-                    <md-optgroup label="Search By:">
-                        <md-option ng-value="item" ng-repeat="item in items" aria-label="Search Options">{{item}}</md-option>
-                    </md-optgroup>
-                </md-select>
-            </md-input-container>
             <!-- Search Field -->
             <md-input-container class="search-input">
-                <input type="text" class="campaign-search-input" name="campaignSearch" aria-label="Search Input" ng-model="searchInput" required />
-            </md-input-container>
-            <!-- Submit Button -->
-            <md-button type="submit" class="searchIcon md-icon-button md-accent" aria-label="Submit">
+                <input ng-model="searchInput" type="text" class="campaign-search-input" name="campaignSearch" aria-label="Search Input" />
                 <md-icon>
                     <svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
                         <path d="M0 0h24v24H0z" fill="none" />
                     </svg>
                 </md-icon>
-            </md-button>
+            </md-input-container>
         </div>
         </form>
     </md-subheader>
     <!-- Featured Carousel -->
-    <div class="home-carousel">
+    <div class="home-carousel" ng-hide="searchInput">
         <div layout="column" layout-align="center center" >
             <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="1440" max-height="400" auto-slide="true" auto-slide-time="5000">
             </jk-carousel>
@@ -66,9 +57,10 @@
     </div>
     <!-- Campaign Tiles -->
     <div class="gridListTiles" flex ng-cloak>
-      <h2 class="active-campaigns">Active Campaigns</h2>
+      <h2 class="active-campaigns" ng-hide="searchInput">Active Campaigns</h2>
+      <h2 class="active-campaigns" ng-show="searchInput">{{filtered.length}} results found for {{searchInput}}</h2>
         <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="3:3" md-gutter="30px" md-gutter-gt-sm="30px" md-gutter-gt-md="30px">
-             <md-grid-tile ng-repeat="campaign in campaigns" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
+             <md-grid-tile ng-repeat="campaign in campaigns | filter:searchInput as filtered" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
                 <a ng-href="campaigns/{{campaign.campaignId}}"><md-grid-tile-footer>
                     <h3>{{campaign.title}}</h2>
                     <h6>By: {{campaign.creatorName}}</h4>
@@ -77,7 +69,7 @@
         </md-grid-list>
     </div>
     <!-- Campaign Widget -->
-    <div class="featured-campaign-widget">
+    <div class="featured-campaign-widget" ng-hide="searchInput">
       <div class="widget-guts">
 
       <h3>{{campaigns[0].title}}</h2>
