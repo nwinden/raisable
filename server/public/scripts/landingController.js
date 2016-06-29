@@ -227,7 +227,7 @@ $scope.donorTiers = [];
 $scope.title = campaign.title;
 $scope.name = campaign.creatorName;
 $scope.levels = campaign.donorLevels;
-
+var claimedReward = 0;
 
 
 //gramaticly correct backer message
@@ -262,7 +262,13 @@ function changeProgressBar() {
 }
 
 $scope.calcFees = function (blah) {
-  $scope.accountFees = 0.3 + (0.029 * blah);
+  $scope.accountFees = (30 + (0.029 * blah));
+  $scope.totalContribution = blah - $scope.accountFees;
+}
+
+$scope.calcFees2 = function (blah) {
+  blah *= 100;
+  $scope.accountFees = (30 + (0.029 * blah));
   $scope.totalContribution = blah - $scope.accountFees;
 }
 
@@ -301,8 +307,17 @@ $scope.dataArray = [{
 
 
 //function for generating reward dialog box
-$scope.claimReward = function (event) {
-  console.log($scope.claimReward);
+$scope.claimReward = function (tier) {
+  //needs to run calcFees(tier.low) on first click - if tier.low is null then what happens?
+  $scope.calcFees(tier.low);
+  //prepopulates donation filed based on reward selected
+  console.log(tier.low); //check if it is undefined or null, change if statement to match
+  if (tier.low == undefined) {
+    $scope.donationAmount = 0;
+  } else {
+    $scope.donationAmount = tier.low / 100;
+  }
+
   $mdDialog.show({
     clickOutsideToClose: true,
     scope: $scope,

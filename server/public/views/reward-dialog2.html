@@ -14,7 +14,7 @@
        <md-input-container>
          <md-radio-group>
            <md-radio-button name="rewardTier" value="{{tier.name}}" ng-model="selectedReward.reward"
-            ng-repeat="tier in donorTiers"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+            ng-repeat="tier in donorTiers" ng-if="tier.name != 'Donor'"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
            <md-radio-button name="rewardTier" value="forgoReward" ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
            <br>
            <md-radio-button name="publicThankYou" value="goPublic" ng-model="selectedReward.goPublic">Can we publicly thank you?</md-radio-button>
@@ -50,18 +50,18 @@
            <table class="experiment">
              <tr>
                <td class="action">Donation:</td>
-               <td class="results">
-                 <input class="donationInput" type="text" name="donationAmount" ng-model="donationAmount"
-                   ng-change="calcFees(donationAmount)" ng-currency min="1" max="1000000" />
+               <td class="results"><span>$</span>
+                 <input class="donationInput" type="number" name="donationAmount" ng-model="donationAmount"
+                   ng-change="calcFees2(donationAmount)" />
                </td>
              </tr>
              <tr>
                <td class="action">Account Fees:</td>
-               <td class="results">{{accountFees | currency}}</td>
+               <td class="results">{{accountFees / 100 | currency}}</td>
              </tr>
              <tr>
                <td class="action">Total Contribution:</td>
-               <td class="results">{{totalContribution | currency}}</td>
+               <td class="results">{{totalContribution / 100 | currency}}</td>
              </tr>
            </table><br>
            <md-button id="submitReward" class="md-raised md-primary" ng-click="">Pay {{donationAmount | currency}}</md-button>
