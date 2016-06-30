@@ -223,17 +223,22 @@ clientApp.controller('HomeController', ['$scope', '$location', '$http', function
 
     };
 
+
+
+
+
+
     //--- Home Page Campaign Search --- //
-    $scope.searchInput;
-    $scope.items = ["Category", "Keyword", "Zipcode"];
-    $scope.selectedItem;
-    $scope.getSelectedText = function() {
-        if ($scope.selectedItem !== undefined) {
-            return $scope.selectedItem;
-        } else {
-            return " Select ";
-        }
-    };
+    // $scope.searchInput;
+    // $scope.searchItem;
+    //
+
+    if ($scope.searchInput !== undefined) {
+        return $scope.searching = true;
+      }
+    // } else {
+    //     return " Select ";
+    // }
 
     $scope.campaignSearch = function() {
         alert("Sumbitted: " + $scope.searchInput + " and " + $scope.selectedItem);
