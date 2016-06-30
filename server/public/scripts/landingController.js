@@ -267,7 +267,9 @@ $scope.calcFees = function (blah) {
 }
 
 $scope.calcFees2 = function (blah) {
+  //$scope.checkAvailability(blah); TESTING  Broken
   blah *= 100;
+
   $scope.accountFees = (30 + (0.029 * blah));
   $scope.totalContribution = blah - $scope.accountFees;
 }
@@ -308,8 +310,9 @@ $scope.dataArray = [{
 
 //function for generating reward dialog box
 $scope.claimReward = function (tier) {
-  //needs to run calcFees(tier.low) on first click - if tier.low is null then what happens?
+
   $scope.calcFees(tier.low);
+  $scope.checkAvailability(tier.low); //TESTING!!!
   //prepopulates donation filed based on reward selected
   console.log(tier.low); //check if it is undefined or null, change if statement to match
   if (tier.low == undefined) {
@@ -330,5 +333,16 @@ $scope.claimReward = function (tier) {
      }
   });
 };
+
+/////Modal Logics/////
+$scope.checkAvailability = function(donation) {
+  for (var i = 0; i < campaign.donorLevels.length; i++) {
+    if (donation >= campaign.donorLevels[i].low) {
+      console.log(campaign.donorLevels[i].name + ' is available');
+    } else {
+      console.log(campaign.donorLevels[i].name + ' is not available');
+    }
+  }
+}
 
 }]);
