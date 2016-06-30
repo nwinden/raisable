@@ -104,6 +104,20 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
           "imageLink": "https://genesistransformation.files.wordpress.com/2014/11/coffee.jpg",
           "websiteLink": "dunnbrothers.com/promotion/3029fjd3",
           "promotorLinkUsed":"none"
+        },
+        {
+          "donation": 50000,
+          "publicThankYou": true,
+          "emailThankYou": true,
+          "acceptedReward": true,
+          "rewardAccepted": "Sponser Reward",
+          "firstName": "Dunn Bros Coffee",
+          "lastName": "",
+          "zipCode": 55432,
+          "email": "bob@dunnbrothers.com",
+          "imageLink": "https://genesistransformation.files.wordpress.com/2014/11/coffee.jpg",
+          "websiteLink": "dunnbrothers.com/promotion/3029fjd3",
+          "promotorLinkUsed":"none"
         }
       ]
     },
