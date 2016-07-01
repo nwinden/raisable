@@ -3,7 +3,19 @@ md-toolbar {
   text-align: center;
 }
 
+.ai {
+  color: pink;
+}
+
 /************************* GOAL AMOUNT / DONORS DISPLAY **********************/
+.goalSection {
+  padding: 0 10px 0 10px;
+}
+
+.goalSection h1, h5, h3 {
+  text-align: center;
+}
+
 .goalInformation {
   text-align: center;
 }
@@ -17,16 +29,9 @@ md-toolbar {
   height: auto;
 }
 
-.sponsors {
-  text-align: center;
-}
-
-.backers {
-  text-align: center;
-}
 /*********************** REWARD TIERS *******************/
 .rewards {
-  background-color: pink;
+/*  background-color: pink;*/
 }
 
 md-card {
@@ -41,17 +46,8 @@ md-card-header {
 /************************** TEAM INFO SECTION **********************/
 
 img {
-  height: auto;
   width: 100%;
-/*  display: inline;*/
-}
-
-.groupMedia {
-  width: 100%;
-  height: 400px;
-  background-color: black;
-  text-align: center;
-  vertical-align: middle;
+  margin: 5px 0 5px 0;
 }
 
 .groupNarrative {
@@ -69,15 +65,19 @@ img {
 .needsContainer {
   width: 30%;
   height: auto;
-/*  float: left;*/
+  float: left;
   margin: 5px;
 }
 
 
 /************************ FAQ ****************************/
 .faq {
-  text-align: center;
   /*background-color: lightgreen;*/
+  padding: 10px;
+}
+
+.faq h2 {
+  text-align: center;
 }
 
 /*********************** REWARD DIALOG ********************/
