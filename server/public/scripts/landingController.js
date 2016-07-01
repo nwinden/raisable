@@ -184,7 +184,7 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
     },
     {
       "name": "Donor",
-      "low": 500,
+      "low": 100,
       "high": 100000,
       "hasReward": false,
       "rewardTitle": "",
@@ -275,22 +275,21 @@ function changeProgressBar() {
   $scope.raised = campaign.raised;
 }
 
-$scope.calcFees = function (blah) {
-  $scope.accountFees = (30 + (0.029 * blah));
-  $scope.totalContribution = blah - $scope.accountFees;
+$scope.calcFees = function (donation) {
+  $scope.accountFees = (30 + (0.029 * donation));
+  $scope.totalContribution = donation - $scope.accountFees;
 }
 
-$scope.calcFees2 = function (blah) {
-  //$scope.checkAvailability(blah); TESTING  Broken
-  blah *= 100;
-
-  $scope.accountFees = (30 + (0.029 * blah));
-  $scope.totalContribution = blah - $scope.accountFees;
+$scope.calcFees2 = function (donation) {
+  donation *= 100;
+  $scope.checkAvailability(donation);
+  $scope.accountFees = (30 + (0.029 * donation));
+  $scope.totalContribution = donation - $scope.accountFees;
 }
 
 var params = $location.search('link');
 console.log('params:', params);
-if (params.$$search.link == true) {
+if (params.$$search.link == true) { //$$ is correct
   console.log('location search found true!');
 } else {
   console.log('location search found false, but at least it checked');
@@ -325,36 +324,44 @@ $scope.dataArray = [{
 //function for generating reward dialog box
 $scope.claimReward = function (tier) {
 
-  $scope.calcFees(tier.low);
-  $scope.checkAvailability(tier.low); //TESTING!!!
   //prepopulates donation filed based on reward selected
-  console.log(tier.low); //check if it is undefined or null, change if statement to match
-  if (tier.low == undefined) {
+  if (tier == 0) {
     $scope.donationAmount = 0;
+    $scope.calcFees(0);
   } else {
     $scope.donationAmount = tier.low / 100;
+    $scope.calcFees(tier.low);
   }
 
   $mdDialog.show({
-    clickOutsideToClose: true,
-    scope: $scope,
-    preserveScope: true,
-    templateUrl: 'reward-dialog2.html',
     controller: function LandingController($scope, $mdDialog) {
       $scope.closeDialog = function () {
         $mdDialog.hide();
       }
-     }
+    },
+    clickOutsideToClose: true,
+    scope: $scope,
+    preserveScope: true,
+    templateUrl: 'reward-dialog2.html',
+    onComplete: afterShowAnimation
   });
+  function afterShowAnimation(scope, element, options) {
+    console.log('popup done');
+    $scope.checkAvailability(tier.low);
+
+  }
 };
 
 /////Modal Logics/////
 $scope.checkAvailability = function(donation) {
-  for (var i = 0; i < campaign.donorLevels.length; i++) {
+  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+    angular.element(document.querySelector('.tier-' + [i])).removeClass('unavailable');
     if (donation >= campaign.donorLevels[i].low) {
       console.log(campaign.donorLevels[i].name + ' is available');
     } else {
       console.log(campaign.donorLevels[i].name + ' is not available');
+      console.log(angular.element(document.querySelector('.tier-' + [i])));
+      angular.element(document.querySelector('.tier-' + [i])).addClass('unavailable');
     }
   }
 }
