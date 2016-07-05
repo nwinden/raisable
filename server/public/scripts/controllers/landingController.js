@@ -405,7 +405,7 @@ $scope.charge = function (clientCard, date) {
 
       chargeToken.stripeToken = token;
 
-      $http.post('/pay', $scope.chargeToken).then(function(response) {
+      $http.post('/pay', chargeToken).then(function(response) {
 
         alert('Your Charge has been processed. Please have a wonderful day.');
 
