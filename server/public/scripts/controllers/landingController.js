@@ -310,7 +310,6 @@ angular.forEach($scope.campaign.donorLevels, function (tiers) {
 });
 
 //--- Landing Page Carousel --- //
-
 $scope.dataArray = [{
     src: 'http://www.calgarywindowsales.ca/img/Calgary-1440x400--3.jpg'
 }, {
@@ -427,12 +426,15 @@ $scope.checkAvailability = function(donation) {
 $scope.checkAvailabilityChange = function(donation) {
   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
     angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
-    //angular.element(document.querySelector('.tier-' + [i])).removeClass('ng-touched');
+    angular.element(document.querySelector('.tier-' + [i])).removeClass('ng-touched');
 
     if (donation < campaign.donorLevels[i].low) {
       angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
       angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
-    }
+    } /*else if (donation = campaign.donorLevels[i].low) {
+      angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
+      angular.element(document.querySelector('.tier-' + [i])).removeClass('ng-empty');
+    }*/
   }
 }
 
@@ -446,14 +448,14 @@ $scope.clickCheckBox = function(tier) { ///!!!!!!!!!!!!!!!!!!!!!
   }
 }
 
-$scope.clickCheckBox = function() { ///!!!!!!!!!!!!!!!!!!!!!
-  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-    angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
-
-    // if (tier.name == campaign.donorLevels.name) {
-    //   angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
-    // }
-  }
-}
+// $scope.clickCheckBox = function() { ///!!!!!!!!!!!!!!!!!!!!!
+//   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+//     angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+//
+//     // if (tier.name == campaign.donorLevels.name) {
+//     //   angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
+//     // }
+//   }
+// }
 /////
 }]);
