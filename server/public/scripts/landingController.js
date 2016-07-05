@@ -365,7 +365,7 @@ $scope.charge = function (clientCard, date) {
   } else {
 
     clientCard.exp_month = (date.getMonth()+1).toString();
-    
+
   }
 
   clientCard.exp_year = date.getFullYear().toString().substring(2);
@@ -387,6 +387,10 @@ $scope.charge = function (clientCard, date) {
       $http.post('/pay', $scope.chargeToken).then(function(response) {
 
         alert('Your Charge has been processed. Please have a wonderful day.');
+
+        //post to server increasing the donor count
+        //post donor Information
+        //check if they did the sponsor level to propmt a file upload
 
       }, function(response) {
 
