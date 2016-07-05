@@ -245,9 +245,6 @@ var claimedReward = 0;
 
 Stripe.setPublishableKey('pk_test_sxs4BWKkRUf9HMXnALXxadxG');
 
-$scope.chargeToken = {};
-
-
 //gramaticly correct backer message
 if (campaign.donorCount == 1) {
   $scope.backers = campaign.donorCount + ' backer';
@@ -359,11 +356,16 @@ $scope.claimReward = function (tier) {
 $scope.charge = function (clientCard, date) {
 
   var token;
+  var chargeToken = {};
 
   if ((date.getMonth()+1).toString().length == 1) {
+
     clientCard.exp_month = '0' + (date.getMonth()+1);
+
   } else {
+
     clientCard.exp_month = (date.getMonth()+1).toString();
+    
   }
 
   clientCard.exp_year = date.getFullYear().toString().substring(2);
@@ -374,19 +376,27 @@ $scope.charge = function (clientCard, date) {
 
     console.log(token);
 
-    $scope.chargeToken.stripeToken = token;
+    if (token == undefined) {
 
-    $http.post('/pay', $scope.chargeToken).then(function(response) {
+      alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
 
-      console.log('somthing happened');
-      console.log(response);
+    } else {
 
-      $scope.chargeToken = {};
+      chargeToken.stripeToken = token;
 
-    });
+      $http.post('/pay', $scope.chargeToken).then(function(response) {
+
+        alert('Your Charge has been processed. Please have a wonderful day.');
+
+      }, function(response) {
+
+        alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
+
+      });
+
+    }
 
   });
-
 
 }
 

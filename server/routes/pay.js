@@ -16,11 +16,14 @@ router.post('/', function (req, res) {
   }, function(err, charge) {
 
     if (err && err.type === 'StripeCardError') {
-      console.log('wat?');
-      res.sendStatus(500);
+      res.sendStatus(502);
+    } else if (err) {
+      res.sendStatus(502);
+    } else {
+      res.sendStatus(200);
     }
 
-    res.sendStatus(200);
+
 
   });
 
