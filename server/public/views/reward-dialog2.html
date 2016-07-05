@@ -36,13 +36,16 @@
          <input type="text" name="email" ng-model="selectedReward.email" placeholder="Email" />
        </md-input-container>
        <md-input-container>
-         <input type="number" name="number" placeholder="Card Number" />
+         <input type="text" name="number" ng-model="clientCard.number" placeholder="Card Number" />
        </md-input-container>
        <md-input-container>
-         <input type="date" name="expdate" placeholder="Exp. Date" />
+        <input type="month" name="date" ng-model="date" placeholder="Exp. Date" />
        </md-input-container>
        <md-input-container>
-         <input type="number" name="cvc" placeholder="CVC/CVV" />
+         <input type="text" name="cvc" ng-model="clientCard.cvc" placeholder="CVC/CVV" />
+       </md-input-container>
+       <md-input-container>
+         <input type="text" name="zip" ng-model="clientCard.address_zip" placeholder="Card Zip Code" />
        </md-input-container>
 
        <h4>Breakout</h4>
@@ -64,7 +67,7 @@
                <td class="results">{{totalContribution / 100 | currency}}</td>
              </tr>
            </table><br>
-           <md-button id="submitReward" class="md-raised md-primary" ng-click="">Pay {{donationAmount | currency}}</md-button>
+           <md-button id="submitReward" class="md-raised md-primary" ng-click="charge(clientCard, date)">Pay {{donationAmount | currency}}</md-button>
          </div>
      </div>
 

@@ -4,6 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var campaigns = require('./routes/campaigns');
+var pay = require('./routes/pay');
 
 //middleware
 app.use(express.static(path.join(__dirname, './public')));
@@ -25,6 +26,7 @@ mongoose.connection.on('error', function (err) {
 
 //routes
 app.use('/campaigns', campaigns);
+app.use('/pay', pay);
 
 // start server
 app.set('port', process.env.PORT || 5000);

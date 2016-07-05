@@ -1,4 +1,4 @@
-clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'campaignFactory', function($scope, $location, $mdDialog, campaignFactory) {
+clientApp.controller('LandingController', ['$scope','$location', '$http', '$mdDialog', 'campaignFactory', function($scope, $location, $http, $mdDialog, campaignFactory) {
 
   var campaign = {
     "url": "raisable.com/slp-booster-club/ad98398dad",
@@ -243,6 +243,7 @@ $scope.name = campaign.creatorName;
 $scope.levels = campaign.donorLevels;
 var claimedReward = 0;
 
+Stripe.setPublishableKey('pk_test_sxs4BWKkRUf9HMXnALXxadxG');
 
 //gramaticly correct backer message
 if (campaign.donorCount == 1) {
@@ -353,8 +354,58 @@ $scope.claimReward = function (tier) {
   }
 };
 
-/////Reward Logic/////
-//fires on claim reward to precheck selected reward
+$scope.charge = function (clientCard, date) {
+
+  var token;
+  var chargeToken = {};
+
+  if ((date.getMonth()+1).toString().length == 1) {
+
+    clientCard.exp_month = '0' + (date.getMonth()+1);
+
+  } else {
+
+    clientCard.exp_month = (date.getMonth()+1).toString();
+
+  }
+
+  clientCard.exp_year = date.getFullYear().toString().substring(2);
+
+  Stripe.card.createToken(clientCard, function(status, response) {
+
+    token = response.id;
+
+    console.log(token);
+
+    if (token == undefined) {
+
+      alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
+
+    } else {
+
+      chargeToken.stripeToken = token;
+
+      $http.post('/pay', $scope.chargeToken).then(function(response) {
+
+        alert('Your Charge has been processed. Please have a wonderful day.');
+
+        //post to server increasing the donor count
+        //post donor Information
+        //check if they did the sponsor level to propmt a file upload
+
+      }, function(response) {
+
+        alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
+
+      });
+
+    }
+
+  });
+
+}
+
+/////Modal Logics/////
 $scope.checkAvailability = function(donation) {
   //funky notation is jquery Lite built into angular
   //uses -1 to leave comparison with 'no reward' off
