@@ -282,7 +282,7 @@ $scope.calcFees = function (donation) {
 
 $scope.calcFees2 = function (donation) {
   donation *= 100;
-  $scope.checkAvailability(donation);
+  $scope.checkAvailabilityChange(donation);
   $scope.accountFees = (30 + (0.029 * donation));
   $scope.totalContribution = donation - $scope.accountFees;
 }
@@ -315,7 +315,6 @@ $scope.dataArray = [{
 }, {
     src: 'https://wordpress.nessyamato.com/wp-content/uploads/2015/10/hp1440x400-menar-bluegreen.jpg'
 }, {
-
     src: 'http://www.anglinpr.com/files/7814/4356/6575/web-header-OCAST-1440-x-400.png'
 }];
 
@@ -346,24 +345,64 @@ $scope.claimReward = function (tier) {
     onComplete: afterShowAnimation
   });
   function afterShowAnimation(scope, element, options) {
-    console.log('popup done');
-    $scope.checkAvailability(tier.low);
-
+    if (tier == 0) {
+      $scope.checkAvailability(campaign.donorLevels[0] + 1);
+    } else {
+      $scope.checkAvailability(tier.low);
+    }
   }
 };
 
-/////Modal Logics/////
+/////Reward Logic/////
+//fires on claim reward to precheck selected reward
 $scope.checkAvailability = function(donation) {
+  //funky notation is jquery Lite built into angular
+  //uses -1 to leave comparison with 'no reward' off
   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-    angular.element(document.querySelector('.tier-' + [i])).removeClass('unavailable');
-    if (donation >= campaign.donorLevels[i].low) {
-      console.log(campaign.donorLevels[i].name + ' is available');
-    } else {
-      console.log(campaign.donorLevels[i].name + ' is not available');
-      console.log(angular.element(document.querySelector('.tier-' + [i])));
-      angular.element(document.querySelector('.tier-' + [i])).addClass('unavailable');
+    angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+    angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
+
+    if (donation == campaign.donorLevels[i].low) {
+      angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
+
+    } else if (donation < campaign.donorLevels[i].low) {
+      angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
+      angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
     }
   }
 }
 
+//function fires when user changes donation amount.
+$scope.checkAvailabilityChange = function(donation) {
+  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+    angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
+    //angular.element(document.querySelector('.tier-' + [i])).removeClass('ng-touched');
+
+    if (donation < campaign.donorLevels[i].low) {
+      angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
+      angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+    }
+  }
+}
+
+$scope.clickCheckBox = function(tier) { ///!!!!!!!!!!!!!!!!!!!!!
+  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+    angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+
+    if (tier.name == campaign.donorLevels.name) {
+      angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
+    }
+  }
+}
+
+$scope.clickCheckBox = function() { ///!!!!!!!!!!!!!!!!!!!!!
+  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+    angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+
+    // if (tier.name == campaign.donorLevels.name) {
+    //   angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
+    // }
+  }
+}
+/////
 }]);
