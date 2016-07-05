@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var moment = require('moment');
 var campaigns = require('./routes/campaigns');
+var pay = require('./routes/pay');
 
 
 //middleware
@@ -27,6 +28,7 @@ mongoose.connection.on('error', function (err) {
 
 //routes
 app.use('/campaigns', campaigns);
+app.use('/pay', pay);
 
 // start server
 app.set('port', process.env.PORT || 5000);

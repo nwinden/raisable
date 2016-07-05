@@ -13,11 +13,9 @@
        <h4>Claim your reward</h4>
        <md-input-container>
          <md-radio-group>
-           <md-radio-button name="reward" value="{{tier.name}}" id="{{tier.name}}" ng-model="selectedReward.rewardAccepted"
-            ng-repeat="tier in donorTiers"><b>{{tier.name}}:
-            </b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
-           <md-radio-button name="reward" value="forgoReward" id="forgoReward"
-           ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
+           <md-radio-button class="tier-{{$index}}" name="rewardTier" id="{{tier.name}}" value="{{tier.name}}" ng-model="selectedReward.reward"
+            ng-repeat="tier in donorTiers" ng-if="tier.name != 'Donor'"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+           <md-radio-button name="rewardTier" value="forgoReward" id="forgoReward" ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
            <br>
            <md-radio-button name="publicThankYou" value="goPublic" id="goPublic" ng-model="selectedReward.goPublic">Can we publicly thank you?</md-radio-button>
          </md-radio-group>
@@ -38,13 +36,16 @@
          <input type="text" name="email" ng-model="selectedReward.email" placeholder="Email" />
        </md-input-container>
        <md-input-container>
-         <input type="number" placeholder="Card Number" />
+         <input type="text" name="number" ng-model="clientCard.number" placeholder="Card Number" />
        </md-input-container>
        <md-input-container>
-         <input type="text" size="2" ng-model="expDate" placeholder="Exp. Date" />
+        <input type="month" name="date" ng-model="date" placeholder="Exp. Date" />
        </md-input-container>
        <md-input-container>
-         <input type="number" name="cvc" placeholder="CVC/CVV" />
+         <input type="text" name="cvc" ng-model="clientCard.cvc" placeholder="CVC/CVV" />
+       </md-input-container>
+       <md-input-container>
+         <input type="text" name="zip" ng-model="clientCard.address_zip" placeholder="Card Zip Code" />
        </md-input-container>
 
        <h4>Breakout</h4>
@@ -52,21 +53,21 @@
            <table class="experiment">
              <tr>
                <td class="action">Donation:</td>
-               <td class="results">
-                 <input class="donationInput" type="text" name="donationAmount" ng-model="donationAmount"
-                   ng-change="calcFees(donationAmount)" ng-currency min="1" max="1000000" />
+               <td class="results"><span>$</span>
+                 <input class="donationInput" type="number" name="donationAmount" ng-model="donationAmount"
+                   ng-change="calcFees2(donationAmount)" />
                </td>
              </tr>
              <tr>
                <td class="action">Account Fees:</td>
-               <td class="results">{{accountFees | currency}}</td>
+               <td class="results">{{accountFees / 100 | currency}}</td>
              </tr>
              <tr>
                <td class="action">Total Contribution:</td>
-               <td class="results">{{totalContribution | currency}}</td>
+               <td class="results">{{totalContribution / 100 | currency}}</td>
              </tr>
            </table><br>
-           <md-button id="submitReward" class="md-raised md-primary" ng-click="createDonor()">Pay {{donationAmount | currency}}</md-button>
+           <md-button id="submitReward" class="md-raised md-primary" ng-click="charge(clientCard, date)">Pay {{donationAmount | currency}}</md-button>
          </div>
      </div>
 

@@ -1,4 +1,4 @@
-clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'campaignFactory', function($scope, $location, $mdDialog, campaignFactory) {
+clientApp.controller('LandingController', ['$scope','$location', '$http', '$mdDialog', 'campaignFactory', function($scope, $location, $http, $mdDialog, campaignFactory) {
 
   var campaign = {
     "url": "raisable.com/slp-booster-club/ad98398dad",
@@ -184,7 +184,7 @@ clientApp.controller('LandingController', ['$scope','$location', '$mdDialog', 'c
     },
     {
       "name": "Donor",
-      "low": 500,
+      "low": 100,
       "high": 100000,
       "hasReward": false,
       "rewardTitle": "",
@@ -241,7 +241,10 @@ $scope.donorTiers = [];
 $scope.title = campaign.title;
 $scope.name = campaign.creatorName;
 $scope.levels = campaign.donorLevels;
-$scope.expDate;
+
+var claimedReward = 0;
+
+Stripe.setPublishableKey('pk_test_sxs4BWKkRUf9HMXnALXxadxG');
 
 
 //gramaticly correct backer message
@@ -275,14 +278,21 @@ function changeProgressBar() {
   $scope.raised = campaign.raised;
 }
 
-$scope.calcFees = function (blah) {
-  $scope.accountFees = 0.3 + (0.029 * blah);
-  $scope.totalContribution = blah - $scope.accountFees;
+$scope.calcFees = function (donation) {
+  $scope.accountFees = (30 + (0.029 * donation));
+  $scope.totalContribution = donation - $scope.accountFees;
+}
+
+$scope.calcFees2 = function (donation) {
+  donation *= 100;
+  $scope.checkAvailability(donation);
+  $scope.accountFees = (30 + (0.029 * donation));
+  $scope.totalContribution = donation - $scope.accountFees;
 }
 
 var params = $location.search('link');
 console.log('params:', params);
-if (params.$$search.link == true) {
+if (params.$$search.link == true) { //$$ is correct
   console.log('location search found true!');
 } else {
   console.log('location search found false, but at least it checked');
@@ -312,17 +322,6 @@ $scope.dataArray = [{
     src: 'http://www.anglinpr.com/files/7814/4356/6575/web-header-OCAST-1440-x-400.png'
 }];
 
-/*var acceptedReward;
-var rewardAccepted = "";
-
-function identifyReward() {
-  if (document.getElementById("forgoReward").checked {
-    acceptedReward = true;
-  } else {
-    acceptedReward = false;
-    if (document.getElementById(""))
-  }
-}*/
 
 function getRadioVal(form, name) {
   var rewardAccepted;
@@ -337,10 +336,6 @@ function getRadioVal(form, name) {
   return rewardAccepted;
 }
 
-$scope.createDonor = function () {
-  var data = $scope.selectedReward;
-
-}
 
 
 
@@ -349,19 +344,99 @@ $scope.createDonor = function () {
 
 
 //function for generating reward dialog box
-$scope.claimReward = function (event) {
-  console.log($scope.claimReward);
+$scope.claimReward = function (tier) {
+
+  //prepopulates donation filed based on reward selected
+  if (tier == 0) {
+    $scope.donationAmount = 0;
+    $scope.calcFees(0);
+  } else {
+    $scope.donationAmount = tier.low / 100;
+    $scope.calcFees(tier.low);
+  }
+
   $mdDialog.show({
-    clickOutsideToClose: true,
-    scope: $scope,
-    preserveScope: true,
-    templateUrl: 'reward-dialog2.html',
     controller: function LandingController($scope, $mdDialog) {
       $scope.closeDialog = function () {
         $mdDialog.hide();
       }
-     }
+    },
+    clickOutsideToClose: true,
+    scope: $scope,
+    preserveScope: true,
+    templateUrl: 'reward-dialog2.html',
+    onComplete: afterShowAnimation
   });
+  function afterShowAnimation(scope, element, options) {
+    console.log('popup done');
+    $scope.checkAvailability(tier.low);
+
+  }
 };
+
+$scope.charge = function (clientCard, date) {
+
+  var token;
+  var chargeToken = {};
+
+  if ((date.getMonth()+1).toString().length == 1) {
+
+    clientCard.exp_month = '0' + (date.getMonth()+1);
+
+  } else {
+
+    clientCard.exp_month = (date.getMonth()+1).toString();
+
+  }
+
+  clientCard.exp_year = date.getFullYear().toString().substring(2);
+
+  Stripe.card.createToken(clientCard, function(status, response) {
+
+    token = response.id;
+
+    console.log(token);
+
+    if (token == undefined) {
+
+      alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
+
+    } else {
+
+      chargeToken.stripeToken = token;
+
+      $http.post('/pay', $scope.chargeToken).then(function(response) {
+
+        alert('Your Charge has been processed. Please have a wonderful day.');
+
+        //post to server increasing the donor count
+        //post donor Information
+        //check if they did the sponsor level to propmt a file upload
+
+      }, function(response) {
+
+        alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
+
+      });
+
+    }
+
+  });
+
+}
+
+/////Modal Logics/////
+$scope.checkAvailability = function(donation) {
+  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+    angular.element(document.querySelector('.tier-' + [i])).removeClass('unavailable');
+    if (donation >= campaign.donorLevels[i].low) {
+      console.log(campaign.donorLevels[i].name + ' is available');
+    } else {
+      console.log(campaign.donorLevels[i].name + ' is not available');
+      console.log(angular.element(document.querySelector('.tier-' + [i])));
+      angular.element(document.querySelector('.tier-' + [i])).addClass('unavailable');
+    }
+  }
+}
 
 }]);

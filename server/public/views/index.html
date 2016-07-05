@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Raisable</title>
-    <!-- Application Logic -->
+    <!-- Angular Requirements -->
     <script src="/assets/vendors/angular.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
-    <script src="/assets/vendors/jk-carousel.js"></script>
+    <!-- Widget Requirements -->
+    <script src="/assets/vendors/jquery.min.js"></script>
     <script src="/assets/vendors/progressbar.min.js"></script>
     <script src="/assets/vendors/moment.min.js"></script>
     <script src="/assets/vendors/ng-currency.js"></script>
-    <script src="/scripts/clientApp.js" charset="utf-8"></script>
-    <script src="/scripts/homeController.js" charset="utf-8"></script>
-    <script src="/scripts/factories/campaignFactory.js"></script>
+    <!-- Carousel Requirements -->
+    <script src="/assets/vendors/jk-carousel.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.5.7/angular-touch.min.js"></script>
+    <script src="/assets/vendors/angular-carousel.min.js"></script> -->
 
-    <!-- Application Styles -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+
+    <!-- Application Requirements -->
+    <script src="/scripts/clientApp.js" charset="utf-8"></script>
+    <script src="/scripts/controllers/homeController.js" charset="utf-8"></script>
+    <script src="/scripts/factories/campaignFactory.js"></script>
+    <!-- Styles -->
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles/jk-carousel.css">
+    <!-- <link href="/assets/vendors/angular-carousel.css" rel="stylesheet" type="text/css" /> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css">
+
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/homestylesheet.css">
 </head>
+
 <body ng-app="clientApp" ng-controller="HomeController" ng-init="getCampaigns()">
 
     <!-- Toolbar container -->
@@ -33,62 +49,75 @@
     <!-- Campaign Search Bar -->
 
     <md-subheader class="sub-nav">
-      <form ng-submit="campaignSearch()">
-        <div class="search-dropdown">
-            <!-- Search Field -->
-            <md-input-container class="search-input">
-                <input ng-model="searchInput" type="text" class="campaign-search-input" name="campaignSearch" aria-label="Search Input" />
-                <md-icon>
-                    <svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                        <path d="M0 0h24v24H0z" fill="none" />
-                    </svg>
-                </md-icon>
-            </md-input-container>
-        </div>
+        <form ng-submit="campaignSearch()">
+            <div class="search-dropdown">
+                <!-- Search Field -->
+                <md-input-container class="search-input">
+                    <input ng-model="searchInput" type="text" class="campaign-search-input" name="campaignSearch" aria-label="Search Input" />
+                    <md-icon>
+                        <svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                            <path d="M0 0h24v24H0z" fill="none" />
+                        </svg>
+                    </md-icon>
+                </md-input-container>
+            </div>
         </form>
     </md-subheader>
     <!-- Featured Carousel -->
-    <div class="home-carousel" ng-hide="searchInput">
-        <div layout="column" layout-align="center center" >
-            <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="1440" max-height="400" auto-slide="true" auto-slide-time="5000">
-            </jk-carousel>
+
+    <div class="swiper-container" ng-hide="searchInput">
+        <div class="swiper-wrapper" ng-hide="searchInput">
+            <div ng-repeat="slide in featuredCampaigns" class="swiper-slide" ng-style="{'background-image':'url({{slide.imageLink}})'}"  ng-hide="searching">
+                <!-- Campaign Widget -->
+                <div class="featured-campaign-widget" ng-hide="searchInput">
+                    <h1>{{slide.title}}</h1>
+                    <h5>By: {{slide.creatorName}}</h5>
+                    <div class="goalCard">
+                        <md-card class="md-whiteframe-9dp">
+                            <h3>Goal: {{slide.goal / 100 | currency}}</h3>
+                            <div layout="column">
+                              <div class="progress" id="progress" ng-init="changeProgressBar()"></div>
+                                <h5>Raised: {{slide.raised / 100 | currency}}</h5>
+                                <div layout="row" class="remainingTime">
+                                    <h5 flex ng-init="timeRemaining()">{{timeRemaining}}</h5>
+                                    <h5 flex>{{backers}}</h5>
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+          </div>
         </div>
-    </div>
-    <!-- Campaign Tiles -->
-    <div class="gridListTiles" flex ng-cloak>
-      <h2 class="active-campaigns" ng-hide="searchInput">Active Campaigns</h2>
-      <h2 class="active-campaigns" ng-show="searchInput">{{filtered.length}} results found for {{searchInput}}</h2>
-        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="3:3" md-gutter="30px" md-gutter-gt-sm="30px" md-gutter-gt-md="30px">
-             <md-grid-tile ng-repeat="campaign in campaigns | filter:searchInput as filtered" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
-                <a ng-href="campaigns/{{campaign.campaignId}}"><md-grid-tile-footer>
-                    <h3>{{campaign.title}}</h2>
+
+          <div class="swiper-pagination" ng-hide="searchInput"></div>
+
+
+
+
+
+
+
+
+        <!-- Campaign Tiles -->
+        <div class="gridListTiles" flex ng-cloak>
+            <h2 class="active-campaigns" ng-hide="searchInput">Active Campaigns</h2>
+            <h2 class="active-campaigns" ng-show="searchInput">{{filtered.length}} results found for {{searchInput}}</h2>
+            <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="3:3" md-gutter="30px" md-gutter-gt-sm="30px" md-gutter-gt-md="30px">
+                <md-grid-tile ng-repeat="campaign in campaigns | filter:searchInput as filtered" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
+                    <a ng-href="campaigns/{{campaign.campaignId}}">
+                        <md-grid-tile-footer>
+                            <h3>{{campaign.title}}</h2>
                     <h6>By: {{campaign.creatorName}}</h4>
                 </md-grid-tile-footer>
             </a></md-grid-tile>
         </md-grid-list>
     </div>
-    <!-- Campaign Widget -->
-    <div class="featured-campaign-widget" ng-hide="searchInput">
-      <div class="widget-guts">
 
-      <h3>{{campaigns[0].title}}</h2>
-      <h6>By: {{campaigns[0].creatorName}}</h5>
-      <div flex class="goalCard">
-        <md-card>
-          <h3>Goal: {{campaigns[0].goal | currency}}</h3>
-          <div flex layout="column">
-            <div id="progressLine"></div>
-            <h5>Raised: {{campaigns[0].raised | currency}}</h5>
-              <div flex layout="row" class="remainingTime">
-                <h5 flex>Remaining Time</h5>
-                <h5 flex>Number of Backers</h5>
-              </div>
-
-          </div>
-        </md-card>
-      </div>
-    </div>
-</div>
 </body>
+
 </html>
