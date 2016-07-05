@@ -8,7 +8,7 @@ var CampaignSchema = new Schema({
   title: { type: String, required: true },
   creatorName: { type: String, required: true },
   creatorId: { type: String, required: true },
-  campaignId: {type: Number, required: true},
+  campaignId: { type: Number, required: true},
   zipCode: { type: Number, required: true },
   categories: [String],
   imageLink: { type: String, required: true },
@@ -59,6 +59,7 @@ var CampaignSchema = new Schema({
       lastName: { type: String, required: false },
       zipCode: { type: Number, required: true },
       email: { type: String, required: true },
+      imageApproved: { type: Boolean, required: true, default: false},
       imageLink: { type: String, required: false },
       websiteLink: { type: String, required: false },
       promotorLinkUsed: { type: String, required: true, default: "none" }

@@ -27,4 +27,17 @@ router.get('/all', function (req, res) {
   });
 });
 
+router.get('/:id', function (req, res) {
+  var id = req.params.id;
+  Campaign.find({campaignId: id}, function (err, campaigns) {
+
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+
+    res.send(campaigns);
+  });
+});
+
 module.exports = router;
