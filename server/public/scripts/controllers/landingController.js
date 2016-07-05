@@ -327,7 +327,7 @@ function getRadioVal(form, name) {
   var rewardAccepted;
   var radios = form.elements[name];
 
-  for (var i = 0; len = radios.length; i < len; i++) {
+  for (var i = 0, len = radios.length; i < len; i++) {
     if (radios[i].checked) {
       rewardAccepted = radios[i].value;
       break;
