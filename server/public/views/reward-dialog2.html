@@ -4,7 +4,7 @@
      <h2>Choose Reward and Submit Donation</h2>
    </div>
  </md-toolbar>
- <form name="donorRewardsForm">
+ <form name="donorRewardsForm" id="donorForm">
  <md-dialog-content flex-shrink="0" flex-basis="auto" layout="row">
 
      <div flex="5"></div>
@@ -13,11 +13,13 @@
        <h4>Claim your reward</h4>
        <md-input-container>
          <md-radio-group>
-           <md-radio-button name="rewardTier" value="{{tier.name}}" ng-model="selectedReward.reward"
-            ng-repeat="tier in donorTiers"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
-           <md-radio-button name="rewardTier" value="forgoReward" ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
+           <md-radio-button name="reward" value="{{tier.name}}" id="{{tier.name}}" ng-model="selectedReward.rewardAccepted"
+            ng-repeat="tier in donorTiers"><b>{{tier.name}}:
+            </b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+           <md-radio-button name="reward" value="forgoReward" id="forgoReward"
+           ng-model="selectedReward.reward">I would like to forgo my reward.</md-radio-button>
            <br>
-           <md-radio-button name="publicThankYou" value="goPublic" ng-model="selectedReward.goPublic">Can we publicly thank you?</md-radio-button>
+           <md-radio-button name="publicThankYou" value="goPublic" id="goPublic" ng-model="selectedReward.goPublic">Can we publicly thank you?</md-radio-button>
          </md-radio-group>
        </md-input-container>
        <md-input-container>
@@ -36,10 +38,10 @@
          <input type="text" name="email" ng-model="selectedReward.email" placeholder="Email" />
        </md-input-container>
        <md-input-container>
-         <input type="number" name="number" placeholder="Card Number" />
+         <input type="number" placeholder="Card Number" />
        </md-input-container>
        <md-input-container>
-         <input type="date" name="expdate" placeholder="Exp. Date" />
+         <input type="text" size="2" ng-model="expDate" placeholder="Exp. Date" />
        </md-input-container>
        <md-input-container>
          <input type="number" name="cvc" placeholder="CVC/CVV" />
@@ -64,7 +66,7 @@
                <td class="results">{{totalContribution | currency}}</td>
              </tr>
            </table><br>
-           <md-button id="submitReward" class="md-raised md-primary" ng-click="">Pay {{donationAmount | currency}}</md-button>
+           <md-button id="submitReward" class="md-raised md-primary" ng-click="createDonor()">Pay {{donationAmount | currency}}</md-button>
          </div>
      </div>
 

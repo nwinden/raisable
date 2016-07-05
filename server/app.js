@@ -2,8 +2,10 @@ var express = require("express");
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var moment = require('moment');
 var campaigns = require('./routes/campaigns');
+
 
 //middleware
 app.use(express.static(path.join(__dirname, './public')));

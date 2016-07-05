@@ -241,7 +241,7 @@ $scope.donorTiers = [];
 $scope.title = campaign.title;
 $scope.name = campaign.creatorName;
 $scope.levels = campaign.donorLevels;
-
+$scope.expDate;
 
 
 //gramaticly correct backer message
@@ -311,6 +311,40 @@ $scope.dataArray = [{
 
     src: 'http://www.anglinpr.com/files/7814/4356/6575/web-header-OCAST-1440-x-400.png'
 }];
+
+/*var acceptedReward;
+var rewardAccepted = "";
+
+function identifyReward() {
+  if (document.getElementById("forgoReward").checked {
+    acceptedReward = true;
+  } else {
+    acceptedReward = false;
+    if (document.getElementById(""))
+  }
+}*/
+
+function getRadioVal(form, name) {
+  var rewardAccepted;
+  var radios = form.elements[name];
+
+  for (var i = 0; len = radios.length; i < len; i++) {
+    if (radios[i].checked) {
+      rewardAccepted = radios[i].value;
+      break;
+    }
+  }
+  return rewardAccepted;
+}
+
+$scope.createDonor = function () {
+  var data = $scope.selectedReward;
+
+}
+
+
+
+
 
 
 

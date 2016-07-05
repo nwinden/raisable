@@ -24,11 +24,13 @@ md-toolbar {
   text-align: center;
 }
 
-.shareIcon {
-  width: 60px;
-  height: auto;
+.socialIcons {
+  fill: lightblue;
 }
 
+.socialIconsContainer .svgIcon {
+  margin: 20px 5px 5px 5px;
+}
 /*********************** REWARD TIERS *******************/
 .rewards {
 /*  background-color: pink;*/
