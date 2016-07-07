@@ -112,9 +112,12 @@ md-dialog-content h4 {
   float: right;
 }
 
-/*.unavailable {
-  opacity: 0.35;
-}*/
+/*Hides step button on payment form*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .selected {
 box-shadow: 0px 0px 6px blue;

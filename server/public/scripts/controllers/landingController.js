@@ -19,6 +19,18 @@ var bar = new ProgressBar.Line(progressLine, {
   svgStyle: {width: '100%', height: '100%'}
 });
 
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    paginationClickable: true,
+    spaceBetween: 0,
+    centeredSlides: true,
+    autoplay: 5000,
+    autoplayDisableOnInteraction: false,
+    lazyLoading: true
+});
+
 $scope.selectedReward = {};
 $scope.donationAmount = 0;
 $scope.accountFees = 0;
@@ -30,7 +42,6 @@ $scope.donorTiers = [];
 $scope.title = campaign.title;
 $scope.name = campaign.creatorName;
 $scope.levels = campaign.donorLevels;
-
 var claimedReward = 0;
 
 Stripe.setPublishableKey('pk_test_sxs4BWKkRUf9HMXnALXxadxG');
@@ -70,6 +81,10 @@ function changeProgressBar() {
 $scope.calcFees = function (donation) {
   $scope.accountFees = (30 + (0.029 * donation));
   $scope.totalContribution = donation - $scope.accountFees;
+  if (donation < 500) {
+    $scope.accountFees = 0;
+    $scope.totalContribution = 0;
+  }
 }
 
 $scope.calcFees2 = function (donation) {
@@ -77,6 +92,10 @@ $scope.calcFees2 = function (donation) {
   $scope.checkAvailabilityChange(donation);
   $scope.accountFees = (30 + (0.029 * donation));
   $scope.totalContribution = donation - $scope.accountFees;
+  if (donation < 500) {
+    $scope.accountFees = 0;
+    $scope.totalContribution = 0;
+  }
 }
 
 var params = $location.search('link');
@@ -210,7 +229,7 @@ $scope.charge = function (clientCard, date) {
 /////Modal Logics/////
 $scope.checkAvailability = function(donation) {
   //funky notation is jquery Lite built into angular
-  //uses -1 to leave comparison with 'no reward' off
+  //uses - 1 to leave comparison with 'no reward' off
   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
     angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
     angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
@@ -233,21 +252,26 @@ $scope.checkAvailabilityChange = function(donation) {
 
     if (donation < campaign.donorLevels[i].low) {
       angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
+      angular.element(document.querySelector('.tier-' + [i])).attr('aria-checked', false);
       angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
     }
   }
 }
 
-$scope.clickCheckBox = function(tier) { ///!!!!!!!!!!!!!!!!!!!!!
+$scope.clickCheckBox = function(tier) {
   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-    angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+    if (tier.name != campaign.donorLevels.name) {
+      angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
 
-    if (tier.name == campaign.donorLevels.name) {
+    } else if (tier.name == campaign.donorLevels.name) {
       angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
     }
   }
 }
 
+$scope.toggleThankYou = function() {
+  angular.element(document.querySelector('.thankYou')).toggleClass('md-checked');
+}
 
 }); //end of get call. ALL CODE MUST BE IN THESE BRACKETS!!!
 

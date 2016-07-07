@@ -10,9 +10,13 @@
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/progressbar.min.js"></script>
+
     <script src="https://js.stripe.com/v2/" charset="utf-8"></script>
+
     <script src="/assets/vendors/moment.min.js"></script>
-    <script src="/assets/vendors/jk-carousel.js"></script>
+    <script src="/assets/vendors/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
     <script src="/scripts/controllers/landingController.js"></script>
     <script src="/scripts/factories/campaignFactory.js"></script>
@@ -21,6 +25,7 @@
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/landing-jk-carousel.css">
+
   </head>
 
   <body ng-app="clientApp" ng-controller="LandingController" layout="column">
@@ -49,7 +54,7 @@
                       <h5 flex>{{backers}}</h5>
                     </div>
                 </div>
-                <md-button class="md-raised md-primary" ng-click="claimReward()">Contribute Now</md-button>
+                <md-button class="md-raised md-primary" ng-click="claimReward(0)">Contribute Now</md-button>
               </md-card>
             </div>
 
@@ -94,13 +99,19 @@
               </div>
 
               <!--carousels for each level of donation-->
-              <div class="backers" ng-repeat="level in levels" ng-if="level.name != 'Sponsor'">
-                <h3>{{level.name}} <span ng-hide="level.name =='Donor'">backers</span></h3>
-                  <div layout="column" layout-align="center center">
-                      <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="600" auto-slide="true" auto-slide-time="5000">
-                      </jk-carousel>
+              <div layout="column" layout-align="center center" ng-if="level.name != 'Sponsor'" ng-repeat="level in levels">
+                <h3>{{level.name}}</h3>
+                <div ng-repeat="person in level.sponsors">
+                  <div class="swiper-container" >
+                    <div class="swiper-wrapper" >
+                      <div class="swiper-slide">
+                        {{person.firstName}} {{person.lastName}}
+                      </div>
+                    </div>
                   </div>
+                </div>
               </div>
+
           </div>
         </div>
       </md-content>
