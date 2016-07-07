@@ -14,8 +14,10 @@
        <md-input-container>
          <md-radio-group>
            <md-radio-button class="tier-{{$index}}" name="rewardTier" value="{{tier.name}}" ng-model="selectedReward.reward"
-            ng-repeat="tier in donorTiers" ng-if="tier.name != 'Donor'" ng-click="clickCheckBox(tier)"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
-           <md-radio-button name="rewardTier" value="forgoReward" ng-model="selectedReward.reward" ng-click="clickCheckBoxDonor()">I would like to forgo my reward.</md-radio-button>
+            ng-repeat="tier in donorTiers" ng-if="tier.name != 'Donor'"
+            ng-click="clickCheckBox(tier)"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+           <md-radio-button class="donor" name="rewardTier" value="forgoReward"
+           ng-model="selectedReward.reward" ng-click="clickCheckBoxDonor()">I would like to forgo my reward.</md-radio-button>
            <br>
          </md-radio-group>
          <md-radio-group>

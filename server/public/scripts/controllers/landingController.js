@@ -177,9 +177,58 @@ $scope.claimReward = function (tier) {
 
 $scope.charge = function (clientCard, date) {
 
-
   //-----TESTING REWARD VALS, MOVE TO POST CALL RETURN WHEN TESTING COMPLETE-----//
+  $http.get('/campaigns/' + id)
+  .then(function(response) {
+    campaign = response.data[0];
+  });
 
+  var newSponsor = {
+    donation: $scope.donationAmount,
+    //publicthankyou in if statement below
+    //emailThankYou...
+    //acceptedReward...
+    //rewardName...
+    firstName: $scope.selectedReward.firstName,
+    lastName: $scope.selectedReward.lastName,
+    zipCode: $scope.clientCard.address_zip,
+    email: $scope.selectedReward.email,
+    imageApproved: false
+    //image link set in second Modal
+    //websiteLink
+    //promotorLink set in if statement that checks for link 1st
+  };
+
+
+  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+    if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
+      console.log(i + ' is classy');
+      //push the new sponsor object to the right donorLevels array
+      newSponsor.acceptedReward = true;
+      newSponsor.rewardName = campaign.donorLevels[i].name; //position in array of donorLevels
+    }
+  }
+
+  if (angular.element(document.querySelector('.donor')).hasClass('md-checked')) {
+    console.log('donor has class');
+
+    newSponsor.acceptedReward = false;
+    newSponsor.rewardName = "Donor";
+  }
+
+  if (angular.element(document.querySelector('.thankYou')).hasClass('md-checked')) {
+    console.log('want public thank you has class');
+
+    newSponsor.publicThankYou = true;
+    newSponsor.emailThankYou = true;
+  }
+
+  campaign.raised += $scope.donationAmount; //check for the numbers that get fucked up sometimes!!!!!
+  campaign.donorCount += 1;
+  //promotors[?].clicks...
+  //promotors[?].backerCount += 1;
+  //promotors[?].donation += $scope.donationAmount;
+  console.log(newSponsor);
   //-----TESTING REWARD VALS-----//
 
   var token;
