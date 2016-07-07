@@ -22,8 +22,20 @@ router.get('/all', function (req, res) {
       res.sendStatus(500);
       return;
     }
-
     res.send(campaigns);
+  });
+});
+
+router.get('/:campaignId', function (req, res) {
+  Campaign.find({campaignId: req.params.campaignId}, function (err, campaign) {
+
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    console.log(req.params.campaignId);
+    console.log("Made it this far!");
+    res.send(campaign);
   });
 });
 

@@ -82,10 +82,10 @@ clientApp.controller('HomeController', ['$scope', '$location', '$http', function
     //--- Home Page Carousel --- //
     $(document).ready(function() {
         var swiper = new Swiper('.swiper-container', {
+            paginationClickable: true,
             pagination: '.swiper-pagination',
             nextButton: '.swiper-button-next',
             prevButton: '.swiper-button-prev',
-            paginationClickable: true,
             spaceBetween: 0,
             centeredSlides: true,
             autoplay: 5000,
