@@ -177,6 +177,11 @@ $scope.claimReward = function (tier) {
 
 $scope.charge = function (clientCard, date) {
 
+
+  //-----TESTING REWARD VALS, MOVE TO POST CALL RETURN WHEN TESTING COMPLETE-----//
+
+  //-----TESTING REWARD VALS-----//
+
   var token;
   var chargeToken = {};
 
