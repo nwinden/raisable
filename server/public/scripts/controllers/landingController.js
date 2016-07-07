@@ -82,125 +82,108 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                 }
 
                 //function for generating reward dialog box
-                $scope.claimReward = function(tier) {
+$scope.claimReward = function (tier) {
+  //prepopulates donation filed based on reward selected
+  if (tier == 0) {
+    $scope.donationAmount = 0;
+    $scope.calcFees(0);
+  } else {
+    $scope.donationAmount = tier.low / 100;
+    $scope.calcFees(tier.low);
+  }
+  $mdDialog.show({
+    controller: function LandingController($scope, $mdDialog) {
+      $scope.closeDialog = function () {
+        $mdDialog.hide();
+      }
+    },
+    clickOutsideToClose: true,
+    scope: $scope,
+    preserveScope: true,
+    templateUrl: '/views/reward-dialog2.html',
+    onComplete: afterShowAnimation
+  });
+  function afterShowAnimation(scope, element, options) {
+    if (tier == 0) {
+      $scope.checkAvailability(0);
+    } else {
+      $scope.checkAvailability(tier.low);
+    }
+  }
+};
+                //
+                $scope.charge = function(clientCard, date) {
 
-                    //prepopulates donation filed based on reward selected
-                    if (tier == 0) {
-                        $scope.donationAmount = 0;
-                        $scope.calcFees(0);
+                    var token;
+                    var chargeToken = {};
+
+                    if ((date.getMonth() + 1).toString().length == 1) {
+
+                        clientCard.exp_month = '0' + (date.getMonth() + 1);
+
                     } else {
-                        $scope.donationAmount = tier.low / 100;
-                        $scope.calcFees(tier.low);
+
+                        clientCard.exp_month = (date.getMonth() + 1).toString();
+
                     }
 
-                    $mdDialog.show({
-                        controller: function LandingController($scope, $mdDialog) {
-                            $scope.closeDialog = function() {
-                                $mdDialog.hide();
-                            }
-                        },
-                        clickOutsideToClose: true,
-                        scope: $scope,
-                        preserveScope: true,
-                        templateUrl: 'reward-dialog2.html',
-                        onComplete: afterShowAnimation
+                    clientCard.exp_year = date.getFullYear().toString().substring(2);
+
+                    Stripe.card.createToken(clientCard, function(status, response) {
+
+                        token = response.id;
+
+                        console.log(token);
+
+                        if (token == undefined) {
+
+                            alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
+
+                        } else {
+
+                            chargeToken.stripeToken = token;
+
+                            $http.post('/pay', $scope.chargeToken).then(function(response) {
+
+                                alert('Your Charge has been processed. Please have a wonderful day.');
+
+                                //post to server increasing the donor count
+                                //post donor Information
+                                //check if they did the sponsor level to propmt a file upload
+
+                            }, function(response) {
+
+                                alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
+
+                            });
+
+                        }
+
                     });
 
-                    function afterShowAnimation(scope, element, options) {
-                        console.log('popup done');
-                        $scope.checkAvailability(tier.low);
-
-                    }
-                };
+                }
                 //
-                // $scope.charge = function(clientCard, date) {
-                //
-                //     var token;
-                //     var chargeToken = {};
-                //
-                //     if ((date.getMonth() + 1).toString().length == 1) {
-                //
-                //         clientCard.exp_month = '0' + (date.getMonth() + 1);
-                //
-                //     } else {
-                //
-                //         clientCard.exp_month = (date.getMonth() + 1).toString();
-                //
-                //     }
-                //
-                //     clientCard.exp_year = date.getFullYear().toString().substring(2);
-                //
-                //     Stripe.card.createToken(clientCard, function(status, response) {
-                //
-                //         token = response.id;
-                //
-                //         console.log(token);
-                //
-                //         if (token == undefined) {
-                //
-                //             alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
-                //
-                //         } else {
-                //
-                //             chargeToken.stripeToken = token;
-                //
-                //             $http.post('/pay', $scope.chargeToken).then(function(response) {
-                //
-                //                 alert('Your Charge has been processed. Please have a wonderful day.');
-                //
-                //                 //post to server increasing the donor count
-                //                 //post donor Information
-                //                 //check if they did the sponsor level to propmt a file upload
-                //
-                //             }, function(response) {
-                //
-                //                 alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
-                //
-                //             });
-                //
-                //         }
-                //
-                //     });
-                //
-                // }
-                //
-                // /////Modal Logics/////
-                // $scope.checkAvailability = function(donation) {
-                //     for (var i = 0; i < $scope.campaign.donorLevels.length - 1; i++) {
-                //         angular.element(document.querySelector('.tier-' + [i])).removeClass('unavailable');
-                //         if (donation >= $scope.campaign.donorLevels[i].low) {
-                //             console.log($scope.campaign.donorLevels[i].name + ' is available');
-                //         } else {
-                //             console.log($scope.campaign.donorLevels[i].name + ' is not available');
-                //             console.log(angular.element(document.querySelector('.tier-' + [i])));
-                //             angular.element(document.querySelector('.tier-' + [i])).addClass('unavailable');
-                //         }
-                //     }
-                // }
-                //
-                // //---  Carousels --- //
-                // $(document).ready(function() {
-                //
-                //     $(".swiper-container").each(function(index, element) {
-                //         var $this = $(this);
-                //         $this.addClass("instance-" + index);
-                //         $this.find(".swiper-button-prev").addClass("btn-prev-" + index);
-                //         $this.find(".swiper-button-next").addClass("btn-next-" + index);
-                //         var swiper = new Swiper(".instance-" + index, {
-                //             pagination: '.swiper-pagination',
-                //             direction: 'vertical',
-                //             slidesPerView: 1,
-                //             paginationClickable: true,
-                //             spaceBetween: 30,
-                //             mousewheelControl: true
-                //                 // nextButton: ".btn-next-" + index,
-                //                 // prevButton: ".btn-prev-" + index
-                //         })
-                //     })
-                //
-                // });
-                //
-                //
-
+                /////Modal Logics/////
+                $scope.checkAvailability = function(donation) {
+    //funky notation is jquery Lite built into angular
+    //uses -1 to leave comparison with 'no reward' off
+    for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+     if (donation < campaign.donorLevels[i].low) {
+        angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
+        angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+      }
+    }
+  }
+  //function fires when user changes donation amount.
+  $scope.checkAvailabilityChange = function(donation) {
+    for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+      if (donation < campaign.donorLevels[i].low) {
+        angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
+        angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+      } else if (donation >= campaign.donorLevels[i].low) {
+        angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
+      }
+    }
+  }
 
             }]);

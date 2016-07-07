@@ -14,7 +14,6 @@
     <script src="/assets/vendors/progressbar.min.js"></script>
     <script src="/assets/vendors/moment.min.js"></script>
     <script src="https://js.stripe.com/v2/" charset="utf-8"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
     <script src="/assets/vendors/jk-carousel.js"></script>
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
@@ -118,12 +117,12 @@
                         <md-card ng-click="claimReward(tier)" flex="25" id="reward-card" layout="column" class="md-whiteframe-1dp" ng-repeat="tier in campaign.donorLevels" layout-align="center" ng-if="tier.name != 'Donor'">
                           <div data-content="Claim Reward" class="image">
 
-                            <md-card-header class="tierName">{{tier.name}} Reward</md-card-header>
+                            <md-card-header class="tierName">{{tier.name}}</md-card-header>
                             <md-card-content>
                                 <h3 class="reward-price">{{tier.low / 100 | currency}}</h3>
                                 <p>{{tier.rewardTitle}}</p>
                             </md-card-content>
-                          
+
                           </div>
 
                         </md-card>
