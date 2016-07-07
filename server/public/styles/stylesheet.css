@@ -10,14 +10,20 @@
 
 /************************* TOOL BAR ***************************/
 
+a {
+  text-decoration: none;
+}
+
 md-toolbar {
   background-color: #0277BD !important;
+  height: 80px;
+  min-height: 90px;
+
 }
 
 .nav-logo {
   text-align: left;
   margin-left: 30px;
-  height: 137px;
   color: #FFF;
 }
 
@@ -118,14 +124,54 @@ md-card-footer{
 .claim {
   opacity: 0;
 }
-#reward-card:hover {
+/*#reward-card:hover {
   background:rgba(255,61,0 ,0.8) !important;
   color: white;
   opacity: 1;
   height: 100%;
 
+}*/
+
+.image {
+    position:relative;
+    width:100%;
+    height:100%;
+}
+.image md-card {
+    width:100%;
+    vertical-align:top;
 }
 
+.image:after, .image:before {
+    position:absolute;
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.image:after {
+    content:'\A';
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(255,61,0 ,0.9);
+    border-radius: 3px;
+}
+.image:before {
+    content: attr(data-content);
+    width:100%;
+    color:#fff;
+    z-index:1;
+    bottom:42%;
+    padding:4px 10px;
+    text-align:center;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.image:hover:after, .image:hover:before {
+    opacity:1;
+}
 
 
 /************************** TEAM INFO SECTION **********************/

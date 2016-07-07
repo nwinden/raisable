@@ -1,6 +1,7 @@
 var clientApp = angular.module('clientApp', ['ngMaterial', 'ng-currency', 'jkAngularCarousel']);
 
-clientApp.config(function($mdThemingProvider) {
+clientApp.config( function( $mdThemingProvider) {
+
   $mdThemingProvider.theme('default')
   .primaryPalette('light-blue', {
     'default': '500', // by default use shade 400 from the pink palette for primary intentions
