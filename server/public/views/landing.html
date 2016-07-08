@@ -31,16 +31,19 @@
     <md-toolbar layout="row">
         <a href="/views/index.html"><h1 class="nav-logo" >raisable</h1></a>
     </md-toolbar>
+    <md-subheader class="landing-title">
+        <h1 class="campaignTitle">{{campaign.title}}</h1>
+        <h5 class="campaignOrg">By: {{campaign.creatorName}}</h5>
+    </md-subheader>
 
 
     <div flex layout="row">
 
         <!-- Goal and Donors container -->
-        <md-content flex="25" id="goal" class="md-whiteframe-1dp">
+        <md-content flex="30" id="goal" class="md-whiteframe-1dp">
             <div layout="column" layout-align="center center">
                 <div class="goalSection">
-                    <h1 class="campaignTitle">{{campaign.title}}</h1>
-                    <h5 class="campaignOrg">By: {{campaign.creatorName}}</h5>
+
                     <div class="goalCard">
                         <md-card class="md-whiteframe-1dp">
                             <h2 class="goal">Goal: <strong>{{campaign.goal / 100 | currency}}</strong></h2>
@@ -48,6 +51,9 @@
                                 <div id="progressLine"></div>
                                 <h2 class="raised">Raised: {{campaign.raised / 100 | currency}}</h2>
                                 <div layout="row" class="remainingTime">
+                                    <div layout="row">
+
+                                    </div>
                                     <h3 flex>{{timeRemaining}}</h3>
                                     <h3 flex ng-if="campaign.donorCount == 0">No Backers</h3>
                                     <h3 flex ng-if="campaign.donorCount == 1">{{campaign.donorCount}} Backer</h3>
@@ -57,7 +63,7 @@
                             <md-button class="md-raised md-accent contribute-btn" ng-click="claimReward(0)"><strong>Contribute</strong></md-button>
                         </md-card>
                     </div>
-                    <p layout="row" layout-align="center"><em>Share this campaign:</em> </p>
+                    <h5 class="shareCampaign" layout-align="center"><em>Share this campaign:</em> </h5>
                     <div class="socialIcons" layout="row" layout-align="center">
 
                         <a href=""><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-64.png" alt="share through facebook" class="shareIcon" /></a>
@@ -66,6 +72,8 @@
                         <a href=""><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/twitter_circle_color-64.png" alt="share through twitter" class="shareIcon" /></a>
                     </div>
 
+                    <div class="thankYouBorder">
+                      <h2 class="thankYouBackers">Thank you, Backers!</h2>
                     <div layout-align="center" class="sponsors" ng-repeat="level in campaign.donorLevels" ng-if="level.name == 'Sponsor'">
                         <h3>{{level.name}}</h3>
                         <md-card class="md-whiteframe-1dp" ng-repeat="backer in level.sponsors">
@@ -74,6 +82,7 @@
                                 <br><a href="{{backer.websiteLink}}">{{backer.websiteLink}}</a></md-content>
                         </md-card>
                     </div>
+
                     <!-- </div> -->
 
                     <!--carousels for each level of donation-->
@@ -86,18 +95,17 @@
                     </div> -->
 
                     <!-- Swiper -->
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper" ng-repeat="level in campaign.donorLevels">
-                          <h3>{{level.name}}</h3>
-                            <div ng-repeat="person in level.sponsors" class="swiper-slide">
-                                    {{person.firstName}} {{person.lastName}}
-                                </div>
+                    <div class="thanks-list-container">
+                        <div class="thanks-list" ng-repeat="level in campaign.donorLevels">
+                            <h3 class="levelName">{{level.name}}</h3>
+                            <div ng-repeat="person in level.sponsors" class="thanks">
+                                {{person.firstName}} {{person.lastName}}
+                            </div>
+                            <md-divider></md-divider>
                         </div>
                     </div>
 
-
-                    <div class="swiper-pagination" ng-hide="searchInput"></div>
-
+                  </div>
 
 
 
@@ -106,7 +114,7 @@
         </md-content>
 
         <!-- Container for Main content - reward tiers, organization info and FAQ -->
-        <md-content flex="75" id="groupInfo" class="md-whiteframe-1dp">
+        <md-content flex="70" id="groupInfo" class="md-whiteframe-1dp">
             <div layout="column">
 
                 <!-- Reward tiers container -->
@@ -114,18 +122,20 @@
 
 
                     <div flex layout="row" class="rewards">
+
                         <md-card ng-click="claimReward(tier)" flex="25" id="reward-card" layout="column" class="md-whiteframe-1dp" ng-repeat="tier in campaign.donorLevels" layout-align="center" ng-if="tier.name != 'Donor'">
-                          <div data-content="Claim Reward" class="image">
+                            <div data-content="Claim " class="image">
 
-                            <md-card-header class="tierName">{{tier.name}}</md-card-header>
-                            <md-card-content>
-                                <h3 class="reward-price">{{tier.low / 100 | currency}}</h3>
-                                <p>{{tier.rewardTitle}}</p>
-                            </md-card-content>
+                                <md-card-header class="tierName">{{tier.name}}</md-card-header>
+                                <md-card-content>
+                                    <h3 class="reward-price">{{tier.low / 100 | currency}}</h3>
+                                    <p>{{tier.rewardTitle}}</p>
+                                </md-card-content>
 
-                          </div>
+                            </div>
 
                         </md-card>
+
                     </div>
                 </div>
 
@@ -138,7 +148,11 @@
                         <div class="groupNarrative">
                             <md-card layout-align="center" class="md-whiteframe-1dp">
                                 <md-card-header>About This Campaign</md-card-header>
-                                <md-card-content>{{campaign.about}}</md-card-content>
+                                <md-card-content>
+                                    <p>
+                                        {{campaign.about}}
+                                    </p>
+                                </md-card-content>
                             </md-card>
                         </div>
 
@@ -165,8 +179,11 @@
                             <md-card layout-align="center" class="md-whiteframe-1dp faq">
                                 <md-card-header>Frequently Asked Questions</md-card-header>
                                 <div layout-align="center" class="faq-card" ng-repeat="faq in campaign.faqs">
-                                    <strong>Q: {{faq.question}}</strong>
-                                    <br> A: {{faq.response}}
+                                    <strong><p class="faq-q">Q: {{faq.question}}</p></strong>
+                                    <br>
+                                    <p class="faq-a">
+                                        A: {{faq.response}}
+                                    </p>
                                 </div>
                             </md-card>
                         </div>

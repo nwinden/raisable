@@ -16,6 +16,9 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                         changeProgressBar();
                         timeRemaining();
                         console.log($scope.campaign);
+
+
+
                     });
                 }
 
@@ -25,7 +28,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                     easing: 'easeInOut',
                     duration: 2000,
                     color: '#0277BD',
-                    trailColor: '#FAFAFA',
+                    trailColor: 'lightgray',
                     trailWidth: 8,
                     svgStyle: {
                         width: '100%',
@@ -63,10 +66,13 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                 }
 
                 function changeProgressBar() {
+                  if ($scope.campaign.raised < $scope.campaign.goal){
                     var progress = ($scope.campaign.raised / $scope.campaign.goal);
                     bar.animate(progress);
-                    $scope.goal = $scope.campaign.goal;
-                    $scope.raised = $scope.campaign.raised;
+                  } else {
+                    var progress = 1;
+                    bar.animate(progress);
+                  }
                 }
 
                 $scope.calcFees = function(donation) {

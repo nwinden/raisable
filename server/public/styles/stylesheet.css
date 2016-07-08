@@ -39,6 +39,8 @@ md-toolbar {
   margin-bottom: 0px;
 }
 
+.goalCard {
+}
 .campaignOrg{
   color: gray;
   margin-bottom: 50px;
@@ -48,6 +50,7 @@ md-toolbar {
 .goalSection {
   padding: 0 10px 0 10px;
   margin: 10px;
+  width: 100%;
 }
 
 .goalSection h1, h5 {
@@ -71,6 +74,7 @@ md-toolbar {
   padding: 5px;
   border-radius: 3px;
   font-size: 20px;
+
 }
 
 .goalInformation {
@@ -92,13 +96,27 @@ md-toolbar {
 
 }
 
+.socialIcons {
+  margin: 0px;
+  padding: 0px;
+}
+
+.shareCampaign{
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+}
+
 /*********************** REWARD TIERS *******************/
 .rewards {
 /*  background-color: pink;*/
 margin-bottom: 7px;
+width: 100%
 }
 
-
+.reward-scroll {
+  left: -100px;
+}
 
 .reward-price{
   margin: 0px;
@@ -175,6 +193,22 @@ md-card-footer{
 
 
 /************************** TEAM INFO SECTION **********************/
+@media screen and (max-width: 1281px) {
+    .remainingTime {
+      font-size: 14px;
+    }
+    md-card-header {
+      font-size: 12px;
+    }
+    p {
+      font-size: 12px;
+
+    }
+
+}
+
+
+
 
 img {
   margin-left: 7px;
@@ -283,14 +317,41 @@ md-dialog-content h4 {
 box-shadow: 0px 0px 6px blue;
 }
 
-/*carousels*/
-.swiper-container {
-        width: 100%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
+/*thank you*/
+.thanks-list-container {
+  text-align: center;
+}
+
+.thanks {
+  margin-bottom: 10px;
+}
+
+.landing-title {
+  text-align: center;
+  height: 140px;
+  border-bottom: 1px solid lightgray;
+}
+
+h3.levelName {
+  color: #0277BD;
+}
+
+.faq-q {
+  padding: 0px;
+  margin: 0px;
+}
+
+.faq-a {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+
+}
+
+h2.thankYouBackers{
+  color: rgba(255,61,0 ,1);
+}
+
+.thankYouBorder {
+  border: 1px solid lightgray;
+}
