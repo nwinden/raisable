@@ -1,0 +1,149 @@
+{
+  "url": "raisable.com/desks/addad",
+  "shortUrl": "raisable.com/desks",
+  "featured": true,
+  "title": "Standing Desks for More Active Students",
+  "creatorName": "John-Meyers High School",
+  "creatorId": "507f1919729de860ba",
+  "campaignId": 6660,
+  "zipCode": 75001,
+  "categories": [
+    "education",
+    "high school",
+    "desks",
+    "school supplies"
+  ],
+  "imageLink": "./example-images/standing-desks2",
+  "videoLink": "",
+  "about": "We are in desperate need of new desks. Standing desks have been proven to improve attention span and concentration in students.",
+
+  "items": [{
+    "name": "Adjustable Desk",
+    "price": 80000,
+    "quantity": 30
+  }
+  ],
+
+  "goal": 2400000,
+  "raised": 8000,
+  "donorCount": 2,
+  "launchDate": "2016-06-21T16:00:00Z",
+  "deadlineDate": "2016-11-15T16:00:00Z",
+
+  "faqs": [{
+    "question": "What about students who can't stand",
+    "email": "curiousbacker1@gmail.com",
+    "approved": true,
+    "response": "The desks are adjustable and can be sat at. They are wide and wheelchair accesable."
+  }
+  ],
+
+  "promoters": [{
+    "name": "Dr. Edwards",
+    "refferalUrl": "dre",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+    },
+    {
+    "name": "Billy",
+    "refferalUrl": "billy",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+    },
+    {
+    "name": "Jeb",
+    "refferalUrl": "jeb",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+  }],
+
+  "donorLevels": [{
+    "name": "Sponsor",
+    "low": 50000,
+    "high": 1000000,
+    "hasReward": true,
+    "rewardTitle": "Sponsor Package",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 50000,
+        "publicThankYou": true,
+        "emailThankYou": true,
+        "acceptedReward": true,
+        "rewardAccepted": "Sponser",
+        "firstName": "Dunn Bros Coffee",
+        "lastName": "",
+        "zipCode": 55432,
+        "email": "bob@dunnbrothers.com",
+        "imageApproved": true,
+        "imageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/logo.jpg",
+        "websiteLink": "dunnbrothers.com/promotion/3029fjd3",
+        "promotorLinkUsed":"none"
+      }
+    ]
+  },
+  {
+    "name": "Gold",
+    "low": 20000,
+    "high": 49999,
+    "hasReward": true,
+    "rewardTitle": "Desk will be engraved with your name.",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+
+    ]
+  },
+  {
+    "name": "Donor",
+    "low": 500,
+    "high": 100000,
+    "hasReward": false,
+    "rewardTitle": "",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 10000,
+        "publicThankYou": false,
+        "emailThankYou": false,
+        "acceptedReward": false,
+        "rewardAccepted": "No Reward",
+        "firstName": "",
+        "lastName": "",
+        "zipCode": 55005,
+        "email": "abbieh@gmail.com",
+        "imageApproved": true,
+        "imageLink": "",
+        "websiteLink": "",
+        "promotorLinkUsed":"andym"
+      }
+    ]
+  }],
+
+  "twitterImageLink": "",
+  "twitterShareText": "",
+  "facebookPostTitle": "",
+  "facebookImageLink": "",
+  "facebookPostContent": "",
+  "instagramImageLink": "",
+  "instagramShareText": "",
+  "pinterestImageLink": "",
+  "pinterestShareText": "",
+}
