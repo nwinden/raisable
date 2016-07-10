@@ -27,6 +27,17 @@
 </head>
 
 <body ng-app="clientApp" ng-controller="LandingController" layout="column">
+  <!-- facebook sdk script -->
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- end fb sdk -->
+
     <!-- Toolbar container -->
     <md-toolbar layout="row">
         <a href="/views/index.html"><h1 class="nav-logo" >raisable</h1></a>
@@ -63,13 +74,11 @@
                             <md-button class="md-raised md-accent contribute-btn" ng-click="claimReward(0)"><strong>Contribute</strong></md-button>
                         </md-card>
                     </div>
-                    <h5 class="shareCampaign" layout-align="center"><em>Share this campaign:</em> </h5>
+                    <h5 class="shareCampaign" layout-align="center"><em></em> </h5>
                     <div class="socialIcons" layout="row" layout-align="center">
 
-                        <a href=""><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-64.png" alt="share through facebook" class="shareIcon" /></a>
-                        <!-- <a href=""><img src="/assets/images/instagram.png" alt="share through instagram" class="shareIcon" /></a>
-                        <a href=""><img src="/assets/images/pinterest.png" alt="share through pinterest" class="shareIcon" /></a> -->
-                        <a href=""><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/twitter_circle_color-64.png" alt="share through twitter" class="shareIcon" /></a>
+                        <div class="fb-share-button" data-href="https://goraisable.com/campaigns/1234/" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgoraisable.com%2Fcampaigns%2F1234%2F&amp;src=sdkpreparse">Share</a></div>
+                        <a href="https://twitter.com/intent/tweet" class="twitter-hashtag-button" data-size="large" data-text="Help the Spartans reach their goal!" data-url="http://goraisable.com/campaigns/1234/" data-via="raisable" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
 
                     <div class="thankYouBorder">
@@ -99,7 +108,10 @@
                         <div class="thanks-list" ng-repeat="level in campaign.donorLevels">
                             <h3 class="levelName">{{level.name}}</h3>
                             <div ng-repeat="person in level.sponsors" class="thanks">
-                                {{person.firstName}} {{person.lastName}}
+                              <img class="sponsorImage" ng-src="{{person.imageLink}}" /><br />
+
+                                  {{person.firstName}} {{person.lastName}}
+
                             </div>
                             <md-divider></md-divider>
                         </div>

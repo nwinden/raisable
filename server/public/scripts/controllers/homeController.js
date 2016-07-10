@@ -103,7 +103,7 @@ clientApp.controller('HomeController', ['$scope', '$location', '$http', function
     });
 
 
-
+  $scope.sort = $scope.campaigns.deadlineDate;
 
 
 

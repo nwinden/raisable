@@ -72,16 +72,16 @@
         <div class="swiper-wrapper" ng-hide="searchInput">
             <div ng-repeat="slide in featuredCampaigns" class="swiper-slide" ng-style="{'background-image':'url({{slide.imageLink}})'}" ng-hide="searching">
                 <div class="overlay">
-                    </br>
                     </br>{{slide.title}}</div>
                 <div class="featured-title">
                     <h3 class="featured-org">By: {{slide.creatorName}}</h3>
                 </div>
             </div>
         </div>
+        <div class="swiper-pagination" ng-hide="searchInput"></div>
+
     </div>
 
-    <div class="swiper-pagination" ng-hide="searchInput"></div>
 
 
 
@@ -107,9 +107,9 @@
     <!-- Campaign Tiles -->
     <div class="gridListTiles" flex ng-cloak>
         <h2 class="active-campaigns" ng-hide="searchInput">Active Campaigns</h2>
-        <h2 class="active-campaigns" ng-show="searchInput">{{filtered.length}} results found for {{searchInput}}</h2>
+        <h2 class="active-campaigns" ng-show="searchInput">Searching for "{{searchInput}}"</h2>
         <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="3:3" md-gutter="30px" md-gutter-gt-sm="30px" md-gutter-gt-md="30px">
-            <md-grid-tile ng-repeat="campaign in campaigns | filter:searchInput as filtered" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.imageLink}})'}">
+            <md-grid-tile ng-repeat="campaign in campaigns | orderBy:'deadlineDate' | filter:searchInput as filtered" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.tileImageLink}})'}">
                 <a ng-href="http://localhost:5000/campaigns/{{campaign.campaignId}}">
                     <md-grid-tile-footer>
                         <h3>{{campaign.title}}</h2>
