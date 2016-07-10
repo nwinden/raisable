@@ -12,7 +12,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // mongoose connection
-var databaseURI = 'mongodb://localhost:27017/raisable';
+
+// process.env.MONGODB_URI will only be defined if you are running on Heroku
+if(process.env.MONGODB_URI != undefined) {
+    // use the string value of the environment variable
+  var  databaseURI = 'mongodb://heroku_3rd65rt7:jkbu598e43ni3jskajvh60d97u@ds017155.mlab.com:17155/heroku_3rd65rt7';
+} else {
+    // use the local database server
+    databaseURI = 'mongodb://localhost:27017/raisable';
+}
+
 
 mongoose.connect(databaseURI);
 
