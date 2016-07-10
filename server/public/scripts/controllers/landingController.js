@@ -259,6 +259,7 @@ $scope.charge = function (clientCard, date) {
     } else {
 
       chargeToken.stripeToken = token;
+      chargeToken.donation = $scope.donationAmount * 100;
 
       $http.post('/pay', chargeToken).then(function(response) {
 
@@ -309,16 +310,16 @@ $scope.checkAvailabilityChange = function(donation) {
   }
 }
 
-// $scope.clickCheckBox = function(tier) {
-//   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-//     if (tier.name != campaign.donorLevels.name) {
-//       angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
-//
-//     } else if (tier.name == campaign.donorLevels.name) {
-//       angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
-//     }
-//   }
-// }
+$scope.clickCheckBox = function(tier) {
+  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+    if (tier.name != campaign.donorLevels.name) {
+      angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+
+    } else if (tier.name == campaign.donorLevels.name) {
+      angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
+    }
+  }
+}
 
 $scope.toggleThankYou = function() {
   angular.element(document.querySelector('.thankYou')).toggleClass('md-checked');
