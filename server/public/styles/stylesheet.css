@@ -116,11 +116,14 @@ md-toolbar {
 .rewards {
 /*  background-color: pink;*/
 margin-bottom: 7px;
-width: 100%
+overflow-x: scroll;
 }
 
 .reward-scroll {
-  left: -100px;
+}
+
+md-card#reward-card{
+  width: 400px;
 }
 
 .reward-price{

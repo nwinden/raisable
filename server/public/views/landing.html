@@ -135,7 +135,7 @@
 
                     <div flex layout="row" class="rewards">
 
-                        <md-card ng-click="claimReward(tier)" flex="25" id="reward-card" layout="column" class="md-whiteframe-1dp" ng-repeat="tier in campaign.donorLevels" layout-align="center" ng-if="tier.name != 'Donor'">
+                        <md-card ng-click="claimReward(tier)"  id="reward-card" layout="column" class="md-whiteframe-1dp" ng-repeat="tier in campaign.donorLevels" layout-align="center" ng-if="tier.name != 'Donor'">
                             <div data-content="Claim " class="image">
 
                                 <md-card-header class="tierName">{{tier.name}}</md-card-header>
