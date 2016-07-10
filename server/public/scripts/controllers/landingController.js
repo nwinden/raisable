@@ -285,15 +285,12 @@ $scope.checkAvailability = function(donation) {
   //funky notation is jquery Lite built into angular
   //uses - 1 to leave comparison with 'no reward' off
   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-    angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
-    angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
 
     if (donation == campaign.donorLevels[i].low) {
       angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
 
     } else if (donation < campaign.donorLevels[i].low) {
       angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
-      angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
     }
   }
 }
@@ -301,27 +298,27 @@ $scope.checkAvailability = function(donation) {
 //function fires when user changes donation amount.
 $scope.checkAvailabilityChange = function(donation) {
   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+
     angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
-    angular.element(document.querySelector('.tier-' + [i])).removeClass('ng-touched');
+    angular.element(document.querySelector('.tier-' + [i])).removeClass('ng-checked');
 
     if (donation < campaign.donorLevels[i].low) {
       angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
-      angular.element(document.querySelector('.tier-' + [i])).attr('aria-checked', false);
       angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
     }
   }
 }
 
-$scope.clickCheckBox = function(tier) {
-  for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-    if (tier.name != campaign.donorLevels.name) {
-      angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
-
-    } else if (tier.name == campaign.donorLevels.name) {
-      angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
-    }
-  }
-}
+// $scope.clickCheckBox = function(tier) {
+//   for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
+//     if (tier.name != campaign.donorLevels.name) {
+//       angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
+//
+//     } else if (tier.name == campaign.donorLevels.name) {
+//       angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
+//     }
+//   }
+// }
 
 $scope.toggleThankYou = function() {
   angular.element(document.querySelector('.thankYou')).toggleClass('md-checked');
