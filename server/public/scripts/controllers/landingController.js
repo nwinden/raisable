@@ -76,47 +76,60 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                 }
 
                 $scope.calcFees = function(donation) {
+                  if (donation === 0) {
+                    $scope.accountFees = 0;
+                    $scope.totalContribution = 0;
+                  } else {
                     $scope.accountFees = (30 + (0.029 * donation));
                     $scope.totalContribution = donation - $scope.accountFees;
+                  }
                 }
 
                 $scope.calcFees2 = function(donation) {
+                  if (donation === 0) {
+                    $scope.accountFees = 0;
+                    $scope.totalContribution = 0;
+                  } else {
                     donation *= 100;
                     $scope.checkAvailability(donation);
                     $scope.accountFees = (30 + (0.029 * donation));
                     $scope.totalContribution = donation - $scope.accountFees;
+                  }
+
                 }
 
+
+
                 //function for generating reward dialog box
-$scope.claimReward = function (tier) {
-  //prepopulates donation filed based on reward selected
-  if (tier == 0) {
-    $scope.donationAmount = 0;
-    $scope.calcFees(0);
-  } else {
-    $scope.donationAmount = tier.low / 100;
-    $scope.calcFees(tier.low);
-  }
-  $mdDialog.show({
-    controller: function LandingController($scope, $mdDialog) {
-      $scope.closeDialog = function () {
-        $mdDialog.hide();
-      }
-    },
-    clickOutsideToClose: true,
-    scope: $scope,
-    preserveScope: true,
-    templateUrl: '/views/reward-dialog2.html',
-    onComplete: afterShowAnimation
-  });
-  function afterShowAnimation(scope, element, options) {
-    if (tier == 0) {
-      $scope.checkAvailability(0);
-    } else {
-      $scope.checkAvailability(tier.low);
-    }
-  }
-};
+                $scope.claimReward = function (tier) {
+                  //prepopulates donation filed based on reward selected
+                  if (tier == 0) {
+                    $scope.donationAmount = 0;
+                    $scope.calcFees(0);
+                  } else {
+                    $scope.donationAmount = tier.low / 100;
+                    $scope.calcFees(tier.low);
+                  }
+                  $mdDialog.show({
+                    controller: function LandingController($scope, $mdDialog) {
+                      $scope.closeDialog = function () {
+                        $mdDialog.hide();
+                      }
+                    },
+                    clickOutsideToClose: true,
+                    scope: $scope,
+                    preserveScope: true,
+                    templateUrl: '/views/reward-dialog2.html',
+                    onComplete: afterShowAnimation
+                  });
+                  function afterShowAnimation(scope, element, options) {
+                    if (tier == 0) {
+                      $scope.checkAvailability($scope.campaign.donorLevels[0] + 1);
+                    } else {
+                      $scope.checkAvailability(tier.low);
+                    }
+                  }
+                };
                 //
                 $scope.charge = function(clientCard, date) {
 
@@ -170,24 +183,25 @@ $scope.claimReward = function (tier) {
                 }
                 //
                 /////Modal Logics/////
-                $scope.checkAvailability = function(donation) {
+  $scope.checkAvailability = function(donation) {
     //funky notation is jquery Lite built into angular
-    //uses -1 to leave comparison with 'no reward' off
-    for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-     if (donation < campaign.donorLevels[i].low) {
+    //uses - 1 to leave comparison with 'no reward' off
+    for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
+      if (donation == $scope.campaign.donorLevels[i].low) {
+        angular.element(document.querySelector('.tier-' + [i])).addClass('md-checked');
+      } else if (donation < $scope.campaign.donorLevels[i].low) {
         angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
-        angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
       }
     }
   }
   //function fires when user changes donation amount.
   $scope.checkAvailabilityChange = function(donation) {
-    for (var i = 0; i < campaign.donorLevels.length - 1; i++) {
-      if (donation < campaign.donorLevels[i].low) {
+    for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
+      angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
+      angular.element(document.querySelector('.tier-' + [i])).removeClass('ng-checked');
+      if (donation < $scope.campaign.donorLevels[i].low) {
         angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
         angular.element(document.querySelector('.tier-' + [i])).removeClass('md-checked');
-      } else if (donation >= campaign.donorLevels[i].low) {
-        angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
       }
     }
   }

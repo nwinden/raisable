@@ -289,12 +289,19 @@ strong {
 
 /*********************** REWARD DIALOG ********************/
 
+.rewardDialog{
+  width: 50%;
+  height: 80%;
+  font-size: 12px;
+}
+
 /*.experiment th, td {
   border: 1px solid black;
 }*/
 
 .action {
-  width: 60%;
+  display: inline;
+  float: left;
 }
 
 md-dialog-content h4 {
@@ -314,7 +321,7 @@ md-dialog-content h4 {
 }
 
 #submitReward {
-  float: right;
+  display: inline;
 }
 
 .unavailable {
@@ -376,4 +383,13 @@ h2.thankYouBackers{
 
 .thankYouBorder {
   /*border: 1px solid lightgray;*/
+}
+
+md-input-container {
+  margin: -4px;
+  width: 75%
+}
+
+.column {
+  margin: 20px;
 }
