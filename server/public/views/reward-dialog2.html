@@ -62,7 +62,7 @@
        <br />
        Donation Total:
        <md-input-container>
-         <input type="number" name="donationAmount" ng-model="donationAmount" ng-change="calcFees2(donationAmount)" />
+         <input type="number" name="donationAmount" ng-model="donationAmount" min="0" ng-change="calcFees2(donationAmount)" />
        </md-input-container>
        <br />
        <div class="submitButtonDialog">

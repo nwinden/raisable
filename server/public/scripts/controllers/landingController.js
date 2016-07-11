@@ -124,7 +124,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                   });
                   function afterShowAnimation(scope, element, options) {
                     if (tier == 0) {
-                      $scope.checkAvailability($scope.campaign.donorLevels[0] + 1);
+                      $scope.checkAvailability(0);
                     } else {
                       $scope.checkAvailability(tier.low);
                     }
