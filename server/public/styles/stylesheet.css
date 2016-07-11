@@ -290,8 +290,6 @@ strong {
 /*********************** REWARD DIALOG ********************/
 
 .rewardDialog{
-  width: 50%;
-  height: 80%;
   font-size: 12px;
 }
 
@@ -322,6 +320,8 @@ md-dialog-content h4 {
 
 #submitReward {
   display: inline;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .unavailable {
@@ -387,9 +387,26 @@ h2.thankYouBackers{
 
 md-input-container {
   margin: -4px;
-  width: 75%
+  width: 100%
 }
 
 .column {
   margin: 20px;
+}
+
+#dialogContent {
+  margin: 0 20px;
+}
+
+.thanksCenter {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.submitButtonDialog{
+  padding: 0 auto;
+}
+
+*:focus {
+    outline: none;
 }
