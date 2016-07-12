@@ -1,4 +1,4 @@
-<md-dialog flex="90" class="rewardDialog">
+<md-dialog flex="90" class="rewardDialog" ng-cloak>
  <!-- <md-toolbar>
    <div class="md-toolbar-tools">
      <h2>Choose Reward and Submit Donation</h2>
@@ -13,13 +13,13 @@
        <br />
        <md-input-container>
          <md-radio-group>
-           <md-radio-button class="tier-{{$index}}" ng-class="{ 'md-checked' : donationAmount * 100 >= tier.low && donationAmount * 100 <= tier.high}" name="rewardTier" value="{{tier.name}}" ng-model="selectedReward.reward"
-            ng-repeat="tier in campaign.donorLevels" ng-click="clickCheckBox()" ng-if="tier.name != 'Donor'"><b>{{tier.name}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+           <md-radio-button class="tier-{{$index}}" ng-class="{ 'md-checked' : donationAmount * 100 >= tier.low && donationAmount * 100 <= tier.high}" name="rewardTier" value="{{tier.name}}" ng-model="sponsor.reward"
+            ng-repeat="tier in campaign.donorLevels" ng-click="clickCheckBox()" ng-if="tier.name != 'Donor'"><b>{{tier.name}} -</b> <b>{{tier.low / 100 | currency}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
             <br />
-           <md-radio-button name="rewardTier" value="forgoReward" ng-model="selectedReward.reward" ng-click="clickCheckBox()"><em>I would like to forgo my reward.</em></md-radio-button>
+           <!-- <md-radio-button name="rewardTier" value="forgoReward" ng-model="sponsor.reward" ng-click="clickCheckBox()"><em>I would like to forgo my reward.</em></md-radio-button> -->
          </md-radio-group>
          <md-radio-group>
-           <md-radio-button name="publicThankYou" value="goPublic" ng-model="selectedReward.goPublic"><em>Can we publicly thank you?</em></md-radio-button>
+           <md-radio-button class="thankYou md-primary" name="publicThankYou" value="goPublic" ng-model="sponsor.goPublic"><em>I would like to be publicly thanked.</em></md-radio-button>
          </md-radio-group>
        </md-input-container>
 
@@ -30,13 +30,13 @@
        <h2>2. Complete Checkout</h2>
        <br />
        <md-input-container>
-         <input type="text" name="firstName" ng-model="selectedReward.firstName" placeholder="First Name" required/>
+         <input type="text" name="firstName" ng-model="sponsor.firstName" placeholder="First Name" required/>
        </md-input-container>
        <md-input-container>
-         <input type="text" name="lastName" ng-model="selectedReward.lastName" placeholder="Last Name" required />
+         <input type="text" name="lastName" ng-model="sponsor.lastName" placeholder="Last Name" required />
        </md-input-container>
        <md-input-container>
-         <input type="text" class="cc-input" name="email" ng-model="selectedReward.email" placeholder="Email" required/>
+         <input type="text" class="cc-input" name="email" ng-model="sponsor.email" placeholder="Email" required/>
        </md-input-container>
        <md-input-container>
          <input type="text" class="cc-input" name="number" ng-model="clientCard.number" placeholder="Card Number" required />
@@ -67,7 +67,7 @@
        <br />
        <div class="submitButtonDialog">
 
-       <md-button id="submitReward" class="md-raised md-accent" ng-click="charge(clientCard, date)">Pay {{donationAmount | currency}}</md-button>
+       <md-button id="submitReward" class="md-raised md-accent" ng-click="charge(clientCard, date)">Contribute {{donationAmount | currency}}</md-button>
       </div>
 
        </div>
@@ -80,7 +80,11 @@
 
 
 
-
+     <section>
+            <div class="md-actions">
+                <md-button ng-click="closeDialog()" class="md-fab md-fab-bottom-right md-mini" aria-label="Close"><ng-md-icon icon="close">X</ng-md-icon></md-button>
+            </div>
+        </section>
 
 
 

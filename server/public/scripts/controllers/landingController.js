@@ -1,7 +1,12 @@
 clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdDialog', 'campaignFactory', function($scope, $location, $http, $mdDialog, campaignFactory) {
 
             $scope.campaign = {};
+            $scope.sponsor = {};
             getCampaign();
+
+            function closeDialog(){
+              $mdDialog.hide();
+            }
 
 
             function getCampaign() {
@@ -133,42 +138,109 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                 //
                 $scope.charge = function(clientCard, date) {
 
-                    var token;
-                    var chargeToken = {};
+                  var token;
+  var chargeToken = {};
 
-                    if ((date.getMonth() + 1).toString().length == 1) {
+  if ((date.getMonth()+1).toString().length == 1) {
 
-                        clientCard.exp_month = '0' + (date.getMonth() + 1);
+    clientCard.exp_month = '0' + (date.getMonth()+1);
 
-                    } else {
+  } else {
 
-                        clientCard.exp_month = (date.getMonth() + 1).toString();
+    clientCard.exp_month = (date.getMonth()+1).toString();
 
-                    }
+  }
 
-                    clientCard.exp_year = date.getFullYear().toString().substring(2);
+  clientCard.exp_year = date.getFullYear().toString().substring(2);
 
-                    Stripe.card.createToken(clientCard, function(status, response) {
+  Stripe.card.createToken(clientCard, function(status, response) {
 
-                        token = response.id;
+    token = response.id;
 
-                        console.log(token);
+    console.log(token);
 
-                        if (token == undefined) {
+    if (token == undefined) {
 
-                            alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
+      alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
 
-                        } else {
+    } else {
 
-                            chargeToken.stripeToken = token;
+      chargeToken.stripeToken = token;
+      chargeToken.donation = $scope.donationAmount * 100;
 
-                            $http.post('/pay', chargeToken).then(function(response) {
+      $http.post('/pay', chargeToken).then(function(response) {
 
-                                alert('Your Charge has been processed. Please have a wonderful day.');
+        alert('Your Charge has been processed. Please have a wonderful day.');
+        closeDialog();
 
-                                //post to server increasing the donor count
-                                //post donor Information
-                                //check if they did the sponsor level to propmt a file upload
+        //post to server increasing the donor count
+        //post donor Information
+        //check if they did the sponsor level to propmt a file upload
+
+        //***************************************************************************************************************************
+        var newSponsor = {
+          donation: $scope.donationAmount * 100,
+          // publicthankyou: in if statement below
+          // emailThankYou: logic below
+          // acceptedReward: logic below
+          // rewardAccepted: logic below
+          firstName: $scope.sponsor.firstName,
+          lastName: $scope.sponsor.lastName,
+          zipCode: $scope.clientCard.address_zip,
+          email: $scope.sponsor.email,
+          imageApproved: false,
+          imageLink: '',
+          websiteLink: '',
+          promotorLinkUsed: ''
+        };
+
+        //emailThankYou
+        if ($scope.sponsor.email) {
+          newSponsor.emailThankYou = true;
+        } else {
+          newSponsor.emailThankYou = false;
+        }
+
+        console.log($scope.sponsor);
+
+        //acceptedReward & rewardName
+        if (angular.element(document.querySelector('.donor')).hasClass('md-checked')) {
+          console.log('donor has class');
+
+          newSponsor.acceptedReward = false;
+          newSponsor.rewardAccepted = "Donor";
+        }
+
+        //publicThankYou & emailThankYou
+        if (angular.element(document.querySelector('.thankYou')).hasClass('md-checked')) {
+          console.log('want public thank you has class');
+
+          newSponsor.publicThankYou = true;
+          /*newSponsor.emailThankYou = true;*/
+        }
+
+        //acceptedReward && rewardName
+        for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
+          if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
+            console.log(i + ' is classy');
+
+            newSponsor.acceptedReward = true;
+            newSponsor.rewardAccepted = $scope.campaign.donorLevels[i].name; //position in array of donorLevels
+            //push the new sponsor object to the right donorLevels array
+          }
+        }
+
+        // var id = "5772ea48b24a5d65ac8ac15f";
+        var id = $scope.campaign._id;
+        console.log(newSponsor);
+        console.log($scope.campaign._id);
+        $http.put('/campaigns/' + id, newSponsor)
+          .then(function (response) {
+            console.log('PUT /new sponsor after successful payment collected ', newSponsor);
+            getCampaign();
+          });
+
+        //***************************************************************************************************************************
 
                             }, function(response) {
 
