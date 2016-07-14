@@ -1,0 +1,26 @@
+<md-dialog>
+  <form class="addImageForm">
+    <md-content>
+      <md-card>
+        <md-card-header>Add an image of yourself or organization </md-card-header>
+        <md-card-content>
+
+
+            <input type="file" name="addImage" />
+          
+          <md-button class="md-raised md-accent contribute-btn" ng-click=""><strong>Add Image</strong></md-button>
+        </md-card-content>
+        <md-card-footer>
+          <section>
+            <div class="md-dialog-actions">
+                 <md-button ng-click="closeDialog()" class="addImg md-fab md-fab-bottom-right md-mini" aria-label="Close"><ng-md-icon icon="close">X</ng-md-icon></md-button>
+            </div>
+          </section>
+        </md-card-footer>
+
+      </md-card>
+
+    </md-content>
+
+  </form>
+</md-dialog>
