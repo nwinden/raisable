@@ -3,6 +3,9 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
             $scope.campaign = {};
             $scope.sponsor = {};
 
+            $scope.path = $location.path();
+            console.log($scope.path);
+
             getCampaign();
 
 
