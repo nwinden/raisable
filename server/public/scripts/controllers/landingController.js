@@ -286,4 +286,8 @@ $scope.clickCheckBox = function(tier) {
   }
 }
 
+$scope.buttonToggle = function() {
+  angular.element(document.querySelector('.thankYou')).toggleClass('md-checked');
+}
+
             }]);

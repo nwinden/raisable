@@ -93,6 +93,9 @@ clientApp.controller('HomeController', ['$scope', '$location', '$http', function
             lazyLoading: true
         })
 
+        $(window).trigger('resize');
+
+
         //--- Home Page Campaign Search --- //
         if ($scope.searchInput !== undefined) {
             $scope.searching = true;
