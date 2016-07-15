@@ -17,13 +17,12 @@ app.use(bodyParser.json());
 
 // process.env.MONGODB_URI will only be defined if you are running on Heroku
 if(process.env.MONGODB_URI != undefined) {
-    // use the string value of the environment variable
+  // use the string value of the environment variable
   var  databaseURI = 'mongodb://heroku_3rd65rt7:jkbu598e43ni3jskajvh60d97u@ds017155.mlab.com:17155/heroku_3rd65rt7';
 } else {
-    // use the local database server
-    databaseURI = 'mongodb://localhost:27017/raisable';
+  // use the local database server
+  databaseURI = 'mongodb://localhost:27017/raisable';
 }
-
 
 mongoose.connect(databaseURI);
 
@@ -47,9 +46,6 @@ app.listen(app.get('port'), function () {
 });
 
 // Handle index file separately
-
-
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, './public/views/index.html'));
 });
