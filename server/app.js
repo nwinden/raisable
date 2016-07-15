@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 if(process.env.MONGODB_URI != undefined) {
     // use the string value of the environment variable
   // var  databaseURI = 'mongodb://heroku_3rd65rt7:jkbu598e43ni3jskajvh60d97u@ds017155.mlab.com:17155/heroku_3rd65rt7';
-  var databaseURI = 'mongodb://raisable:raisable@host:27017/heroku_3rd65rt7';
+  var databaseURI = process.env.MONGODB_URI;
 } else {
     // use the local database server
     databaseURI = 'mongodb://localhost:27017/raisable';

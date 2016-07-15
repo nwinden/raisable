@@ -13,13 +13,17 @@
        <br />
        <md-input-container>
          <md-radio-group>
-           <md-radio-button class="tier-{{$index}}" ng-class="{ 'md-checked' : donationAmount * 100 >= tier.low && donationAmount * 100 <= tier.high}" name="rewardTier" value="{{tier.name}}" ng-model="sponsor.reward"
-            ng-repeat="tier in campaign.donorLevels" ng-click="clickCheckBox()" ng-if="tier.name != 'Donor'"><b>{{tier.name}} -</b> <b>{{tier.low / 100 | currency}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
+           <md-radio-button class="tier-{{$index}}" ng-class="{ 'md-checked' : donationAmount * 100 >= tier.low && donationAmount * 100 <= tier.high}" name="rewardTier" value="{{tier.name}}"
+            ng-repeat="tier in campaign.donorLevels" ng-click="clickCheckBox()" ><b>{{tier.name}} -</b> <b>{{tier.low / 100 | currency}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
             <br />
            <!-- <md-radio-button name="rewardTier" value="forgoReward" ng-model="sponsor.reward" ng-click="clickCheckBox()"><em>I would like to forgo my reward.</em></md-radio-button> -->
          </md-radio-group>
          <md-radio-group>
+<<<<<<< HEAD
            <md-radio-button class="thankYou md-primary" ng-click="buttonToggle()" name="publicThankYou" value="goPublic" ng-model="sponsor.goPublic"><em>I would like to be publicly thanked.</em></md-radio-button>
+=======
+           <md-radio-button class="thankYou md-primary" name="publicThankYou" ng-click="toggleClass()" value="goPublic" ng-model="sponsor.goPublic" ><em>I would like to be publicly thanked.</em></md-radio-button>
+>>>>>>> d465b1fc8b016869e6e161ee64851ba47035b7c5
          </md-radio-group>
        </md-input-container>
 
@@ -82,10 +86,10 @@
 
 
      <section>
-            <div class="md-actions">
-                <md-button ng-click="closeDialog()" class="md-fab md-fab-bottom-right md-mini" aria-label="Close"><ng-md-icon icon="close">X</ng-md-icon></md-button>
-            </div>
-        </section>
+        <div class="md-dialog-actions">
+            <md-button ng-click="closeDialog()" class="md-fab md-fab-bottom-right md-mini" aria-label="Close"><ng-md-icon icon="close">X</ng-md-icon></md-button>
+        </div>
+    </section>
 
 
 
