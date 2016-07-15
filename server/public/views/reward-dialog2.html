@@ -1,12 +1,7 @@
 <md-dialog flex="90" class="rewardDialog" ng-cloak>
- <!-- <md-toolbar>
-   <div class="md-toolbar-tools">
-     <h2>Choose Reward and Submit Donation</h2>
-   </div>
- </md-toolbar> -->
+
  <form name="donorRewardsForm">
  <md-dialog-content flex-shrink="0" flex-basis="auto" layout="row">
-
 
      <div flex="33" layout="column" class="column">
        <h2>1. Claim Your Reward</h2>
@@ -16,13 +11,11 @@
            <md-radio-button class="tier-{{$index}}" ng-class="{ 'md-checked' : donationAmount * 100 >= tier.low && donationAmount * 100 <= tier.high}" name="rewardTier" value="{{tier.name}}" ng-model="sponsor.reward"
             ng-repeat="tier in campaign.donorLevels" ng-click="clickCheckBox()" ng-if="tier.name != 'Donor'"><b>{{tier.name}} -</b> <b>{{tier.low / 100 | currency}}:</b> {{tier.rewardTitle}}<br>{{tier.rewardDescription}}</md-radio-button>
             <br />
-           <!-- <md-radio-button name="rewardTier" value="forgoReward" ng-model="sponsor.reward" ng-click="clickCheckBox()"><em>I would like to forgo my reward.</em></md-radio-button> -->
          </md-radio-group>
          <md-radio-group>
            <md-radio-button class="thankYou md-primary" name="publicThankYou" value="goPublic" ng-model="sponsor.goPublic"><em>I would like to be publicly thanked.</em></md-radio-button>
          </md-radio-group>
        </md-input-container>
-
      </div>
 
 
@@ -50,26 +43,22 @@
        <md-input-container>
          <input type="text" class="cc-input" name="zip" ng-model="clientCard.address_zip" placeholder="Card Zip Code" required/>
        </md-input-container>
-
      </div>
 
      <div flex="33" layout="column" class="column">
        <div>
 
-
-       <h2>3. Submit Payment</h2>
-       <br />
-       <br />
-       Donation Total:
-       <md-input-container>
-         <input type="number" name="donationAmount" ng-model="donationAmount" ng-change="calcFees2(donationAmount)" />
-       </md-input-container>
-       <br />
-       <div class="submitButtonDialog">
-
-       <md-button id="submitReward" class="md-raised md-accent" ng-click="charge(clientCard, date)">Contribute {{donationAmount | currency}}</md-button>
-      </div>
-
+         <h2>3. Submit Payment</h2>
+         <br />
+         <br />
+         Donation Total:
+         <md-input-container>
+           <input type="number" name="donationAmount" ng-model="donationAmount" ng-change="calcFees2(donationAmount)" />
+         </md-input-container>
+         <br />
+         <div class="submitButtonDialog">
+           <md-button id="submitReward" class="md-raised md-accent" ng-click="charge(clientCard, date)">Contribute {{donationAmount | currency}}</md-button>
+        </div>
        </div>
 
        <div class="thanksCenter">
@@ -77,18 +66,11 @@
        </div>
      </div>
 
-
-
-
      <section>
-            <div class="md-actions">
-                <md-button ng-click="closeDialog()" class="md-fab md-fab-bottom-right md-mini" aria-label="Close"><ng-md-icon icon="close">X</ng-md-icon></md-button>
-            </div>
-        </section>
-
-
-
-
+      <div class="md-actions">
+        <md-button ng-click="closeDialog()" class="md-fab md-fab-bottom-right md-mini" aria-label="Close"><ng-md-icon icon="close">X</ng-md-icon></md-button>
+      </div>
+     </section>
 
    </md-dialog-content>
 

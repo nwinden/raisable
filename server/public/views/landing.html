@@ -66,7 +66,7 @@
 
                                     </div>
                                     <h3 flex>{{timeRemaining}}</h3>
-                                    <h3 flex ng-if="campaign.donorCount == 0">No Backers</h3>
+                                    <h3 flex ng-if="campaign.donorCount <= 0">0 Backers</h3>
                                     <h3 flex ng-if="campaign.donorCount == 1">{{campaign.donorCount}} Backer</h3>
                                     <h3 flex ng-if="campaign.donorCount > 1">{{campaign.donorCount}} Backers</h3>
                                 </div>
@@ -92,17 +92,6 @@
                         </md-card>
                     </div>
 
-                    <!-- </div> -->
-
-                    <!--carousels for each level of donation-->
-                    <!-- <div class="backers" ng-repeat="level in levels" ng-if="level.name != 'Sponsor'">
-                        <h3>{{level.name}}</h3>
-                        <div layout="column" layout-align="center center">
-                            <jk-carousel data="dataArray" item-template-url="'/views/item-template.html'" max-width="2000" max-height="600" auto-slide="true" auto-slide-time="5000">
-                            </jk-carousel>
-                        </div>
-                    </div> -->
-
                     <!-- Swiper -->
                     <div class="thanks-list-container">
                         <div class="thanks-list" ng-repeat="level in campaign.donorLevels">
@@ -119,8 +108,6 @@
 
                   </div>
 
-
-
                 </div>
             </div>
         </md-content>
@@ -131,7 +118,6 @@
 
                 <!-- Reward tiers container -->
                 <div class="reward-scroll">
-
 
                     <div flex layout="row" class="rewards">
 
@@ -155,7 +141,6 @@
                     <div flex="1"></div>
 
                     <div flex="58" layout="column" layout-align="space-around none" class="teamInfoContainer">
-
 
                         <div class="groupNarrative">
                             <md-card layout-align="center" class="md-whiteframe-1dp">
@@ -201,19 +186,7 @@
                         </div>
                     </div>
 
-
-
                     <div flex="2"></div>
-
-                    <!-- <div flex="36"> -->
-
-                    <!-- <md-content class="faq">
-                  <h2>FAQ</h2>
-                  <p ng-repeat="faq in faqs">
-                    <b>Q:</b> {{faq.question}}<br>
-                    <b>A:</b> {{faq.response}}
-                  </p>
-                </md-content> -->
 
                     <div flex="3"></div>
                 </div>
