@@ -2,69 +2,62 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
   $scope.campaign = {};
   $scope.sponsor = {};
+
   getCampaign();
 
   function closeDialog(){
-  $mdDialog.hide();
+    $mdDialog.hide();
   }
 
   function getCampaign() {
     var whatever = location.pathname;
     for (var i = 0; i < whatever.length; i++) {
       if (whatever[i] == '/') {
-          whatever = whatever.substring(i + 1);
+        whatever = whatever.substring(i + 1);
       }
     }
-
     $http.get('/campaigns/landing/' + whatever).then(function(response) {
-        $scope.campaign = response.data[0];
-        changeProgressBar();
-        timeRemaining();
-        console.log($scope.campaign);
+      $scope.campaign = response.data[0];
+      changeProgressBar();
+      timeRemaining();
+      console.log('GET $scope.campaign', $scope.campaign);
     });
   }
 
-  //animated goal percentage bar. calls on page load and after a donation is made
+  // goal percentage bar. called on page load and on completed payment
   var bar = new ProgressBar.Line(progressLine, {
-      strokeWidth: 8,
-      easing: 'easeInOut',
-      duration: 2000,
-      color: '#0277BD',
-      trailColor: 'lightgray',
-      trailWidth: 8,
-      svgStyle: {
-          width: '100%',
-          height: '100%'
-      }
+    strokeWidth: 8,
+    easing: 'easeInOut',
+    duration: 2000,
+    color: '#0277BD',
+    trailColor: 'lightgray',
+    trailWidth: 8,
+    svgStyle: {
+        width: '100%',
+        height: '100%'
+    }
   });
 
-  // $scope.selectedReward = {};
+
   $scope.donationAmount = 0;
   $scope.accountFees = 0;
   $scope.totalContribution = 0;
-  // $scope.needs = [];
-  // $scope.faqs = [];
-  // $scope.donorTiers = [];
-  // $scope.title = campaign.title;
-  // $scope.name = campaign.creatorName;
-  // $scope.levels = campaign.donorLevels;
-  // var claimedReward = 0;
 
   Stripe.setPublishableKey('pk_test_sxs4BWKkRUf9HMXnALXxadxG');
 
   function timeRemaining() {
-      var deadline = moment($scope.campaign.deadlineDate);
-      console.log(deadline);
-      var now = moment();
-      console.log(now);
-      $scope.timeRemaining = moment(deadline - now).format('D');
-      if ($scope.timeRemaining <= 0) {
-          $scope.timeRemaining = 0 + ' days left';
-      } else if ($scope.timeRemaining == 1) {
-          $scope.timeRemaining = 1 + ' day left!';
-      } else {
-          $scope.timeRemaining += ' days left';
-      }
+    var deadline = moment($scope.campaign.deadlineDate);
+    // console.log(deadline);
+    var now = moment();
+    // console.log(now);
+    $scope.timeRemaining = moment(deadline - now).format('D');
+    if ($scope.timeRemaining <= 0) {
+        $scope.timeRemaining = 0 + ' days left';
+    } else if ($scope.timeRemaining == 1) {
+        $scope.timeRemaining = 1 + ' day left!';
+    } else {
+        $scope.timeRemaining += ' days left';
+    }
   }
 
   function changeProgressBar() {
@@ -97,9 +90,8 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       $scope.accountFees = (30 + (0.029 * donation));
       $scope.totalContribution = donation - $scope.accountFees;
     }
+
   }
-
-
 
   //function for generating reward dialog box
   $scope.claimReward = function (tier) {
@@ -132,113 +124,143 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
     }
   };
 
-
-  //payment function
-  $scope.charge = function(clientCard, date) {
-
-  var token;
-  var chargeToken = {};
-
-  if ((date.getMonth()+1).toString().length == 1) {
-    clientCard.exp_month = '0' + (date.getMonth()+1);
-  } else {
-    clientCard.exp_month = (date.getMonth()+1).toString();
+  //function to generate "add image" modal. called upon successful stripe charge
+  function addImage() {
+    if ($scope.donationAmount * 100 >= $scope.campaign.donorLevels[0].low) {
+      $mdDialog.show({
+        controller: function LandingController($scope, $mdDialog) {
+          $scope.closeDialog = function() {
+            $mdDialog.hide();
+          }
+        },
+        clickOutsideToClose: true,
+        scope: $scope,
+        preserveScope: true,
+        templateUrl: "/views/image-dialog.html",
+      })
+    }
   }
 
-  clientCard.exp_year = date.getFullYear().toString().substring(2);
+  $scope.charge = function(clientCard, date) {
 
+    var token;
+    var chargeToken = {};
 
-  Stripe.card.createToken(clientCard, function(status, response) {
-
-    token = response.id;
-
-    if (token == undefined) {
-
-      alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
-
+    if ((date.getMonth()+1).toString().length == 1) {
+      clientCard.exp_month = '0' + (date.getMonth()+1);
     } else {
+      clientCard.exp_month = (date.getMonth()+1).toString();
+    }
 
-      chargeToken.stripeToken = token;
-      chargeToken.donation = $scope.donationAmount * 100;
+    clientCard.exp_year = date.getFullYear().toString().substring(2);
+
+    Stripe.card.createToken(clientCard, function(status, response) {
+
+      token = response.id;
+
+      if (token == undefined) {
+
+        alert('Something went wrong, Please re-enter your Credit Card Information and Try Again.');
+
+      } else {
+
+        chargeToken.stripeToken = token;
+        chargeToken.donation = $scope.donationAmount * 100;
+
+        $http.post('/pay', chargeToken).then(function(response) {
 
 
+          alert('Your Charge has been processed. Please have a wonderful day.');
 
-      // ALL the campaign stuff only updates on database on sucesful payment
-      $http.post('/pay', chargeToken).then(function(response) {
+          addImage();
+          // if ($scope.donationAmount >= $campaign.donorLevels[0].low) {
+          //   addImage();
+          // }
 
-        alert('Your Charge has been processed. Please have a wonderful day.');
-        closeDialog();
+          closeDialog();
 
-        var newSponsor = {
-          donation: $scope.donationAmount * 100,
-          // publicthankyou: in if statement below
-          // emailThankYou: logic below
-          // acceptedReward: logic below
-          // rewardAccepted: logic below
-          firstName: $scope.sponsor.firstName,
-          lastName: $scope.sponsor.lastName,
-          zipCode: $scope.clientCard.address_zip,
-          email: $scope.sponsor.email,
-          imageApproved: false,
-          imageLink: '',
-          websiteLink: '',
-          promotorLinkUsed: ''
-        };
+          var rewards = [];
+          angular.forEach($scope.campaign.donorLevels, function (reward) {
+            rewards.push(reward.name);
 
-        //emailThankYou
-        if ($scope.sponsor.email) {
-          newSponsor.emailThankYou = true;
-        } else {
-          newSponsor.emailThankYou = false;
-        }
-
-        console.log($scope.sponsor);
-
-        //acceptedReward & rewardName
-        if (angular.element(document.querySelector('.donor')).hasClass('md-checked')) {
-
-          newSponsor.acceptedReward = false;
-          newSponsor.rewardAccepted = "Donor";
-        }
-
-        //publicThankYou & emailThankYou
-        if (angular.element(document.querySelector('.thankYou')).hasClass('md-checked')) {
-
-          newSponsor.publicThankYou = true;
-        }
-
-        //acceptedReward && rewardName
-        for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
-          if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
-            console.log(i + ' is classy');
-
-            newSponsor.acceptedReward = true;
-            newSponsor.rewardAccepted = $scope.campaign.donorLevels[i].name; //position in array of donorLevels
-            //push the new sponsor object to the right donorLevels array
-          }
-        }
-
-        var id = $scope.campaign._id;
-        console.log(newSponsor);
-        console.log($scope.campaign._id);
-        $http.put('/campaigns/' + id, newSponsor)
-          .then(function (response) {
-            console.log('PUT /new sponsor after successful payment collected ', newSponsor);
-            getCampaign();
           });
+          console.log(rewards);
 
+          //post to server increasing the donor count
+          //post donor Information
+          //check if they did the sponsor level to propmt a file upload
 
-        }, function(response) {
-          alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
-        });
+          //***************************************************************************************************************************
 
-      } //closes else statement aka happy path
-    }); //closes stripe card create
-  } //closes stripe card
+          var newSponsor = {
+            donation: $scope.donationAmount * 100,
+            // publicthankyou: in if statement below
+            // emailThankYou: logic below
+            // acceptedReward: logic below
+            // rewardAccepted: logic below
+            firstName: $scope.sponsor.firstName,
+            lastName: $scope.sponsor.lastName,
+            zipCode: $scope.clientCard.address_zip,
+            email: $scope.sponsor.email,
+            imageApproved: false,
+            imageLink: '',
+            websiteLink: '',
+            promotorLinkUsed: ''
+          };
 
+          //emailThankYou
+          if ($scope.sponsor.email) {
+            newSponsor.emailThankYou = true;
+          } else {
+            newSponsor.emailThankYou = false;
+          }
 
+          //publicThankYou
+          if (angular.element(document.querySelector('.thankYou')).hasClass('md-checked')) {
+            console.log('want public thank you has class');
 
-                /////Modal Logics/////
+            newSponsor.publicThankYou = true;
+          } else {
+            newSponsor.publicThankYou = false;
+          }
+
+          //acceptedReward && rewardName
+          for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
+            if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
+              console.log(i + ' is classy');
+              newSponsor.rewardAccepted = $scope.campaign.donorLevels[i].name;
+              if (i == $scope.campaign.donorLevels.length - 1) {
+                newSponsor.acceptedReward = false;
+              } else {
+                newSponsor.acceptedReward = true;
+              }
+            }
+          }
+
+          var id = $scope.campaign._id;
+          console.log(newSponsor);
+          console.log($scope.campaign._id);
+          $http.put('/campaigns/' + id, newSponsor)
+            .then(function (response) {
+              console.log('PUT /new sponsor after successful payment collected ', newSponsor);
+              getCampaign();
+            });
+
+          //***************************************************************************************************************************
+
+      }, function(response) {
+
+        alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
+
+      });
+
+    }// closes else statement
+
+  }); //closes stripe.car.createtoken
+
+  } // closes payment function
+
+  /////Modal Logics/////
   $scope.checkAvailability = function(donation) {
     //funky notation is jquery Lite built into angular
     //uses - 1 to leave comparison with 'no reward' off
@@ -248,7 +270,6 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       }
     }
   }
-
   //function fires when user changes donation amount.
   $scope.checkAvailabilityChange = function(donation) {
     for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
@@ -263,13 +284,16 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       }
     }
   }
-
   $scope.clickCheckBox = function(tier) {
     for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
       if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
         angular.element(document.querySelector('.tier-' + [i])).toggleClass('md-checked');
       }
     }
+  }
+
+  $scope.toggleClass = function() {
+    angular.element(document.querySelector('.thankYou')).toggleClass('md-checked');
   }
 
 }]);
