@@ -2,35 +2,35 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Raisable</title>
-    <!-- Angular Requirements -->
-    <script src="/assets/vendors/angular.min.js" charset="utf-8"></script>
-    <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
-    <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
-    <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
-    <!-- Widget Requirements -->
-    <script src="/assets/vendors/jquery.min.js"></script>
-    <script src="/assets/vendors/progressbar.min.js"></script>
-    <script src="/assets/vendors/moment.min.js"></script>
-    <script src="/assets/vendors/ng-currency.js"></script>
-    <script src="/assets/vendors/angular-route.min.js"></script>
+  <meta charset="utf-8">
+  <title>Raisable</title>
+  <!-- Angular Requirements -->
+  <script src="/assets/vendors/angular.min.js" charset="utf-8"></script>
+  <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
+  <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
+  <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
+  <!-- Widget Requirements -->
+  <script src="/assets/vendors/jquery.min.js"></script>
+  <script src="/assets/vendors/progressbar.min.js"></script>
+  <script src="/assets/vendors/moment.min.js"></script>
+  <script src="/assets/vendors/ng-currency.js"></script>
+  <script src="/assets/vendors/angular-route.min.js"></script>
 
 
-    <!-- Carousel Requirements -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+  <!-- Carousel Requirements -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
 
-    <!-- Application Requirements -->
-    <script src="/scripts/clientApp.js" charset="utf-8"></script>
-    <script src="/scripts/controllers/homeController.js" charset="utf-8"></script>
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="/styles/angular-material.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css">
-    <link rel="stylesheet" href="/styles/stylesheet.css">
-    <link rel="stylesheet" href="/styles/homestylesheet.css">
+  <!-- Application Requirements -->
+  <script src="/scripts/clientApp.js" charset="utf-8"></script>
+  <script src="/scripts/controllers/homeController.js" charset="utf-8"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css">
+  <link rel="stylesheet" href="/styles/stylesheet.css">
+  <link rel="stylesheet" href="/styles/homestylesheet.css">
 </head>
 
 <body ng-app="clientApp" ng-controller="HomeController" ng-init="getCampaigns()" ng-cloak>
@@ -74,18 +74,18 @@
 
     <!-- Campaign Tiles -->
     <div class="gridListTiles" flex ng-cloak>
-        <h2 class="active-campaigns" ng-hide="searchInput">Active Campaigns</h2>
-        <h2 class="active-campaigns" ng-show="searchInput">Searching for "{{searchInput}}"</h2>
-        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="3:3" md-gutter="30px" md-gutter-gt-sm="30px" md-gutter-gt-md="30px">
-            <md-grid-tile ng-repeat="campaign in campaigns | orderBy:'deadlineDate' | filter:searchInput as filtered" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.tileImageLink}})'}">
-              <a ng-href="{{path}}/{{campaign.campaignId}}">
-                <md-grid-tile-footer>
-                  <h3>{{campaign.title}}</h2>
-                  <h6>By: {{campaign.creatorName}}</h4>
-                </md-grid-tile-footer>
-              </a>
-            </md-grid-tile>
-        </md-grid-list>
+      <h2 class="active-campaigns" ng-hide="searchInput">Active Campaigns</h2>
+      <h2 class="active-campaigns" ng-show="searchInput">Searching for "{{searchInput}}"</h2>
+      <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="3:3" md-gutter="30px" md-gutter-gt-sm="30px" md-gutter-gt-md="30px">
+        <md-grid-tile ng-repeat="campaign in campaigns | orderBy:'deadlineDate' | filter:searchInput as filtered" md-rowspan="{{tile.span.row}}" md-colspan="{{tile.span.col}}" md-colspan-sm="1" md-colspan-xs="1" ng-class="tile.background" ng-style="{'background-image':'url({{campaign.tileImageLink}})'}">
+            <a ng-href="{{path}}/campaigns/{{campaign.campaignId}}">
+              <md-grid-tile-footer>
+                <h3>{{campaign.title}}</h2>
+                <h6>By: {{campaign.creatorName}}</h4>
+              </md-grid-tile-footer>
+            </a>
+        </md-grid-tile>
+      </md-grid-list>
     </div>
 
 </body>

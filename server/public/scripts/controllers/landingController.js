@@ -219,6 +219,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                 newSponsor.acceptedReward = false;
               } else {
                 newSponsor.acceptedReward = true;
+
               }
             }
           }

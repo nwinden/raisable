@@ -15,7 +15,9 @@
          </md-radio-group>
 
          <md-radio-group>
+
            <md-radio-button class="thankYou md-primary" name="publicThankYou" ng-click="toggleClass()" value="goPublic" ng-model="sponsor.goPublic" ><em>I would like to be publicly thanked.</em></md-radio-button>
+
          </md-radio-group>
        </md-input-container>
      </div>
@@ -52,14 +54,15 @@
          <br />
          <br />
          Donation Total:
+
          <md-input-container>
-           <input type="number" name="donationAmount" ng-model="donationAmount" ng-change="calcFees2(donationAmount)" />
+          <input type="number" name="donationAmount" ng-model="donationAmount" ng-change="calcFees2(donationAmount)"/>
          </md-input-container>
          <br />
          <div class="submitButtonDialog">
            <md-button id="submitReward" class="md-raised md-accent" ng-click="charge(clientCard, date)">Contribute {{donationAmount | currency}}</md-button>
         </div>
-       </div>
+      </div>
 
        <div class="thanksCenter">
          <h1>Thank you for supporting {{campaign.creatorName}}!</h1>
