@@ -3,7 +3,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
             $scope.campaign = {};
             $scope.sponsor = {};
 
-            $scope.path = 'https://stark-wave-13448.herokuapp.com/';
+            $scope.path = '';
             console.log($scope.path);
 
             getCampaign();
