@@ -298,46 +298,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
                 } else {
                   angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
                 }
-<<<<<<< HEAD
-                //
-                /////Modal Logics/////
-$scope.checkAvailability = function(donation) {
-  //funky notation is jquery Lite built into angular
-  //uses - 1 to leave comparison with 'no reward' off
-  for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
-    if (donation < $scope.campaign.donorLevels[i].low) {
-      angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
-    }
-  }
-}
-//function fires when user changes donation amount.
-$scope.checkAvailabilityChange = function(donation) {
-  for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
-    angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
-    if (donation < $scope.campaign.donorLevels[i].low) {
-      angular.element(document.querySelector('.tier-' + [i])).attr('disabled', true);
-      if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
-        angular.element(document.querySelector('.tier-' + [i])).toggleClass('md-checked');
-      }
-    } else {
-      angular.element(document.querySelector('.tier-' + [i])).attr('disabled', false);
-    }
-  }
-}
-$scope.clickCheckBox = function(tier) {
-  for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
-    if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
-      angular.element(document.querySelector('.tier-' + [i])).toggleClass('md-checked');
-    }
-  }
-}
 
-$scope.buttonToggle = function() {
-  angular.element(document.querySelector('.thankYou')).toggleClass('md-checked');
-}
-
-            }]);
-=======
               }
             }
             $scope.clickCheckBox = function(tier) {
@@ -353,4 +314,3 @@ $scope.buttonToggle = function() {
             }
 
 }]);
->>>>>>> d465b1fc8b016869e6e161ee64851ba47035b7c5
