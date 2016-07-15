@@ -22,7 +22,6 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       $scope.campaign = response.data[0];
       changeProgressBar();
       timeRemaining();
-      console.log('GET $scope.campaign', $scope.campaign);
     });
   }
 
@@ -49,16 +48,15 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
   function timeRemaining() {
     var deadline = moment($scope.campaign.deadlineDate);
-    // console.log(deadline);
     var now = moment();
-    // console.log(now);
+
     $scope.timeRemaining = moment(deadline - now).format('D');
     if ($scope.timeRemaining <= 0) {
-        $scope.timeRemaining = 0 + ' days left';
+      $scope.timeRemaining = 0 + ' days left';
     } else if ($scope.timeRemaining == 1) {
-        $scope.timeRemaining = 1 + ' day left!';
+      $scope.timeRemaining = 1 + ' day left!';
     } else {
-        $scope.timeRemaining += ' days left';
+      $scope.timeRemaining += ' days left';
     }
   }
 
@@ -171,13 +169,9 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
         $http.post('/pay', chargeToken).then(function(response) {
 
-
           alert('Your Charge has been processed. Please have a wonderful day.');
 
           addImage();
-          // if ($scope.donationAmount >= $campaign.donorLevels[0].low) {
-          //   addImage();
-          // }
 
           closeDialog();
 
@@ -186,13 +180,6 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
             rewards.push(reward.name);
 
           });
-          console.log(rewards);
-
-          //post to server increasing the donor count
-          //post donor Information
-          //check if they did the sponsor level to propmt a file upload
-
-          //***************************************************************************************************************************
 
           var newSponsor = {
             donation: $scope.donationAmount * 100,
@@ -219,8 +206,6 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
           //publicThankYou
           if (angular.element(document.querySelector('.thankYou')).hasClass('md-checked')) {
-            console.log('want public thank you has class');
-
             newSponsor.publicThankYou = true;
           } else {
             newSponsor.publicThankYou = false;
@@ -229,7 +214,6 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
           //acceptedReward && rewardName
           for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
             if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
-              console.log(i + ' is classy');
               newSponsor.rewardAccepted = $scope.campaign.donorLevels[i].name;
               if (i == $scope.campaign.donorLevels.length - 1) {
                 newSponsor.acceptedReward = false;
@@ -241,27 +225,23 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
           }
 
           var id = $scope.campaign._id;
-          console.log(newSponsor);
-          console.log($scope.campaign._id);
+
           $http.put('/campaigns/' + id, newSponsor)
             .then(function (response) {
               console.log('PUT /new sponsor after successful payment collected ', newSponsor);
               getCampaign();
             });
 
-          //***************************************************************************************************************************
-
-      }, function(response) {
+        }, function(response) {
 
         alert('Your Charge did not go through, please try again or contact your Credit Card Provider for assistance.');
 
       });
 
-    }// closes else statement
-
+    } // closes else statement
   }); //closes stripe.car.createtoken
-
   } // closes payment function
+
 
   /////Modal Logics/////
   $scope.checkAvailability = function(donation) {
@@ -273,6 +253,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       }
     }
   }
+
   //function fires when user changes donation amount.
   $scope.checkAvailabilityChange = function(donation) {
     for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
@@ -287,6 +268,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       }
     }
   }
+
   $scope.clickCheckBox = function(tier) {
     for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
       if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
