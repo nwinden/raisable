@@ -3,6 +3,8 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
   $scope.campaign = {};
   $scope.sponsor = {};
 
+  $scope.path = location.hostname;
+
   getCampaign();
 
   function closeDialog(){
