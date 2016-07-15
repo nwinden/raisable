@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>raisable</title>
 
@@ -9,14 +10,11 @@
     <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/jquery.min.js" charset="utf-8"></script>
     <script src="/assets/vendors/progressbar.min.js"></script>
-
     <script src="https://js.stripe.com/v2/" charset="utf-8"></script>
-
     <script src="/assets/vendors/moment.min.js"></script>
-    <script src="/assets/vendors/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+
     <script src="/scripts/clientApp.js" charset="utf-8"></script>
     <script src="/scripts/controllers/landingController.js"></script>
     <script src="/scripts/factories/campaignFactory.js"></script>
@@ -24,160 +22,178 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/styles/angular-material.min.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
+</head>
 
-  </head>
+<body ng-app="clientApp" ng-controller="LandingController" layout="column" ng-cloak>
+  <!-- facebook sdk script -->
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- end fb sdk -->
 
-  <body ng-app="clientApp" ng-controller="LandingController" layout="column">
-  <!-- Toolbar container -->
-  <md-toolbar layout="row" layout-align="center center">
-    <h1 flex>r<span class="ai">ai</span>sable</h1>
-  </md-toolbar>
+    <!-- Toolbar container -->
+    <md-toolbar layout="row">
+        <a href="/views/index.html"><h1 class="nav-logo" >raisable</h1></a>
+    </md-toolbar>
+    <md-subheader class="landing-title">
+        <h1 class="campaignTitle">{{campaign.title}}</h1>
+        <h5 class="campaignOrg">By: {{campaign.creatorName}}</h5>
+    </md-subheader>
 
 
-  <div flex layout="row">
+    <div flex layout="row">
 
-      <!-- Goal and Donors container -->
-      <md-content flex="25" id="goal" class="md-whiteframe-9dp">
-        <div layout="column" layout-align="center">
-          <div class="goalSection">
-            <h1>{{title}}</h1>
-            <h5>by {{name}}</h5>
-            <div class="goalCard">
-              <md-card class="md-whiteframe-9dp">
-                <h3>Goal: {{goal / 100 | currency}}</h3>
-                <div layout="column">
-                  <div id="progressLine"></div>
-                  <h5>Raised: {{raised / 100 | currency}}</h5>
-                    <div layout="row" class="remainingTime">
-                      <h5 flex>{{timeRemaining}}</h5>
-                      <h5 flex>{{backers}}</h5>
+        <!-- Goal and Donors container -->
+        <md-content flex="30" id="goal" class="md-whiteframe-1dp">
+            <div layout="column" layout-align="center center">
+                <div class="goalSection">
+
+                    <div class="goalCard">
+                        <md-card class="md-whiteframe-1dp">
+                            <h2 class="goal">Goal: <strong>{{campaign.goal / 100 | currency}}</strong></h2>
+                            <div layout="column">
+                                <div id="progressLine"></div>
+                                <h2 class="raised">Raised: {{campaign.raised / 100 | currency}}</h2>
+                                <div layout="row" class="remainingTime">
+                                    <div layout="row">
+
+                                    </div>
+                                    <h3 flex>{{timeRemaining}}</h3>
+                                    <h3 flex ng-if="campaign.donorCount <= 0">0 Backers</h3>
+                                    <h3 flex ng-if="campaign.donorCount == 1">{{campaign.donorCount}} Backer</h3>
+                                    <h3 flex ng-if="campaign.donorCount > 1">{{campaign.donorCount}} Backers</h3>
+                                </div>
+                            </div>
+                            <md-button class="md-raised md-accent contribute-btn" ng-click="claimReward(0)"><strong>Contribute</strong></md-button>
+                        </md-card>
                     </div>
-                </div>
-                <md-button class="md-raised md-primary" ng-click="claimReward(0)">Contribute Now</md-button>
-              </md-card>
-            </div>
+                    <h5 class="shareCampaign" layout-align="center"><em></em> </h5>
+                    <div class="socialIcons" layout="row" layout-align="center">
 
-            <!--social share icons...instagram, twitter, pinterest and facebook-->
-            <div class="socialIconsContainer" layout="row" layout-align="center">
-
-                <a href="https://twitter.com/share" data-text="checkout raisable!" data-dnt="true">
-                  <svg class="svgIcon" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" version="1">
-                    <title>Twitter</title>
-                    <g style="fill-rule:evenodd;fill:none">
-                        <path class="socialIcons" d="M0 30C0 13.4 13.5 0 30 0 46.6 0 60.1 13.4 60.1 30 60.1 46.6 46.6 60 30 60 13.5 60 0 46.6 0 30ZM0 30" fill="#4099FF"/>
-                        <path d="M29.3 23.9L29.4 24.9 28.3 24.8C24.5 24.3 21.2 22.7 18.3 19.9L16.9 18.5 16.6 19.5C15.8 21.8 16.3 24.2 17.9 25.8 18.7 26.7 18.5 26.8
-                          17.1 26.3 16.6 26.1 16.1 26 16.1 26 16 26.2 16.5 28.1 16.9 28.9 17.4 29.9 18.5 31 19.7 31.6L20.8 32.1 19.5 32.1C18.4 32.1 18.3 32.1 18.5
-                          32.6 18.9 34 20.5 35.4 22.4 36L23.7 36.5 22.5 37.2C20.9 38.1 18.9 38.7 16.9 38.7 16 38.8 15.2 38.8 15.2 38.9 15.2 39.1 17.8 40.3 19.2 40.8
-                          23.7 42.1 29 41.6 33 39.2 35.8 37.5 38.7 34.2 40 31 40.7 29.3 41.4 26.1 41.4 24.6 41.4 23.7 41.5 23.5 42.7 22.4 43.4 21.7 44 20.9 44.1 20.7
-                          44.3 20.3 44.3 20.3 43.3 20.7 41.5 21.3 41.2 21.2 42.1 20.3 42.8 19.6 43.5 18.4 43.5 18 43.5 18 43.2 18.1 42.9 18.3 42.5 18.5 41.6 18.8 41
-                          19L39.9 19.3 38.8 18.6C38.3 18.3 37.5 17.8 37.1 17.7 36 17.4 34.4 17.4 33.4 17.8 30.8 18.7 29.1 21.2 29.3 23.9ZM29.3 23.9" fill="#FFF"/>
-                        <path d="M60.1 30C60.1 46.6 46.6 60 30 60 23.9 60 18.2 58.2 13.4 55L47.8 5.8C55.3 11.3 60.1 20.1 60.1 30ZM60.1 30" fill-opacity="0.08"/>
-                    </g>
-                  </svg>
-                </a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-                <a id="shareBtn" href="">
-                  <svg class="svgIcon" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
-                    <title>Facebook</title>
-                    <g fill="none">
-                      <path class="socialIcons" d="M0.1 30C0.1 13.4 13.3 0 29.7 0 46 0 59.2 13.4 59.2 30 59.2 46.6 46 60 29.7 60 13.3 60 0.1 46.6 0.1 30ZM0.1 30" fill="#3B5998"/>
-                      <path d="M32.1 46.3L32.1 30 36.6 30 37.2 24.4 32.1 24.4 32.1 21.6C32.1 20.1 32.3 19.3 34.4 19.3L37.1 19.3 37.1 13.7 32.7 13.7C27.4 13.7 25.5
-                        16.4 25.5 21L25.5 24.4 22.2 24.4 22.2 30 25.5 30 25.5 46.3 32.1 46.3ZM32.1 46.3" fill="#FFF"/>
-                      <path d="M59.2 30C59.2 46.6 46 60 29.7 60 23.6 60 18 58.2 13.3 55L47.2 5.8C54.5 11.3 59.2 20.1 59.2 30ZM59.2 30" fill-opacity="0.08"/>
-                    </g>
-                  </svg>
-                </a> <script>document.getElementById('shareBtn').onclick = function() {FB.ui({method: 'share',display: 'popup',href: 'https://developers.facebook.com/docs/',}, function(response){});}</script>
-              </div>
-
-              <div layout-align="center" class="sponsors" ng-repeat="level in levels" ng-if="level.name == 'Sponsor'">
-                <h3>Sponsors</h3>
-                <md-card class="md-whiteframe-9dp" ng-repeat="backer in level.sponsors" >
-                  <md-card-header>{{backer.firstName}} {{backer.lastName}}</md-card-header>
-                  <md-content>{{backer.imageLink}}<br><a href="{{backer.websiteLink}}">{{backer.websiteLink}}</a></md-content>
-                </md-card>
-              </div>
-
-              <!--carousels for each level of donation-->
-              <div layout="column" layout-align="center center" ng-if="level.name != 'Sponsor'" ng-repeat="level in levels">
-                <h3>{{level.name}}</h3>
-                <div ng-repeat="person in level.sponsors">
-                  <div class="swiper-container" >
-                    <div class="swiper-wrapper" >
-                      <div class="swiper-slide">
-                        {{person.firstName}} {{person.lastName}}
-                      </div>
+                        <div class="fb-share-button" data-href="https://goraisable.com/campaigns/1234/" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgoraisable.com%2Fcampaigns%2F1234%2F&amp;src=sdkpreparse">Share</a></div>
+                        <a href="https://twitter.com/intent/tweet" class="twitter-hashtag-button" data-size="large" data-text="Help the Spartans reach their goal!" data-url="http://goraisable.com/campaigns/1234/" data-via="raisable" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
-                  </div>
-                </div>
-              </div>
 
-          </div>
-        </div>
-      </md-content>
+                    <div class="thankYouBorder">
+                      <h2 class="thankYouBackers">Thank you, Backers!</h2>
+                    <div layout-align="center" class="sponsors" ng-repeat="level in campaign.donorLevels" ng-if="level.name == 'Sponsor'">
+                        <h3>{{level.name}}</h3>
+                        <md-card class="md-whiteframe-1dp" ng-repeat="backer in level.sponsors">
+                            <md-card-header>{{backer.firstName}} {{backer.lastName}}</md-card-header>
+                            <md-content>{{backer.imageLink}}
+                                <br><a href="{{backer.websiteLink}}">{{backer.websiteLink}}</a></md-content>
+                        </md-card>
+                    </div>
 
-      <!-- Container for Main content - reward tiers, organization info and FAQ -->
-      <md-content flex="75" id="groupInfo" class="md-whiteframe-9dp">
-        <div layout="column">
+                    <!-- Swiper -->
+                    <div class="thanks-list-container">
+                        <div class="thanks-list" ng-repeat="level in campaign.donorLevels">
+                            <h3 class="levelName">{{level.name}}</h3>
+                            <div ng-repeat="person in level.sponsors" class="thanks">
+                              <img class="sponsorImage" ng-src="{{person.imageLink}}" /><br />
 
-          <!-- Reward tiers container -->
-          <div flex layout="row" class="rewards">
-            <md-card flex="25" layout="column" class="md-whiteframe-9dp" ng-repeat="tier in donorTiers" layout-align="center" ng-if="tier.name != 'Donor'">
-              <md-card-header>{{tier.name}} Reward</md-card-header>
-              <md-card-content>
-                <p>{{tier.low / 100 | currency}}</p>
-                <p>{{tier.rewardTitle}}</p>
-              </md-card-content>
-              <md-card-footer>
-                <md-button class="md-raised md-primary" ng-click="claimReward(tier)">Claim</md-button>
-              </md-card-footer>
-            </md-card>
-          </div>
 
-          <div flex layout="row" class="media-about-needs">
-              <div flex="5"></div>
+                                    <span>{{person.firstName}} {{person.lastName}}</span>
 
-              <div flex="60" layout="column" layout-align="space-around none" class="teamInfoContainer">
 
-                  <img src="{{campaign.imageLink}}" alt="teamMedia" />
-
-                  <div class="groupNarrative">
-                    <md-card layout-align="center" class="md-whiteframe-9dp">
-                      <md-card-header>About</md-card-header>
-                      <md-card-content>{{campaign.about}}</md-card-content>
-                    </md-card>
-                  </div>
-
-                  <div class="groupNeeds">
-                    <md-card layout-align="center" class="md-whiteframe-9dp">
-                      <md-card-header>Needs</md-card-header>
-                      <md-card-content>
-                        <div ng-repeat="need in needs" class="needsContainer">
-                          Item: {{need.name}}<br>
-                          Quantity: {{need.quantity}}<br>
-                          Total Price: {{need.price / 100 | currency}}
+                            </div>
+                            <md-divider></md-divider>
                         </div>
-                      </md-card-content>
-                    </md-card>
+                    </div>
+
                   </div>
-              </div>
 
-              <div flex="5"></div>
+                </div>
+            </div>
+        </md-content>
 
-              <div flex="25" class="md-whiteframe-9dp">
-                <md-content class="faq">
-                  <h2>FAQ</h2>
-                  <p ng-repeat="faq in faqs">
-                    <b>Q:</b> {{faq.question}}<br>
-                    <b>A:</b> {{faq.response}}
-                  </p>
-                </md-content>
-              </div>
+        <!-- Container for Main content - reward tiers, organization info and FAQ -->
+        <md-content flex="70" id="groupInfo" class="md-whiteframe-1dp">
+            <div layout="column">
 
-              <div flex="5"></div>
-          </div>
-        </div>
-      </md-content>
+                <!-- Reward tiers container -->
+                <div class="reward-scroll">
 
-  </div>
+                    <div flex layout="row" class="rewards">
+
+                        <md-card ng-click="claimReward(tier)"  id="reward-card" layout="column" class="md-whiteframe-1dp" ng-repeat="tier in campaign.donorLevels" layout-align="center" ng-if="tier.name != 'Donor'">
+                            <div data-content="Claim " class="image">
+
+                                <md-card-header class="tierName">{{tier.name}}</md-card-header>
+                                <md-card-content>
+                                    <h3 class="reward-price">{{tier.low / 100 | currency}}</h3>
+                                    <p>{{tier.rewardTitle}}</p>
+                                </md-card-content>
+
+                            </div>
+
+                        </md-card>
+
+                    </div>
+                </div>
+
+                <div flex layout="row" class="media-about-needs">
+                    <div flex="1"></div>
+
+                    <div flex="58" layout="column" layout-align="space-around none" class="teamInfoContainer">
+
+                        <div class="groupNarrative">
+                            <md-card layout-align="center" class="md-whiteframe-1dp">
+                                <md-card-header>About This Campaign</md-card-header>
+                                <md-card-content>
+                                    <p>
+                                        {{campaign.about}}
+                                    </p>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+
+                        <!--<div class="groupMedia">-->
+                        <img src="{{campaign.imageLink}}" alt="teamMedia" />
+                        <!--</div>-->
+
+                        <div class="groupNeeds">
+                            <md-card layout-align="center" class="md-whiteframe-1dp">
+                                <md-card-header>Needs</md-card-header>
+                                <md-card-content>
+                                    <md-card ng-repeat="need in campaign.items" class="needs-card">
+                                        <p class="need-item">{{need.name}}</p>
+                                        <p class="need-item">Quantity: {{need.quantity}}</p>
+                                        </br>
+                                        <md-divider></md-divider>
+                                        <p class="need-item">Total Price: {{need.price / 100 | currency}}</p>
+                                    </md-card>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+
+                        <div class="groupFaqs">
+                            <md-card layout-align="center" class="md-whiteframe-1dp faq">
+                                <md-card-header>Frequently Asked Questions</md-card-header>
+                                <div layout-align="center" class="faq-card" ng-repeat="faq in campaign.faqs">
+                                    <strong><p class="faq-q">Q: {{faq.question}}</p></strong>
+                                    <br>
+                                    <p class="faq-a">
+                                        A: {{faq.response}}
+                                    </p>
+                                </div>
+                            </md-card>
+                        </div>
+                    </div>
+
+                    <div flex="2"></div>
+
+                    <div flex="3"></div>
+                </div>
+            </div>
+        </md-content>
+
+    </div>
 </body>
+
 </html>

@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var DonorTierSchema = require('./donortierschema').schema;
+var SponsorSchema = require('./sponsorschema').schema;
+
 
 var CampaignSchema = new Schema({
   url: { type: String, required: true },
@@ -11,8 +14,9 @@ var CampaignSchema = new Schema({
   campaignId: { type: Number, required: true},
   zipCode: { type: Number, required: true },
   categories: [String],
-  imageLink: { type: String, required: true },
-  videoLink: { type: String, required: true },
+  imageLink: { type: String, required: false },
+  tileImageLink: { type: String, required: false },
+  videoLink: { type: String, required: false },
   about: { type: String, required: true },
   items: [{
     name: { type: String, required: true },
@@ -41,30 +45,7 @@ var CampaignSchema = new Schema({
     backerCount: { type: Number, required: true, default: 0 },
     donationAmmount: { type: Number, required: true, default: 0 }
   }],
-  donorLevels: [{
-    name: { type: String, required: true },
-    low: { type: Number, required: true },
-    high: { type: Number, required: true },
-    hasReward: { type: Boolean, required: true },
-    rewardTitle: { type: String, required: false },
-    rewardDescription: { type: String, required: false },
-    rewardImageLink: { type: String, required: false },
-    sponsors: [{
-      donation: { type: Number, required: true },
-      publicThankYou: { type: Boolean, required: true },
-      emailThankYou: { type: Boolean, required: true },
-      acceptedReward: { type: Boolean, required: true },
-      rewardName: { type: String, required: true },
-      firstName: { type: String, required: false },
-      lastName: { type: String, required: false },
-      zipCode: { type: Number, required: true },
-      email: { type: String, required: true },
-      imageApproved: { type: Boolean, required: true, default: false},
-      imageLink: { type: String, required: false },
-      websiteLink: { type: String, required: false },
-      promotorLinkUsed: { type: String, required: true, default: "none" }
-    }],
-  }],
+  donorLevels: [DonorTierSchema],
   twitterImageLink: { type: String, required: true },
   twitterShareText: { type: String, required: true },
   facebookPostTitle: { type: String, required: true },

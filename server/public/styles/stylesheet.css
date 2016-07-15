@@ -1,6 +1,35 @@
+.dark-primary-color    { background: #1976D2; }
+.default-primary-color { background: #2196F3; }
+.light-primary-color   { background: #BBDEFB; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FF5252; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #727272; }
+.divider-color         { border-color: #B6B6B6; }
+
+
 /************************* TOOL BAR ***************************/
+
+a {
+  text-decoration: none;
+}
+
+h6 {
+  margin: 0px;
+  padding: 0px;
+}
+
 md-toolbar {
-  text-align: center;
+  background-color: #0277BD !important;
+  height: 80px;
+  min-height: 90px;
+
+}
+
+.nav-logo {
+  text-align: left;
+  margin-left: 30px;
+  color: #FFF;
 }
 
 .ai {
@@ -8,12 +37,49 @@ md-toolbar {
 }
 
 /************************* GOAL AMOUNT / DONORS DISPLAY **********************/
-.goalSection {
-  padding: 0 10px 0 10px;
+.campaignTitle{
+  color: #FF5722;
+  font-size: 40px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
-.goalSection h1, h5, h3 {
+.goalCard {
+}
+.campaignOrg{
+  color: gray;
+  margin-bottom: 50px;
+  font-size: 18px;
+}
+
+.goalSection {
+  padding: 0 10px 0 10px;
+  margin: 10px;
+  width: 100%;
+}
+
+.goalSection h1, h5 {
   text-align: center;
+}
+
+.goalSection h2 {
+  text-align: center;
+  color: #0277BD;
+}
+.goalSection h3 {
+  text-align: center;
+  color: gray;
+
+}
+
+
+.remainingTime {
+  background-color: lightgray;
+  margin: 10px 22px 22px 22px;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 20px;
+
 }
 
 .goalInformation {
@@ -28,33 +94,138 @@ md-toolbar {
   fill: lightblue;
 }
 
-.socialIconsContainer .svgIcon {
-  margin: 20px 5px 5px 5px;
+.contribute-btn {
+  width: 90%;
+  margin: 0 auto 20px auto;
+
 }
+
+.socialIcons {
+  margin: 0px;
+  padding: 0px;
+}
+
+.shareCampaign{
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+}
+
 /*********************** REWARD TIERS *******************/
 .rewards {
 /*  background-color: pink;*/
+margin-bottom: 7px;
+overflow-x: scroll;
 }
 
-md-card {
+.reward-scroll {
+}
+
+md-card#reward-card{
+  width: 400px;
+}
+
+.reward-price{
+  margin: 0px;
+}
+
+.tierName {
   text-align: center;
+}
+md-card {
+ border-radius: 3px;
 }
 
 md-card-header {
-  background-color: lightblue;
+  font-weight: 700;
+  color: #0277BD;
+  border-bottom: 1px solid lightgray;
+}
+
+md-card-footer{
   text-align: center;
 }
 
+.claim {
+  opacity: 0;
+}
+/*#reward-card:hover {
+  background:rgba(255,61,0 ,0.8) !important;
+  color: white;
+  opacity: 1;
+  height: 100%;
+
+}*/
+
+.image {
+    position:relative;
+    width:100%;
+    height:100%;
+}
+.image md-card {
+    width:100%;
+    vertical-align:top;
+}
+
+.image:after, .image:before {
+    position:absolute;
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.image:after {
+    content:'\A';
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(255,61,0 ,0.9);
+    border-radius: 3px;
+}
+.image:before {
+    content: attr(data-content);
+    width:100%;
+    color:#fff;
+    z-index:1;
+    bottom:42%;
+    padding:4px 10px;
+    text-align:center;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.image:hover:after, .image:hover:before {
+    opacity:1;
+}
+
+
 /************************** TEAM INFO SECTION **********************/
+@media screen and (max-width: 1281px) {
+    .remainingTime {
+      font-size: 14px;
+    }
+    md-card-header {
+      font-size: 12px;
+    }
+    p {
+      font-size: 12px;
+
+    }
+
+}
 
 img {
-  width: 100%;
-  margin: 5px 0 5px 0;
+  margin-left: 7px;
+  margin-bottom: 7px;
+  border-radius: 3px;
+  margin-top: 10px;
+  width: 99%;
+  height: auto;
 }
 
 .groupNarrative {
   width: 100%;
-  height: auto;
+
   /*background-color: #E8A074;*/
 }
 
@@ -71,11 +242,41 @@ img {
   margin: 5px;
 }
 
+.needs-card{
+  margin-top: 10px;
+  padding: 10px;
+
+}
+
+md-divider {
+  margin: 0px;
+  padding: 0px;
+}
+
+strong {
+  display: inline;
+}
+
+.need-item {
+  margin: 2px;
+}
+
+#groupInfo {
+  padding: 10px 10px 0 10px;
+}
 
 /************************ FAQ ****************************/
 .faq {
   /*background-color: lightgreen;*/
-  padding: 10px;
+
+}
+
+.groupFaqs{
+  width: 100%;
+}
+
+.faq-card{
+  margin: 10px 20px 10px 20px;
 }
 
 .faq h2 {
@@ -83,13 +284,13 @@ img {
 }
 
 /*********************** REWARD DIALOG ********************/
-
-/*.experiment th, td {
-  border: 1px solid black;
-}*/
+.rewardDialog{
+  font-size: 12px;
+}
 
 .action {
-  width: 60%;
+  display: inline;
+  float: left;
 }
 
 md-dialog-content h4 {
@@ -109,7 +310,9 @@ md-dialog-content h4 {
 }
 
 #submitReward {
-  float: right;
+  display: inline;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /*Hides step button on payment form*/
@@ -121,4 +324,79 @@ input::-webkit-inner-spin-button {
 
 .selected {
 box-shadow: 0px 0px 6px blue;
+}
+
+/*thank you*/
+.thanks-list-container {
+  text-align: center;
+}
+
+.thanks {
+  margin-bottom: 10px;
+}
+
+.landing-title {
+  text-align: center;
+  height: 140px;
+  border-bottom: 1px solid lightgray;
+}
+
+h3.levelName {
+  color: #0277BD;
+  margin-bottom: 0px;
+}
+
+.faq-q {
+  padding: 0px;
+  margin: 0px;
+}
+
+.faq-a {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+
+}
+
+.sponsorImage{
+  width: 150px;
+  margin: 0 auto;
+}
+
+h2.thankYouBackers{
+  color: rgba(255,61,0 ,1);
+}
+
+.fb-share-button {
+  margin: 5px;
+}
+
+.twitter-hashtag-button {
+  margin: 5px;
+}
+
+md-input-container {
+  margin: -4px;
+  width: 100%
+}
+
+.column {
+  margin: 20px;
+}
+
+#dialogContent {
+  margin: 0 20px;
+}
+
+.thanksCenter {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.submitButtonDialog{
+  padding: 0 auto;
+}
+
+*:focus {
+    outline: none;
 }
