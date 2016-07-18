@@ -141,7 +141,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
     }
   }
 
-  $scope.charge = function(clientCard, date) {
+  $scope.charge = function(clientCard, date, sponsor) {
 
     var token;
     var chargeToken = {};
@@ -166,6 +166,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
         chargeToken.stripeToken = token;
         chargeToken.donation = $scope.donationAmount * 100;
+        chageToken.emial = sponsor.email
 
         $http.post('/pay', chargeToken).then(function(response) {
 
