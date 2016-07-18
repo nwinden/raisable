@@ -17,9 +17,12 @@
     "angular-jk-carousel": "^0.1.4",
     "angular-material": "^1.1.0-rc.5",
     "angular-route": "^1.5.7",
+    "aws-sdk": "^2.4.7",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongoose": "^4.5.1",
+    "multer": "^1.1.0",
+    "multer-s3": "^2.3.2",
     "stripe": "^4.7.0"
   }
 }

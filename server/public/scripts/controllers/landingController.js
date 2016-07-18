@@ -1,4 +1,4 @@
-clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdDialog', function($scope, $location, $http, $mdDialog) {
+clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdDialog', 'Upload', function($scope, $location, $http, $mdDialog, Upload) {
 
   $scope.campaign = {};
   $scope.sponsor = {};
@@ -128,7 +128,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
   function addImage() {
     if ($scope.donationAmount * 100 >= $scope.campaign.donorLevels[0].low) {
       $mdDialog.show({
-        controller: function LandingController($scope, $mdDialog) {
+        controller: function LandingController($scope, $mdDialog, Upload) {
           $scope.closeDialog = function() {
             $mdDialog.hide();
           }
@@ -140,6 +140,34 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       })
     }
   }
+
+  // upload later on form submit or something similar
+  $scope.submit = function() {
+
+    if ($scope.file) {
+      $scope.upload($scope.file);
+      console.log('i did something:', $scope.file);
+    }
+  };
+
+  // upload on file select or drop
+  $scope.upload = function (file) {
+
+    console.log(file);
+
+    Upload.upload({
+      url: '/upload',
+      data: {file: file}
+    }).then(function (resp) {
+      //put DB whatever call here
+    }, function (resp) {
+      console.log('Error status: ' + resp.status);
+    }, function (evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    });
+
+  };
 
   $scope.charge = function(clientCard, date, sponsor) {
 
@@ -166,7 +194,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
         chargeToken.stripeToken = token;
         chargeToken.donation = $scope.donationAmount * 100;
-        chageToken.emial = sponsor.email
+        chargeToken.emial = sponsor.email
 
         $http.post('/pay', chargeToken).then(function(response) {
 

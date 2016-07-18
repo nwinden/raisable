@@ -1,12 +1,13 @@
 <md-dialog>
-  <form class="addImageForm">
+  <form name="form">
     <md-content>
 
       <md-card>
         <md-card-header>Add an image of yourself or organization </md-card-header>
         <md-card-content>
-          <input type="file" name="addImage" />
-          <md-button class="md-raised md-accent contribute-btn" ng-click=""><strong>Add Image</strong></md-button>
+          <input type="file" ngf-select ng-model="file" name="addImage" ngf-pattern="'image/*'"
+            ngf-accept="'image/*'" ngf-max-size="20MB" />
+          <md-button class="md-raised md-accent contribute-btn" ng-click="submit()"><strong>Add Image</strong></md-button>
         </md-card-content>
 
         <md-card-footer>

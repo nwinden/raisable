@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var campaigns = require('./routes/campaigns');
 var pay = require('./routes/pay');
 var sponsor = require('./routes/sponsor');
+var upload = require('./routes/upload');
 
 //middleware
 app.use(express.static(path.join(__dirname, './public')));
@@ -38,6 +39,7 @@ mongoose.connection.on('error', function (err) {
 app.use('/campaigns', campaigns);
 app.use('/pay', pay);
 app.use('/sponsor', sponsor);
+app.use('/upload', upload);
 
 // start server
 app.set('port', process.env.PORT || 5000);

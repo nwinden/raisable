@@ -1,4 +1,4 @@
-clientApp.controller('HomeController', ['$scope', '$location', '$http', function($scope, $location, $http) {
+clientApp.controller('HomeController', ['$scope', '$location', '$http', 'Upload', function($scope, $location, $http, Upload) {
 
     $scope.campaigns = [];
     $scope.featuredCampaigns = [];
