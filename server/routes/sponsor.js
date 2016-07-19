@@ -19,9 +19,9 @@ router.put('/:id', function (req, res) {
 
     //adjust the donor count
     campaign.donorCount += 1;
-
     var donorTiers = campaign.donorLevels;
     var donation = newSponsor.donation;
+
     donorTiers.forEach(function (tier, index) {
 
       if (donation >= tier.low && donation <= tier.high) {
@@ -29,14 +29,12 @@ router.put('/:id', function (req, res) {
       }
     });
     campaign.save(function (err) {
-        if (err) {
-          console.log('err', err);
-          res.send(err);
-          return;
-        }
-
-        res.sendStatus(204);
-
+      if (err) {
+        console.log('err', err);
+        res.send(err);
+        return;
+      }
+      res.sendStatus(204);
     });
 
   });

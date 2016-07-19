@@ -1,0 +1,148 @@
+{
+  "url": "raisable.com/slp-booster-club/ad98398dad",
+  "shortUrl": "raisable.com/CekJ3Cd",
+  "featured": true,
+  "title": "Star Lab, the Portable Planetarium",
+  "creatorName": "Oakdale Elementary School",
+  "creatorId": "507f191e810c19729de860ba",
+  "campaignId": 5555,
+  "zipCode": 90210,
+  "categories": [
+    "education",
+    "elementary school",
+    "astrology"
+  ],
+  "imageLink": "./example-images/star-lab3.jpg",
+  "videoLink": "",
+  "about": "Help get the Star Lab portable planetarium to Oakdale Elementary School!",
+
+  "items": [{
+    "name": "Star Lab",
+    "price": 80000,
+    "quantity": 1
+  }
+  ],
+
+  "goal": 80000,
+  "raised": 4000,
+  "donorCount": 2,
+  "launchDate": "2016-06-21T16:00:00Z",
+  "deadlineDate": "2016-11-15T16:00:00Z",
+
+  "faqs": [{
+    "question": "Why not go to a planetarium?",
+    "email": "curiousbacker1@gmail.com",
+    "approved": true,
+    "response": "There isn't one nearby."
+  }
+  ],
+
+  "promoters": [{
+    "name": "Mrs. Sarah",
+    "refferalUrl": "sarah",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+    },
+    {
+    "name": "Billy",
+    "refferalUrl": "billy",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+    },
+    {
+    "name": "Jeb",
+    "refferalUrl": "jeb",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+  }],
+
+  "donorLevels": [{
+    "name": "Sponsor",
+    "low": 50000,
+    "high": 1000000,
+    "hasReward": true,
+    "rewardTitle": "Sponsor Package",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 50000,
+        "publicThankYou": true,
+        "emailThankYou": true,
+        "acceptedReward": true,
+        "rewardAccepted": "Sponser",
+        "firstName": "Dunn Bros Coffee",
+        "lastName": "",
+        "zipCode": 55432,
+        "email": "bob@dunnbrothers.com",
+        "imageApproved": true,
+        "imageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/logo.jpg",
+        "websiteLink": "dunnbrothers.com/promotion/3029fjd3",
+        "promotorLinkUsed":"none"
+      }
+    ]
+  },
+  {
+    "name": "Friend",
+    "low": 20000,
+    "high": 49999,
+    "hasReward": true,
+    "rewardTitle": "Join us at the star lab",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+
+    ]
+  },
+  {
+    "name": "Donor",
+    "low": 500,
+    "high": 100000,
+    "hasReward": false,
+    "rewardTitle": "",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 10000,
+        "publicThankYou": false,
+        "emailThankYou": false,
+        "acceptedReward": false,
+        "rewardAccepted": "No Reward",
+        "firstName": "",
+        "lastName": "",
+        "zipCode": 55005,
+        "email": "abbieh@gmail.com",
+        "imageApproved": true,
+        "imageLink": "",
+        "websiteLink": "",
+        "promotorLinkUsed":"andym"
+      }
+    ]
+  }],
+
+  "twitterImageLink": "",
+  "twitterShareText": "",
+  "facebookPostTitle": "",
+  "facebookImageLink": "",
+  "facebookPostContent": "",
+  "instagramImageLink": "",
+  "instagramShareText": "",
+  "pinterestImageLink": "",
+  "pinterestShareText": "",
+}

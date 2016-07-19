@@ -1,4 +1,4 @@
-clientApp.controller('HomeController', ['$scope', '$location', '$http', function($scope, $location, $http) {
+clientApp.controller('HomeController', ['$scope', '$location', '$http', 'Upload', function($scope, $location, $http, Upload) {
 
     $scope.campaigns = [];
     $scope.featuredCampaigns = [];
@@ -92,6 +92,9 @@ clientApp.controller('HomeController', ['$scope', '$location', '$http', function
             autoplayDisableOnInteraction: false,
             lazyLoading: true
         })
+
+        $(window).trigger('resize');
+
 
         //--- Home Page Campaign Search --- //
         if ($scope.searchInput !== undefined) {

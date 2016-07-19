@@ -30,16 +30,6 @@ router.get('/:id', function (req, res) {
 
   res.sendFile(path.join(__dirname, '../public/views/landing.html'));
 
-  // Campaign.find({campaignId: req.params.campaignId}, function (err, campaign) {
-  //
-  //   if (err) {
-  //     res.sendStatus(500);
-  //     return;
-  //   }
-  //   console.log(req.params.campaignId);
-  //   console.log("Made it this far!");
-  //   res.send(campaign);
-  // });
 });
 
 router.put('/:id', function (req, res) {
@@ -79,6 +69,5 @@ router.put('/:id', function (req, res) {
 
   });
 });
-
 
 module.exports = router;

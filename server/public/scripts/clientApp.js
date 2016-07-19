@@ -1,4 +1,4 @@
-var clientApp = angular.module('clientApp', ['ngMaterial', 'ng-currency', 'jkAngularCarousel']);
+var clientApp = angular.module('clientApp', ['ngFileUpload', 'ngMaterial', 'ng-currency']);
 
 clientApp.config( function( $mdThemingProvider) {
 

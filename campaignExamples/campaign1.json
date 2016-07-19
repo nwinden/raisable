@@ -81,7 +81,7 @@
   }],
 
   "donorLevels": [{
-    "name": "Sponsor Reward",
+    "name": "Sponsor",
     "low": 50000,
     "high": 1000000,
     "hasReward": true,
@@ -99,6 +99,7 @@
         "lastName": "",
         "zipCode": 55432,
         "email": "bob@dunnbrothers.com",
+        "imageApproved": true,
         "imageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/logo.jpg",
         "websiteLink": "dunnbrothers.com/promotion/3029fjd3",
         "promotorLinkUsed":"none"
@@ -142,7 +143,7 @@
     ]
   },
   {
-    "name": "Team Reward",
+    "name": "Team",
     "low": 1000,
     "high": 4999,
     "hasReward": true,
@@ -160,6 +161,7 @@
         "lastName": "Ford",
         "zipCode": 55112,
         "email": "mmmmmM@gmail.com",
+        "imageApproved": true,
         "imageLink": "",
         "websiteLink": "",
         "promotorLinkUsed":"jeb"
@@ -185,6 +187,7 @@
         "lastName": "",
         "zipCode": 55005,
         "email": "abbieh@gmail.com",
+        "imageApproved": true,
         "imageLink": "",
         "websiteLink": "",
         "promotorLinkUsed":"andym"

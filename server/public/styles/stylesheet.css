@@ -90,9 +90,8 @@ md-toolbar {
   text-align: center;
 }
 
-.shareIcon {
-  width: 60px;
-  height: auto;
+.socialIcons {
+  fill: lightblue;
 }
 
 .contribute-btn {
@@ -215,9 +214,6 @@ md-card-footer{
 
 }
 
-
-
-
 img {
   margin-left: 7px;
   margin-bottom: 7px;
@@ -288,14 +284,9 @@ strong {
 }
 
 /*********************** REWARD DIALOG ********************/
-
 .rewardDialog{
   font-size: 12px;
 }
-
-/*.experiment th, td {
-  border: 1px solid black;
-}*/
 
 .action {
   display: inline;
@@ -324,8 +315,11 @@ md-dialog-content h4 {
   margin: 0 auto;
 }
 
-.unavailable {
-  opacity: 0.35;
+/*Hides step button on payment form*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .selected {
@@ -374,15 +368,13 @@ h2.thankYouBackers{
 }
 
 .fb-share-button {
-  margin: 5px;
+  margin: 8px;
+
 }
 
 .twitter-hashtag-button {
-  margin: 5px;
-}
+  margin: 8px;
 
-.thankYouBorder {
-  /*border: 1px solid lightgray;*/
 }
 
 md-input-container {
@@ -406,7 +398,6 @@ md-input-container {
 .submitButtonDialog{
   padding: 0 auto;
 }
-
 
 *:focus {
     outline: none;

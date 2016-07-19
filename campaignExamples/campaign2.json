@@ -109,6 +109,7 @@
         "lastName": "",
         "zipCode": 55432,
         "email": "frank@musicgoroundduluth.com",
+        "imageApproved": true,
         "imageLink": "",
         "websiteLink": "http://www.musicgoroundduluthmn.com/",
         "promotorLinkUsed":"ben"
@@ -158,6 +159,7 @@
         "lastName": "Levnte",
         "zipCode": 55112,
         "email": "princesss@gmail.com",
+        "imageApproved": true,
         "imageLink": "",
         "websiteLink": "",
         "promotorLinkUsed":"eve"
@@ -183,6 +185,7 @@
         "lastName": "",
         "zipCode": 55005,
         "email": "jebediah@gmail.com",
+        "imageApproved": false,
         "imageLink": "",
         "websiteLink": "",
         "promotorLinkUsed":"jeb"

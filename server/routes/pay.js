@@ -6,12 +6,14 @@ router.post('/', function (req, res) {
 
   // Get the credit card details submitted by the form
   var stripeToken = req.body.stripeToken;
+  var donation = req.body.donation;
+  var email = req.body.email;
 
   var charge = stripe.charges.create({
-    amount: 2000, // amount in cents, again
+    amount: donation, // amount in cents, again
     currency: "usd",
     source: stripeToken,
-    receipt_email: "noah.winden@gmail.com",
+    receipt_email: email,
     description: "Example charge"
   }, function(err, charge) {
 
@@ -23,12 +25,8 @@ router.post('/', function (req, res) {
       res.sendStatus(200);
     }
 
-
-
   });
 
 });
-
-
 
 module.exports = router;

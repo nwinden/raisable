@@ -1,0 +1,149 @@
+{
+  "url": "raisable.com/movies/ad98dad",
+  "shortUrl": "raisable.com/movies",
+  "featured": true,
+  "title": "Movie Nights In the Gym",
+  "creatorName": "Oakdale Elementary School",
+  "creatorId": "507f191utyc1987f860ba",
+  "campaignId": 1010,
+  "zipCode": 90210,
+  "categories": [
+    "community",
+    "elementary school",
+    "movies",
+    "fun"
+  ],
+  "imageLink": "./example-images/movie-night1.jpg",
+  "videoLink": "",
+  "about": "Since funding was cut we can't pay the licensing fees to bring movies for movie nights anymore. Let's bring back movie night!",
+
+  "items": [{
+    "name": "Film Licensing",
+    "price": 50000,
+    "quantity": 6
+  }
+  ],
+
+  "goal": 30000,
+  "raised": 4000,
+  "donorCount": 2,
+  "launchDate": "2016-06-21T16:00:00Z",
+  "deadlineDate": "2016-11-15T16:00:00Z",
+
+  "faqs": [{
+    "question": "what movies will we get",
+    "email": "curiousbacker1@gmail.com",
+    "approved": true,
+    "response": "The back to the future quadrology."
+  }
+  ],
+
+  "promoters": [{
+    "name": "me",
+    "refferalUrl": "me",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+    },
+    {
+    "name": "Billy",
+    "refferalUrl": "billy",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+    },
+    {
+    "name": "Jeb",
+    "refferalUrl": "jeb",
+    "clicks": [{
+      "time": "2016-05-18T16:00:00Z",
+      "ipAddress": "134.29.208.43",
+      "donation": true
+    }],
+    "backerCount": 4,
+    "donationAmmount": 3000
+  }],
+
+  "donorLevels": [{
+    "name": "Sponsor",
+    "low": 50000,
+    "high": 1000000,
+    "hasReward": true,
+    "rewardTitle": "Sponsor Package",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 50000,
+        "publicThankYou": true,
+        "emailThankYou": true,
+        "acceptedReward": true,
+        "rewardAccepted": "Sponser",
+        "firstName": "Dunn Bros Coffee",
+        "lastName": "",
+        "zipCode": 55432,
+        "email": "bob@dunnbrothers.com",
+        "imageApproved": true,
+        "imageLink": "http://student-fundraising-mockup.s3-website-us-west-2.amazonaws.com/logo.jpg",
+        "websiteLink": "dunnbrothers.com/promotion/3029fjd3",
+        "promotorLinkUsed":"none"
+      }
+    ]
+  },
+  {
+    "name": "Platinum",
+    "low": 20000,
+    "high": 49999,
+    "hasReward": true,
+    "rewardTitle": "Get free popcorn",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+
+    ]
+  },
+  {
+    "name": "Donor",
+    "low": 500,
+    "high": 100000,
+    "hasReward": false,
+    "rewardTitle": "",
+    "rewardDescription": "",
+    "rewardImageLink": "",
+    "sponsors": [
+      {
+        "donation": 10000,
+        "publicThankYou": false,
+        "emailThankYou": false,
+        "acceptedReward": false,
+        "rewardAccepted": "No Reward",
+        "firstName": "",
+        "lastName": "",
+        "zipCode": 55005,
+        "email": "abbieh@gmail.com",
+        "imageApproved": true,
+        "imageLink": "",
+        "websiteLink": "",
+        "promotorLinkUsed":"andym"
+      }
+    ]
+  }],
+
+  "twitterImageLink": "",
+  "twitterShareText": "",
+  "facebookPostTitle": "",
+  "facebookImageLink": "",
+  "facebookPostContent": "",
+  "instagramImageLink": "",
+  "instagramShareText": "",
+  "pinterestImageLink": "",
+  "pinterestShareText": "",
+}
