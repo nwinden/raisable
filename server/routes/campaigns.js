@@ -54,20 +54,17 @@ router.put('/:id', function (req, res) {
     //looping through each object/sponsor tier in donorLevels to compare donation amount to that tier's low/high values
     donorTiers.forEach(function (tier, index) {
       if (donation >= tier.low && donation <= tier.high) {
-
         campaign.donorLevels[index].sponsors.push(newSponsor);
-        target = campaign.donorLevels[index].sponsors;
       }
-      // console.log('this is the target', target);
     });
+
     campaign.save(function (err) {
         if (err) {
           console.log('err', err);
           res.send(err);
           return;
         }
-        res.send(target)
-        // res.sendStatus(204);
+        res.sendStatus(204);
 
     });
 
