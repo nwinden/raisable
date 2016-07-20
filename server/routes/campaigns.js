@@ -37,7 +37,7 @@ router.put('/:id', function (req, res) {
   var newSponsor = req.body;
   console.log(newSponsor);
   Campaign.findById(id, function (err, campaign) {
-    console.log('FOUND CORRECT', campaign);
+    console.log('FOUND CORRECT CAMPAIGN', campaign);
     if (err) {
       res.json({message: "cannot find correct campaign"});
       return;
@@ -50,11 +50,15 @@ router.put('/:id', function (req, res) {
 
     var donorTiers = campaign.donorLevels;
     var donation = newSponsor.donation;
+    var target = [];
+    //looping through each object/sponsor tier in donorLevels to compare donation amount to that tier's low/high values
     donorTiers.forEach(function (tier, index) {
-
       if (donation >= tier.low && donation <= tier.high) {
+
         campaign.donorLevels[index].sponsors.push(newSponsor);
+        target = campaign.donorLevels[index].sponsors;
       }
+      // console.log('this is the target', target);
     });
     campaign.save(function (err) {
         if (err) {
@@ -62,8 +66,8 @@ router.put('/:id', function (req, res) {
           res.send(err);
           return;
         }
-
-        res.sendStatus(204);
+        res.send(target)
+        // res.sendStatus(204);
 
     });
 

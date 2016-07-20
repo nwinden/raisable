@@ -148,6 +148,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       $scope.upload($scope.file);
       console.log('i did something:', $scope.file);
     }
+    closeDialog();
   };
 
   // upload on file select or drop
@@ -160,6 +161,8 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       data: {file: file}
     }).then(function (resp) {
       //put DB whatever call here
+      //https://raisable.s3.amazonaws.com/
+      console.log(resp);
     }, function (resp) {
       console.log('Error status: ' + resp.status);
     }, function (evt) {
@@ -200,7 +203,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
           alert('Your Charge has been processed. Please have a wonderful day.');
 
-          addImage();
+          // addImage();
 
           closeDialog();
 
@@ -240,6 +243,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
             newSponsor.publicThankYou = false;
           }
 
+
           //acceptedReward && rewardName
           for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
             if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
@@ -257,9 +261,16 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
           $http.put('/campaigns/' + id, newSponsor)
             .then(function (response) {
-              console.log('PUT /new sponsor after successful payment collected ', newSponsor);
+              var z = response.data.length - 1;
+              var target = response.data[z]._id;
+              // console.log('PUT /new sponsor after successful payment collected ', newSponsor);
+              // console.log('Successful PUT object:', response);
               getCampaign();
+              addImage();
+              console.log('inside', target);
             });
+
+
 
         }, function(response) {
 

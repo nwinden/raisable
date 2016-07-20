@@ -20,6 +20,7 @@ var upload = multer({
 
 function getS3Url(campaignId) {
   var imageKey = campaignId;
+  console.log('imageKey:', imageKey);
   var getUrl = s3.getSignedUrl('getObject', {
   Bucket: 'raisable',
   Key: imageKey
@@ -29,6 +30,7 @@ function getS3Url(campaignId) {
 
 router.post('/', upload.single('file'), function(req, res, next) {
   res.send(getS3Url(fileName));
+  // res.send(fileName);
 
   console.log(fileName);
   console.log(getS3Url(fileName));
