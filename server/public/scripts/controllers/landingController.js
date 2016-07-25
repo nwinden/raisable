@@ -5,20 +5,22 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
   $scope.path = location.hostname;
 
+  //gets the campaign on page load
   getCampaign();
 
   function closeDialog(){
     $mdDialog.hide();
   }
 
+  //gets the campaign ID from the URL and uses it to get the correct campaign
   function getCampaign() {
-    var whatever = location.pathname;
-    for (var i = 0; i < whatever.length; i++) {
-      if (whatever[i] == '/') {
-        whatever = whatever.substring(i + 1);
+    var campaignID = location.pathname;
+    for (var i = 0; i < campaignID.length; i++) {
+      if ( campaignID[i] == '/') {
+       campaignID = campaignID.substring(i + 1);
       }
     }
-    $http.get('/campaigns/landing/' + whatever).then(function(response) {
+    $http.get('/campaigns/landing/' + campaignID).then(function(response) {
       $scope.campaign = response.data[0];
       changeProgressBar();
       timeRemaining();
@@ -44,8 +46,10 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
   $scope.accountFees = 0;
   $scope.totalContribution = 0;
 
+  //used for stripe
   Stripe.setPublishableKey('pk_test_sxs4BWKkRUf9HMXnALXxadxG');
 
+  //uses moment to find how many days are left fot the campaign
   function timeRemaining() {
     var deadline = moment($scope.campaign.deadlineDate);
     var now = moment();
@@ -60,6 +64,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
     }
   }
 
+  //animates the progress bar for amount donated vs the goal amount
   function changeProgressBar() {
     if ($scope.campaign.raised < $scope.campaign.goal){
       var progress = ($scope.campaign.raised / $scope.campaign.goal);
@@ -70,6 +75,8 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
     }
   }
 
+
+  //next two funcitons manipulate the donation amount to display correctly
   $scope.calcFees = function(donation) {
     if (donation === 0) {
       $scope.accountFees = 0;
@@ -79,6 +86,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       $scope.totalContribution = donation - $scope.accountFees;
     }
   }
+
 
   $scope.calcFees2 = function(donation) {
     if (donation === 0) {
@@ -144,7 +152,6 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
     if ($scope.file) {
       $scope.upload($scope.file);
-      console.log('i did something:', $scope.file);
     }
     closeDialog();
   };
@@ -152,12 +159,12 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
   // upload on file select or drop
   $scope.upload = function (file) {
 
-    console.log(file);
-
     Upload.upload({
       url: '/upload',
       data: {file: file}
     }).then(function (resp) {
+
+      //after image upload, new sponsor is created, image included in object, and PUT into database
       var newSponsor = new Sponsor($scope.donationAmount, $scope.clientCard, $scope.sponsor);
       newSponsor.imageLink = 'https://raisable.s3.amazonaws.com/' + resp.data
       newSponsor.acceptedReward = true;
@@ -166,12 +173,9 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       var id = $scope.campaign._id;
       $http.put('/campaigns/' + id, newSponsor)
         .then(function (response) {
-          console.log('PUT /new sponsor after successful payment collected ', newSponsor);
-          console.log('Successful PUT object:', response);
+
           getCampaign();
         });
-
-      console.log(resp);
     }, function (resp) {
       console.log('Error status: ' + resp.status);
     }, function (evt) {
@@ -186,14 +190,19 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
     var token;
     var chargeToken = {};
 
+
+    //changes the exp month into a useable value
     if ((date.getMonth()+1).toString().length == 1) {
       clientCard.exp_month = '0' + (date.getMonth()+1);
     } else {
       clientCard.exp_month = (date.getMonth()+1).toString();
     }
 
+    //changes the exp year into a useable value
     clientCard.exp_year = date.getFullYear().toString().substring(2);
 
+
+    //pings the strip server to send back a charge token
     Stripe.card.createToken(clientCard, function(status, response) {
 
       token = response.id;
@@ -213,10 +222,14 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
             alert('Your Charge has been processed. Please have a wonderful day.');
 
+
+            //after successful charge to donor, check donaton amount against LOW value of tier (usually sponsor tier)
+            //to determine if condition is met to call addImage function
             if ($scope.donationAmount * 100 >= $scope.campaign.donorLevels[0].low) {
               addImage();
             } else {
 
+              //new donor info is PUT to db without calling addImage. constructor used to create new donor/sponsor
               var newSponsor = new Sponsor($scope.donationAmount, $scope.clientCard, $scope.sponsor);
 
               var id = $scope.campaign._id;
@@ -249,7 +262,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
   /////Modal Logics/////
   $scope.checkAvailability = function(donation) {
-    //funky notation is jquery Lite built into angular
+    // notation is jquery Lite built into angular
     //uses - 1 to leave comparison with 'no reward' off
     for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
       if (donation < $scope.campaign.donorLevels[i].low) {
@@ -273,6 +286,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
     }
   }
 
+  // changes the radio button when another option has been chosen
   $scope.clickCheckBox = function(tier) {
     for (var i = 0; i < $scope.campaign.donorLevels.length; i++) {
       if (angular.element(document.querySelector('.tier-' + [i])).hasClass('md-checked')) {
@@ -281,6 +295,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
     }
   }
 
+  //toggles the thanked button
   $scope.toggleClass = function() {
     angular.element(document.querySelector('.thankYou')).toggleClass('md-checked');
   }
