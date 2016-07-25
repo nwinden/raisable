@@ -32,10 +32,13 @@ router.get('/:id', function (req, res) {
 
 });
 
+//adding / PUT new sponsor into database
 router.put('/:id', function (req, res) {
   var id = req.params.id;
   var newSponsor = req.body;
   console.log(newSponsor);
+
+  //first, find correct campaign in order to add a sponsor
   Campaign.findById(id, function (err, campaign) {
     console.log('FOUND CORRECT CAMPAIGN', campaign);
     if (err) {
@@ -51,7 +54,10 @@ router.put('/:id', function (req, res) {
     var donorTiers = campaign.donorLevels;
     var donation = newSponsor.donation;
     var target = [];
+    
     //looping through each object/sponsor tier in donorLevels to compare donation amount to that tier's low/high values
+    //to determine which tier to add the new sponsor to.
+    //Once found, sponsor object is pushed into sponsors array
     donorTiers.forEach(function (tier, index) {
       if (donation >= tier.low && donation <= tier.high) {
         campaign.donorLevels[index].sponsors.push(newSponsor);
