@@ -16,7 +16,7 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
   function getCampaign() {
     var campaignID = location.pathname;
     for (var i = 0; i < campaignID.length; i++) {
-      if  campaignID[i] == '/') {
+      if ( campaignID[i] == '/') {
        campaignID = campaignID.substring(i + 1);
       }
     }
