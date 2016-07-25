@@ -2,44 +2,50 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>raisable</title>
+    <meta charset="utf-8">
+    <title>raisable</title>
 
-  <script src="/assets/vendors/angular.min.js" charset="utf-8"></script>
-  <script src="/assets/vendors/ng-currency.js"></script>
-  <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
-  <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
-  <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
-  <script src="/assets/vendors/ng-file-upload.min.js"></script>
-  <script src="/assets/vendors/jquery.min.js" charset="utf-8"></script>
-  <script src="/assets/vendors/progressbar.min.js"></script>
-  <script src="https://js.stripe.com/v2/" charset="utf-8"></script>
-  <script src="/assets/vendors/moment.min.js"></script>
+    <script src="/assets/vendors/angular.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/ng-currency.js"></script>
+    <script src="/assets/vendors/angular-animate.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/angular-aria.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/angular-material.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/ng-file-upload.min.js"></script>
+    <script src="/assets/vendors/jquery.min.js" charset="utf-8"></script>
+    <script src="/assets/vendors/progressbar.min.js"></script>
+    <script src="https://js.stripe.com/v2/" charset="utf-8"></script>
+    <script src="/assets/vendors/moment.min.js"></script>
 
-  <script src="/scripts/clientApp.js" charset="utf-8"></script>
-  <script src="/scripts/controllers/landingController.js"></script>
+    <!-- Application Requirements -->
+    <script src="/scripts/clientApp.js" charset="utf-8"></script>
+    <script src="/scripts/controllers/landingController.js"></script>
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="/styles/angular-material.min.css">
-  <link rel="stylesheet" href="/styles/stylesheet.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/angular-material.min.css">
+    <link rel="stylesheet" href="/styles/stylesheet.css">
 </head>
 
 <body ng-app="clientApp" ng-controller="LandingController" layout="column" ng-cloak>
-  <!-- facebook sdk script -->
-  <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<!-- end fb sdk -->
+    <!-- Facebook Share Button Script / SDK -->
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- End fb sdk -->
 
     <!-- Toolbar container -->
     <md-toolbar layout="row">
         <a href="/views/index.html"><h1 class="nav-logo" >raisable</h1></a>
     </md-toolbar>
+
+    <!-- Campaign Title Subhead -->
     <md-subheader class="landing-title">
         <h1 class="campaignTitle">{{campaign.title}}</h1>
         <h5 class="campaignOrg">By: {{campaign.creatorName}}</h5>
@@ -47,12 +53,12 @@
 
 
     <div flex layout="row">
-
-        <!-- Goal and Donors container -->
+        <!-- Goal and Donors aside -->
         <md-content flex="30" id="goal" class="md-whiteframe-1dp">
             <div layout="column" layout-align="center center">
                 <div class="goalSection">
 
+                    <!-- Campaign Stats Widget -->
                     <div class="goalCard">
                         <md-card class="md-whiteframe-1dp">
                             <h2 class="goal">Goal: <strong>{{campaign.goal / 100 | currency}}</strong></h2>
@@ -71,42 +77,42 @@
                             </div>
                             <md-button class="md-raised md-accent contribute-btn" ng-click="claimReward(0)"><strong>Contribute</strong></md-button>
                         </md-card>
+
+                        <!-- Facebook and Twitter Share Buttons -->
                     </div>
                     <h5 class="shareCampaign" layout-align="center"><em></em> </h5>
                     <div class="socialIcons" layout="row" layout-align="center">
 
-                        <div class="fb-share-button" data-href="https://goraisable.com/campaigns/1234/"  data-layout="button" data-size="small"  data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgoraisable.com%2Fcampaigns%2F1234%2F&amp;src=sdkpreparse">Share</a></div>
-                        <a href="https://twitter.com/intent/tweet" class="twitter-hashtag-button" data-size="small" data-text="Help the Spartans reach their goal!" data-url="http://goraisable.com/campaigns/1234/" data-via="raisable" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <div class="fb-share-button" data-href="https://goraisable.com/campaigns/1234/" data-layout="button" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgoraisable.com%2Fcampaigns%2F1234%2F&amp;src=sdkpreparse">Share</a></div>
+                        <a href="https://twitter.com/intent/tweet" class="twitter-hashtag-button" data-size="small" data-text="Help the Spartans reach their goal!" data-url="http://goraisable.com/campaigns/1234/" data-via="raisable" data-show-count="false">Tweet</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
 
+                    <!-- Public Thank You Section -->
                     <div class="thankYouBorder">
-                      <h2 class="thankYouBackers">Thank you, Backers!</h2>
-                    <div layout-align="center" class="sponsors" ng-repeat="level in campaign.donorLevels" ng-if="level.name == 'Sponsor'">
-                        <h3>{{level.name}}</h3>
-                        <md-card class="md-whiteframe-1dp" ng-repeat="backer in level.sponsors">
-                            <md-card-header>{{backer.firstName}} {{backer.lastName}}</md-card-header>
-                            <md-content>{{backer.imageLink}}
-                                <br><a href="{{backer.websiteLink}}">{{backer.websiteLink}}</a></md-content>
-                        </md-card>
-                    </div>
-
-                    <!-- Swiper -->
-                    <div class="thanks-list-container">
-                        <div class="thanks-list" ng-repeat="level in campaign.donorLevels">
-                            <h3 class="levelName">{{level.name}}</h3>
-                            <div ng-repeat="person in level.sponsors" class="thanks">
-                              <img class="sponsorImage" ng-src="{{person.imageLink}}" /><br />
-
-
-                                    <span>{{person.firstName}} {{person.lastName}}</span>
-
-
-                            </div>
-                            <md-divider></md-divider>
+                        <h2 class="thankYouBackers">Thank you, Backers!</h2>
+                        <div layout-align="center" class="sponsors" ng-repeat="level in campaign.donorLevels" ng-if="level.name == 'Sponsor'">
+                            <h3>{{level.name}}</h3>
+                            <md-card class="md-whiteframe-1dp" ng-repeat="backer in level.sponsors">
+                                <md-card-header>{{backer.firstName}} {{backer.lastName}}</md-card-header>
+                                <md-content>{{backer.imageLink}}
+                                    <br><a href="{{backer.websiteLink}}">{{backer.websiteLink}}</a></md-content>
+                            </md-card>
                         </div>
-                    </div>
 
-                  </div>
+                        <div class="thanks-list-container">
+                            <div class="thanks-list" ng-repeat="level in campaign.donorLevels">
+                                <h3 class="levelName">{{level.name}}</h3>
+                                <div ng-repeat="person in level.sponsors" class="thanks">
+                                    <img class="sponsorImage" ng-src="{{person.imageLink}}" />
+                                    <br />
+                                    <span>{{person.firstName}} {{person.lastName}}</span>
+                                </div>
+                                <md-divider></md-divider>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
@@ -118,30 +124,22 @@
 
                 <!-- Reward tiers container -->
                 <div class="reward-scroll">
-
                     <div flex layout="row" class="rewards">
-
-                        <md-card ng-click="claimReward(tier)"  id="reward-card" layout="column" class="md-whiteframe-1dp" ng-repeat="tier in campaign.donorLevels" layout-align="center" ng-if="tier.name != 'Donor'">
+                        <md-card ng-click="claimReward(tier)" id="reward-card" layout="column" class="md-whiteframe-1dp" ng-repeat="tier in campaign.donorLevels" layout-align="center" ng-if="tier.name != 'Donor'">
                             <div data-content="Claim " class="image">
-
                                 <md-card-header class="tierName">{{tier.name}}</md-card-header>
                                 <md-card-content>
                                     <h3 class="reward-price">{{tier.low / 100 | currency}}</h3>
                                     <p>{{tier.rewardTitle}}</p>
                                 </md-card-content>
-
                             </div>
-
                         </md-card>
-
                     </div>
                 </div>
 
                 <div flex layout="row" class="media-about-needs">
                     <div flex="1"></div>
-
                     <div flex="58" layout="column" layout-align="space-around none" class="teamInfoContainer">
-
                         <div class="groupNarrative">
                             <md-card layout-align="center" class="md-whiteframe-1dp">
                                 <md-card-header>About This Campaign</md-card-header>
@@ -156,7 +154,6 @@
                         <!--<div class="groupMedia">-->
                         <img src="{{campaign.imageLink}}" alt="teamMedia" />
                         <!--</div>-->
-
                         <div class="groupNeeds">
                             <md-card layout-align="center" class="md-whiteframe-1dp">
                                 <md-card-header>Needs</md-card-header>
@@ -195,4 +192,5 @@
 
     </div>
 </body>
+
 </html>
