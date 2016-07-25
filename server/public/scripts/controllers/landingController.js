@@ -163,6 +163,8 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
       url: '/upload',
       data: {file: file}
     }).then(function (resp) {
+
+      //after image upload, new sponsor is created, image included in object, and PUT into database
       var newSponsor = new Sponsor($scope.donationAmount, $scope.clientCard, $scope.sponsor);
       newSponsor.imageLink = 'https://raisable.s3.amazonaws.com/' + resp.data
       newSponsor.acceptedReward = true;
@@ -220,11 +222,14 @@ clientApp.controller('LandingController', ['$scope', '$location', '$http', '$mdD
 
             alert('Your Charge has been processed. Please have a wonderful day.');
 
-            // logic to continue the transaction if you are a sponsor to add an image
+
+            //after successful charge to donor, check donaton amount against LOW value of tier (usually sponsor tier)
+            //to determine if condition is met to call addImage function
             if ($scope.donationAmount * 100 >= $scope.campaign.donorLevels[0].low) {
               addImage();
             } else {
 
+              //new donor info is PUT to db without calling addImage. constructor used to create new donor/sponsor
               var newSponsor = new Sponsor($scope.donationAmount, $scope.clientCard, $scope.sponsor);
 
               var id = $scope.campaign._id;

@@ -21,10 +21,10 @@ var upload = multer({
 
 router.post('/', upload.single('file'), function(req, res, next) {
   res.send(fileName);
-  // res.send(fileName);
+
 
   console.log(fileName);
-  // console.log(getS3Url(fileName));
+
 
 });
 
