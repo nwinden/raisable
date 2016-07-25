@@ -2,19 +2,23 @@ var clientApp = angular.module('clientApp', ['ngFileUpload', 'ngMaterial', 'ng-c
 
 clientApp.config( function( $mdThemingProvider) {
 
+  // Angular Theme Settings
   $mdThemingProvider.theme('default')
+  //Adjust primary color (header, etc.)
   .primaryPalette('light-blue', {
-    'default': '500', // by default use shade 400 from the pink palette for primary intentions
-    'hue-1': '700', // use shade 100 for the <code>md-hue-1</code> class
-    'hue-2': '800' // use shade 600 for the <code>md-hue-2</code> class
+    'default': '500',
+    'hue-1': '700',
+    'hue-2': '800'
   })
+  //Adjust background color (under cards, etc.)
   .backgroundPalette('grey', {
                'default': '200'
                })
+  //Adjust accent color (buttons, etc.)
   .accentPalette('deep-orange', {
-    'default': '500', // by default use shade 400 from the pink palette for primary intentions
-    'hue-1': '700', // use shade 100 for the <code>md-hue-1</code> class
-    'hue-2': '800' // use shade 600 for the <code>md-hue-2</code> class
+    'default': '500',
+    'hue-1': '700',
+    'hue-2': '800'
   });
 
 });
