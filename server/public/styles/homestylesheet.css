@@ -2,6 +2,10 @@
 /********************* Home Page *************************/
 /*********************************************************/
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 /********************* Nav Bar ************************/
 md-toolbar {
   background-color: #0277BD !important;
@@ -167,9 +171,8 @@ md-card {
   background-color:rgba(255,61,0 ,0.5);
   color:#fff;
   text-align: center;
-  font-size: 80px;
-  font-weight: 100;
-  letter-spacing: 10px;
+  font-size: 70px;
+  font-weight: 100 !important;
 }
 
 span .swiper-pagination-bullet{
