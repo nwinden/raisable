@@ -10,7 +10,7 @@ body {
   background-size: cover !important;
 }
 
-.md-grid-tile.ng-scope.ng-isolate-scope {
+.gridListTiles md-grid-tile {
   background-size: cover !important;
 }
 
