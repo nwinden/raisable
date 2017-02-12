@@ -24,19 +24,21 @@ clientApp.controller('HomeController', ['$scope', '$location', '$http', 'Upload'
             });
     };
 
+    var swiper = new Swiper('.swiper-container', {
+        paginationClickable: true,
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 5000,
+        autoplayDisableOnInteraction: false,
+        lazyLoading: true
+    })
+
     $(document).ready(function() {
         //--- Home Page Carousel Settings --- //
-        var swiper = new Swiper('.swiper-container', {
-            paginationClickable: true,
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            spaceBetween: 0,
-            centeredSlides: true,
-            autoplay: 5000,
-            autoplayDisableOnInteraction: false,
-            lazyLoading: true
-        })
+
         //--- Home Page Campaign Search, Hides Carousel if user is enters characters into search field --- //
         if ($scope.searchInput !== undefined) {
             $scope.searching = true;
