@@ -6,6 +6,14 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.swiper-slide.ng-scope {
+  background-size: cover !important;
+}
+
+.md-grid-tile.ng-scope.ng-isolate-scope {
+  background-size: cover !important;
+}
+
 /********************* Nav Bar ************************/
 md-toolbar {
   background-color: #0277BD !important;
